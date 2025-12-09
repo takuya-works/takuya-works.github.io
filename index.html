@@ -3,290 +3,446 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Takuya Works - Webライター & アプリ開発者</title>
-    <link rel="stylesheet" href="style.css">
+    <title>かわはらたくや | Webライター × アプリ開発者</title>
+    <meta name="description" content="Webライター＆アプリ開発者のポートフォリオサイト">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- ヘッダー -->
-    <header class="site-header">
-        <div class="header-content">
-            <h1>Takuya Works</h1>
-            <p class="header-tagline">Web Writer / App Developer / Content Creator</p>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <span class="logo-icon">✦</span>
+                <span class="logo-text">t.kawahara</span>
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#writing" class="nav-link">執筆実績</a></li>
+                <li><a href="#apps" class="nav-link">アプリ開発</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link nav-cta">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
-    </header>
-
-    <!-- ナビゲーション -->
-    <nav class="main-nav">
-        <a href="#about">ABOUT</a>
-        <a href="#skills">SKILLS</a>
-        <a href="#portfolio">PORTFOLIO</a>
-        <a href="#contact">CONTACT</a>
     </nav>
 
-    <!-- メインコンテンツ -->
-    <main class="main-content">
-        
-        <!-- Aboutセクション -->
-        <section id="about" class="section">
-            <div class="container">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="hero-gradient"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hero-subtitle animate-fade-up">Webライター × アプリ開発者</p>
+                <h1 class="hero-title animate-fade-up delay-1">
+                    <span class="highlight">言葉</span>と<span class="highlight">コード</span>で、<br>
+                    届ける。伝える。
+                </h1>
+                <p class="hero-description animate-fade-up delay-2">
+                    読みやすい記事と、使いやすいアプリ。<br>
+                    あなたの「伝えたい」を形にします。
+                </p>
+                <div class="hero-buttons animate-fade-up delay-3">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> お問い合わせ
+                    </a>
+                    <a href="#writing" class="btn btn-secondary">
+                        <i class="fas fa-arrow-down"></i> 実績を見る
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image animate-fade-up delay-2">
+                <img src="images/profile.png" alt="プロフィール画像" class="profile-img">
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Writing Works Section -->
+    <section class="works-section" id="writing">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-pen-fancy"></i> 執筆実績
+            </h2>
+            <p class="section-subtitle">Writing Works</p>
+        </div>
+        <div class="carousel-container">
+            <button class="carousel-btn prev" data-carousel="writing-carousel">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="carousel" id="writing-carousel">
+                <!-- Card 1 -->
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="card-category">SEO記事</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">IT企業のオウンドメディア</h3>
+                        <p class="card-description">月間50万PV達成。テック系記事を200本以上執筆。</p>
+                        <div class="card-tags">
+                            <span class="tag">SEO</span>
+                            <span class="tag">IT</span>
+                            <span class="tag">BtoB</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>検索1位獲得記事多数。専門用語を分かりやすく解説することを心がけています。</p>
+                        <a href="#" class="card-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div class="card-category">コラム</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">ライフスタイルメディア</h3>
+                        <p class="card-description">働き方・生き方に関するコラムを連載中。</p>
+                        <div class="card-tags">
+                            <span class="tag">コラム</span>
+                            <span class="tag">ライフスタイル</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>40代の視点から、仕事と人生のバランスについて発信しています。</p>
+                        <a href="#" class="card-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <div class="card-category">取材記事</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">スタートアップ企業インタビュー</h3>
+                        <p class="card-description">創業者の想いを形にする取材記事50本以上。</p>
+                        <div class="card-tags">
+                            <span class="tag">取材</span>
+                            <span class="tag">インタビュー</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>リラックスした雰囲気で本音を引き出し、記事にします。</p>
+                        <a href="#" class="card-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <div class="card-category">LP・広告</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">ECサイトのLP制作</h3>
+                        <p class="card-description">CVR改善に貢献するセールスライティング。</p>
+                        <div class="card-tags">
+                            <span class="tag">LP</span>
+                            <span class="tag">セールス</span>
+                            <span class="tag">EC</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>データ分析に基づいた改善提案も行います。</p>
+                        <a href="#" class="card-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        <div class="card-category">書籍</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">ビジネス書の執筆協力</h3>
+                        <p class="card-description">著者の想いを言葉にするゴーストライター。</p>
+                        <div class="card-tags">
+                            <span class="tag">書籍</span>
+                            <span class="tag">ビジネス</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>3冊の書籍制作に携わり、いずれもAmazonランキング入り。</p>
+                        <a href="#" class="card-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn next" data-carousel="writing-carousel">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- App Development Section -->
+    <section class="works-section apps-section" id="apps">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-mobile-alt"></i> アプリ開発
+            </h2>
+            <p class="section-subtitle">App Development</p>
+        </div>
+        <div class="carousel-container">
+            <button class="carousel-btn prev" data-carousel="apps-carousel">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="carousel" id="apps-carousel">
+                <!-- App Card 1 -->
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="card-category">iOS / Android</div>
+                        <i class="fas fa-tasks card-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">EasyTask</h3>
+                        <p class="card-description">シンプルで続くタスク管理アプリ。10,000DL突破。</p>
+                        <div class="card-tags">
+                            <span class="tag">Flutter</span>
+                            <span class="tag">Firebase</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>タスク完了時のフィードバックで習慣化をサポートします。</p>
+                        <a href="#" class="card-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- App Card 2 -->
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                        <div class="card-category">Webアプリ</div>
+                        <i class="fas fa-pencil-alt card-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">WritersHub</h3>
+                        <p class="card-description">ライター向け案件管理・請求書作成ツール。</p>
+                        <div class="card-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>フリーランスライターの業務効率化を実現。月額利用者500人。</p>
+                        <a href="#" class="card-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- App Card 3 -->
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);">
+                        <div class="card-category">Chrome拡張</div>
+                        <i class="fas fa-clock card-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">FocusMode</h3>
+                        <p class="card-description">集中力を高めるポモドーロタイマー拡張機能。</p>
+                        <div class="card-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Chrome API</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>Chromeウェブストアで星4.8の高評価。5,000ユーザー利用中。</p>
+                        <a href="#" class="card-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- App Card 4 -->
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #8360c3 0%, #2ebf91 100%);">
+                        <div class="card-category">LINE Bot</div>
+                        <i class="fab fa-line card-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">毎日ポジティブBot</h3>
+                        <p class="card-description">毎朝ポジティブな言葉を届けるLINE Bot。</p>
+                        <div class="card-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">LINE API</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>友だち登録3,000人。朝の習慣として愛用されています。</p>
+                        <a href="#" class="card-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn next" data-carousel="apps-carousel">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="images/profile.png" alt="プロフィール画像" class="profile-img large">
+            </div>
+            <div class="about-content">
                 <h2 class="section-title">
-                    <span class="title-icon">👤</span>
-                    ABOUT ME
+                    <i class="fas fa-user"></i> About Me
                 </h2>
+                <p class="about-name">かわはら たくや <span class="about-age">/ 40歳</span></p>
+                <p class="about-description">
+                    Webライターとアプリ開発者として活動しています。
+                    <br><br>
+                    「伝わる文章」と「使いやすい設計」にこだわり、
+                    読み手・ユーザーの目線に立ったモノづくりを大切にしています。
+                    <br><br>
+                    取材ではリラックスした雰囲気で本音を引き出し、
+                    開発ではシンプルで直感的なUXを追求。
+                    丁寧な仕事を心がけています。
+                </p>
                 
-                <div class="about-box">
-                    <p class="about-text">
-                        Webライターとして、SEOに強い記事執筆を中心に活動しています。検索エンジンに評価されるだけでなく、読者にとって本当に価値のあるコンテンツ制作を追求しています。
-                    </p>
-                    <p class="about-text">
-                        文章執筆にとどまらず、アプリ開発、動画コンテンツ、プレゼンテーション資料など、多様なメディアでクライアントのビジネスを支援。デジタルコンテンツ全般において、戦略的な視点と実践的なスキルを提供します。
-                    </p>
-                </div>
-
-                <div class="profile-card">
-                    <div class="profile-item">
-                        <div class="profile-label">職業</div>
-                        <div class="profile-value">Webライター / アプリ開発者</div>
+                <div class="skills-container">
+                    <h3 class="skills-title">Skills</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">SEOライティング</span>
+                            <span class="skill-percent">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="95"></div>
+                        </div>
                     </div>
-                    <div class="profile-item">
-                        <div class="profile-label">専門分野</div>
-                        <div class="profile-value">SEO記事執筆、Webアプリ開発、動画台本、スライド制作</div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">取材・インタビュー</span>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="90"></div>
+                        </div>
                     </div>
-                    <div class="profile-item">
-                        <div class="profile-label">稼働状況</div>
-                        <div class="profile-value">新規案件受付中</div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Flutter / Dart</span>
+                            <span class="skill-percent">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">React / JavaScript</span>
+                            <span class="skill-percent">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="75"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Python</span>
+                            <span class="skill-percent">70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="70"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Skillsセクション -->
-        <section id="skills" class="section section-alt">
-            <div class="container">
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
                 <h2 class="section-title">
-                    <span class="title-icon">💼</span>
-                    SKILLS
+                    <i class="fas fa-paper-plane"></i> Contact
                 </h2>
+                <p class="contact-description">
+                    お仕事のご依頼・ご相談は<br>
+                    お気軽にお問い合わせください。<br>
+                    <strong>丁寧にお返事します。</strong>
+                </p>
                 
-                <div class="skills-grid">
-                    <div class="skill-box">
-                        <div class="skill-icon">📝</div>
-                        <h3 class="skill-title">SEO記事執筆</h3>
-                        <p class="skill-description">
-                            キーワード戦略から構成設計、執筆まで一貫して対応。検索意図を深く理解し、ユーザーとSEOの両方に最適化された記事を制作します。
-                        </p>
-                        <div class="skill-tags">
-                            <span class="tag">SEOライティング</span>
-                            <span class="tag">キーワード選定</span>
-                            <span class="tag">構成設計</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-box">
-                        <div class="skill-icon">📱</div>
-                        <h3 class="skill-title">アプリ開発</h3>
-                        <p class="skill-description">
-                            Webアプリケーションやモバイルアプリの企画・開発。ユーザー体験を最優先に考えた設計と、実用性の高い機能実装が強みです。
-                        </p>
-                        <div class="skill-tags">
-                            <span class="tag">Webアプリ</span>
-                            <span class="tag">UI/UX設計</span>
-                            <span class="tag">プロトタイプ</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-box">
-                        <div class="skill-icon">🎬</div>
-                        <h3 class="skill-title">動画コンテンツ</h3>
-                        <p class="skill-description">
-                            YouTube向け台本や説明動画のシナリオ制作。視聴者の興味を引きつけ、最後まで見てもらえる構成とストーリーテリングを得意としています。
-                        </p>
-                        <div class="skill-tags">
-                            <span class="tag">台本作成</span>
-                            <span class="tag">シナリオ</span>
-                            <span class="tag">構成設計</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-box">
-                        <div class="skill-icon">📊</div>
-                        <h3 class="skill-title">スライド資料</h3>
-                        <p class="skill-description">
-                            企業向けプレゼンテーションやセミナー資料の企画・制作。複雑な情報を分かりやすく伝える構成力とデザインセンスを活かします。
-                        </p>
-                        <div class="skill-tags">
-                            <span class="tag">プレゼン資料</span>
-                            <span class="tag">図解作成</span>
-                            <span class="tag">資料設計</span>
-                        </div>
-                    </div>
+                <div class="social-links">
+                    <a href="https://twitter.com/takuya_writes" target="_blank" class="social-link twitter">
+                        <i class="fab fa-x-twitter"></i>
+                        <span>@takuya_writes</span>
+                    </a>
+                    <a href="https://github.com/takuya-dev" target="_blank" class="social-link github">
+                        <i class="fab fa-github"></i>
+                        <span>takuya-dev</span>
+                    </a>
+                    <a href="https://www.instagram.com/takuya.life" target="_blank" class="social-link instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span>@takuya.life</span>
+                    </a>
+                    <a href="https://note.com/takuya_note" target="_blank" class="social-link note">
+                        <i class="fas fa-pen"></i>
+                        <span>note</span>
+                    </a>
                 </div>
             </div>
-        </section>
-
-        <!-- Portfolioセクション -->
-        <section id="portfolio" class="section">
-            <div class="container">
-                <h2 class="section-title">
-                    <span class="title-icon">📁</span>
-                    PORTFOLIO
-                </h2>
-
-                <div class="portfolio-grid">
-                    <article class="portfolio-card">
-                        <div class="card-header">
-                            <span class="category-badge seo">SEO記事</span>
-                        </div>
-                        <h3 class="card-title">テクノロジー系メディア記事</h3>
-                        <p class="card-description">
-                            最新のWeb技術やプログラミングに関する解説記事を多数執筆。専門性の高い内容でも分かりやすく伝えることで、検索上位を獲得し月間10万PVを達成。
-                        </p>
-                        <div class="card-meta">
-                            <span class="meta-item">📈 月間10万PV達成</span>
-                        </div>
-                    </article>
-
-                    <article class="portfolio-card">
-                        <div class="card-header">
-                            <span class="category-badge app">アプリ開発</span>
-                        </div>
-                        <h3 class="card-title">タスク管理Webアプリ</h3>
-                        <p class="card-description">
-                            シンプルで直感的なUIを持つタスク管理アプリを開発。高速な動作とスムーズなUXで、ユーザーの生産性向上に貢献しています。
-                        </p>
-                        <div class="card-meta">
-                            <span class="meta-item">⚡ 高速動作</span>
-                            <span class="meta-item">📱 レスポンシブ対応</span>
-                        </div>
-                    </article>
-
-                    <article class="portfolio-card">
-                        <div class="card-header">
-                            <span class="category-badge seo">SEO記事</span>
-                        </div>
-                        <h3 class="card-title">ビジネス系ブログ記事</h3>
-                        <p class="card-description">
-                            マーケティング戦略やビジネススキルをテーマにした長文記事を執筆。データに基づいた説得力のある内容で、高いエンゲージメントを実現。
-                        </p>
-                        <div class="card-meta">
-                            <span class="meta-item">📊 データドリブン</span>
-                        </div>
-                    </article>
-
-                    <article class="portfolio-card">
-                        <div class="card-header">
-                            <span class="category-badge video">動画台本</span>
-                        </div>
-                        <h3 class="card-title">SaaS製品紹介動画の台本</h3>
-                        <p class="card-description">
-                            BtoB向けSaaS製品のプロモーション動画台本を作成。製品の価値を的確に伝える構成により、コンバージョン率の大幅な向上に貢献。
-                        </p>
-                        <div class="card-meta">
-                            <span class="meta-item">🎯 CV率向上</span>
-                        </div>
-                    </article>
-
-                    <article class="portfolio-card">
-                        <div class="card-header">
-                            <span class="category-badge app">アプリ開発</span>
-                        </div>
-                        <h3 class="card-title">ポートフォリオ生成ツール</h3>
-                        <p class="card-description">
-                            クリエイター向けに、簡単にポートフォリオサイトを作成できるWebツールを開発。テンプレート選択から公開までをシームレスに実現。
-                        </p>
-                        <div class="card-meta">
-                            <span class="meta-item">🚀 簡単公開</span>
-                        </div>
-                    </article>
-
-                    <article class="portfolio-card">
-                        <div class="card-header">
-                            <span class="category-badge slide">スライド</span>
-                        </div>
-                        <h3 class="card-title">企業向けセミナー資料</h3>
-                        <p class="card-description">
-                            コンテンツマーケティングの実践手法をテーマにした、50ページを超えるプレゼンテーション資料を制作。参加者から高い評価を獲得。
-                        </p>
-                        <div class="card-meta">
-                            <span class="meta-item">⭐ 高評価獲得</span>
-                        </div>
-                    </article>
-
-                    <article class="portfolio-card">
-                        <div class="card-header">
-                            <span class="category-badge video">動画台本</span>
-                        </div>
-                        <h3 class="card-title">教育系YouTubeチャンネル台本</h3>
-                        <p class="card-description">
-                            学習コンテンツの動画台本を継続的に執筆。複雑な概念を段階的に解説する構成で、視聴者の理解度と満足度を向上させています。
-                        </p>
-                        <div class="card-meta">
-                            <span class="meta-item">📚 継続執筆中</span>
-                        </div>
-                    </article>
-
-                    <article class="portfolio-card">
-                        <div class="card-header">
-                            <span class="category-badge seo">SEO記事</span>
-                        </div>
-                        <h3 class="card-title">ライフスタイルメディア記事</h3>
-                        <p class="card-description">
-                            健康、美容、ライフハックなど多様なジャンルのSEO記事を執筆。それぞれの分野で検索上位表示を達成し、安定したトラフィックを獲得。
-                        </p>
-                        <div class="card-meta">
-                            <span class="meta-item">🔝 検索上位達成</span>
-                        </div>
-                    </article>
+            
+            <form class="contact-form" id="contact-form">
+                <div class="form-group">
+                    <label for="name">お名前 <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" required placeholder="お名前">
                 </div>
-            </div>
-        </section>
-
-        <!-- Contactセクション -->
-        <section id="contact" class="section section-alt">
-            <div class="container">
-                <h2 class="section-title">
-                    <span class="title-icon">📮</span>
-                    CONTACT
-                </h2>
-
-                <div class="contact-box">
-                    <p class="contact-intro">
-                        お仕事のご依頼・ご相談はお気軽にお問い合わせください。<br>
-                        記事執筆、アプリ開発、コンテンツ制作など幅広く対応いたします。
-                    </p>
-
-                    <div class="contact-buttons">
-                        <a href="mailto:contact@example.com" class="contact-btn email">
-                            <span class="btn-icon">📧</span>
-                            <span class="btn-text">Email</span>
-                        </a>
-                        <a href="https://twitter.com/yourhandle" class="contact-btn twitter" target="_blank">
-                            <span class="btn-icon">🐦</span>
-                            <span class="btn-text">Twitter</span>
-                        </a>
-                        <a href="https://note.com/yourhandle" class="contact-btn note" target="_blank">
-                            <span class="btn-icon">📝</span>
-                            <span class="btn-text">Note</span>
-                        </a>
-                        <a href="https://github.com/yourhandle" class="contact-btn github" target="_blank">
-                            <span class="btn-icon">💻</span>
-                            <span class="btn-text">GitHub</span>
-                        </a>
-                    </div>
-
-                    <div class="contact-note">
-                        ※連絡先は後で実際のものに更新してください
-                    </div>
+                <div class="form-group">
+                    <label for="email">メールアドレス <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required placeholder="example@email.com">
                 </div>
+                <div class="form-group">
+                    <label for="subject">件名</label>
+                    <select id="subject" name="subject">
+                        <option value="">選択してください</option>
+                        <option value="writing">ライティングのご依頼</option>
+                        <option value="development">アプリ開発のご依頼</option>
+                        <option value="interview">取材のご依頼</option>
+                        <option value="other">その他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">メッセージ <span class="required">*</span></label>
+                    <textarea id="message" name="message" rows="5" required placeholder="ご依頼内容やご質問をお書きください"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-paper-plane"></i> 送信する
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-icon">✦</span>
+                <span class="logo-text">t.kawahara</span>
             </div>
-        </section>
-
-    </main>
-
-    <!-- フッター -->
-    <footer class="site-footer">
-        <p>&copy; 2025 Takuya Works - All Rights Reserved</p>
+            <p class="footer-tagline">言葉とコードで、届ける。伝える。</p>
+            <div class="footer-social">
+                <a href="https://twitter.com/takuya_writes" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://github.com/takuya-dev" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.instagram.com/takuya.life" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://note.com/takuya_note" target="_blank"><i class="fas fa-pen"></i></a>
+            </div>
+            <p class="footer-copyright">&copy; 2024 takuya kawahara. All rights reserved.</p>
+        </div>
     </footer>
 
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
 </body>
 </html>
