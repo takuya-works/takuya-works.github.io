@@ -1,0 +1,460 @@
+/* ===================================
+   Article Page Styles
+   Calm Blue Theme
+   =================================== */
+
+/* Variables (Blue Theme) */
+:root {
+    --primary: #2C5F8D;
+    --primary-hover: #1e4a6b;
+    --primary-light: #5B8FB9;
+    
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --bg-card: #ffffff;
+    
+    --text-primary: #2c3e50;
+    --text-secondary: #546e7a;
+    --text-muted: #95a5a6;
+    
+    --accent-gradient: linear-gradient(135deg, #2C5F8D 0%, #5B8FB9 100%);
+    --card-shadow: 0 4px 20px rgba(44, 95, 141, 0.08);
+    --card-shadow-hover: 0 8px 40px rgba(44, 95, 141, 0.12);
+    
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Noto Sans JP', 'Poppins', sans-serif;
+    line-height: 1.9;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+}
+
+/* ===================================
+   Progress Bar
+   =================================== */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: var(--accent-gradient);
+    z-index: 9999;
+    transition: width 0.2s ease;
+}
+
+/* ===================================
+   Article Header
+   =================================== */
+.article-header {
+    background: var(--accent-gradient);
+    color: white;
+    padding: 100px 20px 70px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.article-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+    animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-30px, 30px) rotate(5deg); }
+}
+
+.article-title {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
+}
+
+.article-subtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    opacity: 0.95;
+    font-weight: 400;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.article-meta {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===================================
+   Container
+   =================================== */
+.article-container {
+    max-width: 850px;
+    margin: -30px auto 0;
+    background: var(--bg-primary);
+    box-shadow: var(--card-shadow);
+    border-radius: 20px 20px 0 0;
+    position: relative;
+    z-index: 10;
+}
+
+/* ===================================
+   Table of Contents
+   =================================== */
+.toc {
+    background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+    border-left: 5px solid var(--primary);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 40px;
+    box-shadow: 0 2px 12px rgba(44, 95, 141, 0.08);
+}
+
+.toc h3 {
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toc h3::before {
+    content: "📖";
+    font-size: 1.5rem;
+}
+
+.toc ol {
+    list-style: none;
+    counter-reset: toc-counter;
+}
+
+.toc ol li {
+    counter-increment: toc-counter;
+    margin-bottom: 15px;
+    padding-left: 40px;
+    position: relative;
+}
+
+.toc ol li::before {
+    content: counter(toc-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: var(--accent-gradient);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(44, 95, 141, 0.2);
+}
+
+.toc a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color var(--transition-normal);
+    font-weight: 500;
+}
+
+.toc a:hover {
+    color: var(--primary);
+}
+
+/* ===================================
+   Article Body
+   =================================== */
+.article-body {
+    padding: 60px 50px;
+}
+
+.chapter {
+    margin-bottom: 80px;
+}
+
+.chapter h2 {
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    color: var(--primary);
+    margin-bottom: 35px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--primary);
+    font-weight: 700;
+}
+
+.chapter h3 {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    color: var(--text-primary);
+    margin: 45px 0 25px;
+    padding-left: 20px;
+    border-left: 5px solid var(--primary-light);
+    font-weight: 600;
+}
+
+.chapter p {
+    margin-bottom: 1.6em;
+    text-align: justify;
+    line-height: 2;
+    color: var(--text-secondary);
+}
+
+/* ===================================
+   Bullet Points (Background Color Style)
+   =================================== */
+.chapter ul {
+    margin: 35px 0;
+    padding: 25px 30px;
+    list-style: none;
+    background: linear-gradient(135deg, #e3f2fd 0%, #f0f7ff 100%);
+    border-radius: 10px;
+    border-left: 4px solid var(--primary);
+}
+
+.chapter ul li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    line-height: 1.9;
+    color: var(--text-secondary);
+}
+
+.chapter ul li:last-child {
+    margin-bottom: 0;
+}
+
+.chapter ul li::before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    top: 0.15em;
+    color: var(--primary);
+    font-size: 0.8em;
+}
+
+/* ===================================
+   Strong Emphasis
+   =================================== */
+strong {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* ===================================
+   Responsive Design
+   =================================== */
+@media (max-width: 768px) {
+    .article-header {
+        padding: 80px 20px 50px;
+    }
+    
+    .article-body {
+        padding: 40px 25px;
+    }
+    
+    .toc {
+        margin: 30px 20px;
+        padding: 25px;
+    }
+    
+    .chapter h2 {
+        font-size: 1.5rem;
+    }
+    
+    .chapter h3 {
+        font-size: 1.2rem;
+        padding-left: 15px;
+    }
+    
+    .chapter ul {
+        padding: 20px 25px;
+    }
+    
+    .chapter ul li {
+        padding-left: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .article-container {
+        margin: -20px 10px 0;
+        border-radius: 15px 15px 0 0;
+    }
+    
+    .article-body {
+        padding: 30px 20px;
+    }
+    
+    .toc {
+        margin: 20px 15px;
+        padding: 20px;
+    }
+    
+    .toc ol li {
+        padding-left: 35px;
+    }
+    
+    .toc ol li::before {
+        width: 24px;
+        height: 24px;
+        font-size: 0.8rem;
+    }
+    
+    .chapter ul {
+        padding: 18px 20px;
+    }
+    
+    .chapter ul li {
+        padding-left: 22px;
+    }
+}
+/* ===================================
+   About & References Section
+   =================================== */
+.about-references {
+    margin-top: 60px;
+    padding: 40px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 15px;
+    border-top: 4px solid var(--primary);
+}
+
+.about-references h2 {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.about-references h2:first-child {
+    margin-top: 0;
+}
+
+.about-references p {
+    margin-bottom: 1.3em;
+    line-height: 1.9;
+    color: var(--text-secondary);
+}
+
+.about-references ul {
+    margin: 20px 0;
+    padding: 25px 30px;
+    list-style: none;
+    background: #ffffff;
+    border-radius: 10px;
+    border-left: 4px solid var(--primary-light);
+}
+
+.about-references ul li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+.about-references ul li:last-child {
+    margin-bottom: 0;
+}
+
+.about-references ul li::before {
+    content: "📄";
+    position: absolute;
+    left: 0;
+    font-size: 1em;
+}
+/* ===================================
+   Back to Top Button
+   =================================== */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(44, 95, 141, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all var(--transition-normal);
+    z-index: 999;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(44, 95, 141, 0.4);
+}
+
+.back-to-top span:first-child {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.back-to-top-text {
+    font-size: 0.65rem;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 1rem;
+    }
+    
+    .back-to-top span:first-child {
+        font-size: 1.3rem;
+    }
+    
+    .back-to-top-text {
+        font-size: 0.6rem;
+    }
+}
