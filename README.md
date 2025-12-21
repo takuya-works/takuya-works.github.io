@@ -1,4 +1,4 @@
-# 😊 T.Yamada Portfolio Site
+# 😊 T.Kawahara Portfolio Site
 
 Webライター × アプリ開発者のポートフォリオサイト
 
