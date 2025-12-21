@@ -458,3 +458,22 @@ strong {
         font-size: 0.6rem;
     }
 }
+/* ===================================
+   Chapter Images
+   =================================== */
+.chapter-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 30px 0 40px;
+    box-shadow: 0 4px 15px rgba(44, 95, 141, 0.1);
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .chapter-image {
+        margin: 20px 0 30px;
+        border-radius: 8px;
+    }
+}
