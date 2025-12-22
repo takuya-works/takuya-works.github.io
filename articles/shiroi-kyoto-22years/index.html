@@ -26,8 +26,15 @@
     <link rel="stylesheet" href="../../css/article.css">
 </head>
 <body>
+    <body>
     <!-- Progress Bar -->
     <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Current Position Header -->
+    <div class="current-position" id="currentPosition">
+        <span class="current-chapter" id="currentChapter"></span>
+        <span class="current-heading" id="currentHeading"></span>
+    </div>
     
     <!-- Header -->
     <header class="article-header">
@@ -1477,9 +1484,15 @@
         <span class="back-to-top-text">TOP</span>
     </button>
     
-    <!-- Progress Bar Script -->
+        <!-- Progress Bar & Current Position Script -->
     <script>
-        // プログレスバー
+        let currentChapterElement = null;
+        let currentHeadingElement = null;
+        
+        // すべてのh2とh3要素を取得
+        const chapters = document.querySelectorAll('.chapter h2');
+        const headings = document.querySelectorAll('.chapter h3');
+        
         window.addEventListener('scroll', function() {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -1493,6 +1506,49 @@
             } else {
                 backToTopBtn.classList.remove('show');
             }
+            
+            // 現在位置の表示/非表示
+            const currentPosition = document.getElementById('currentPosition');
+            if (winScroll > 500) {
+                currentPosition.classList.add('show');
+            } else {
+                currentPosition.classList.remove('show');
+            }
+            
+            // 現在のh2を検出
+            let activeChapter = null;
+            chapters.forEach(chapter => {
+                const rect = chapter.getBoundingClientRect();
+                if (rect.top <= 150) {
+                    activeChapter = chapter;
+                }
+            });
+            
+            // 現在のh3を検出
+            let activeHeading = null;
+            headings.forEach(heading => {
+                const rect = heading.getBoundingClientRect();
+                if (rect.top <= 150) {
+                    // このh3が現在のh2の配下にあるか確認
+                    if (activeChapter && activeChapter.parentElement.contains(heading)) {
+                        activeHeading = heading;
+                    }
+                }
+            });
+            
+            // 表示を更新
+            if (activeChapter && activeChapter !== currentChapterElement) {
+                currentChapterElement = activeChapter;
+                document.getElementById('currentChapter').textContent = activeChapter.textContent;
+            }
+            
+            if (activeHeading && activeHeading !== currentHeadingElement) {
+                currentHeadingElement = activeHeading;
+                document.getElementById('currentHeading').textContent = activeHeading.textContent;
+            } else if (!activeHeading && currentHeadingElement) {
+                currentHeadingElement = null;
+                document.getElementById('currentHeading').textContent = '';
+            }
         });
         
         // トップに戻るボタンのクリックイベント
@@ -1503,8 +1559,5 @@
             });
         });
     </script>
-</body>
-</html>
-
 </body>
 </html>

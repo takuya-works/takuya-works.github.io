@@ -477,3 +477,72 @@ strong {
         border-radius: 8px;
     }
 }
+/* ===================================
+   Current Position Header
+   =================================== */
+.current-position {
+    position: fixed;
+    top: 4px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    padding: 12px 20px;
+    box-shadow: 0 2px 10px rgba(44, 95, 141, 0.1);
+    z-index: 998;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: all var(--transition-normal);
+}
+
+.current-position.show {
+    display: flex;
+}
+
+.current-chapter {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.current-heading {
+    color: var(--text-secondary);
+}
+
+.current-heading::before {
+    content: ">";
+    margin: 0 8px;
+    color: var(--text-muted);
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+    .current-position {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+    
+    .current-heading::before {
+        margin: 0 4px 0 0;
+    }
+}
+
+/* コンテナの上部余白を調整 */
+.article-container {
+    margin-top: -30px;
+}
+
+.current-position.show ~ .article-container {
+    margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+    .current-position.show ~ .article-container {
+        margin-top: 50px;
+    }
+}
