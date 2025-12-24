@@ -48,19 +48,32 @@
     <!-- Container -->
     <div class="article-container">
         <!-- Table of Contents -->
-        <nav class="toc">
-            <h3>目次</h3>
-            <ol>
-                <li><a href="#prologue">プロローグ：記憶の中の財前五郎</a></li>
-                <li><a href="#chapter1">第1章：2003年の医療風景──財前五郎が生きた世界</a></li>
-                <li><a href="#chapter2">第2章：免疫療法という革命──がん治療のパラダイムシフト</a></li>
-                <li><a href="#chapter3">第3章：一人ひとりに最適化された治療──プレシジョンメディシンの時代</a></li>
-                <li><a href="#chapter4">第4章：数字が語る希望──生存率はどう変わったのか</a></li>
-                <li><a href="#chapter5">第5章：患者の権利──「お任せします」から「一緒に決める」へ</a></li>
-                <li><a href="#chapter6">第6章：緩和ケアと在宅医療──「生き方を選ぶ」時代へ</a></li>
-                <li><a href="#chapter7">第7章：残された課題と、未来への希望</a></li>
-            </ol>
-        </nav>
+        <div class="toc-container">
+            <button class="toc-toggle" id="tocToggle">
+                <i class="fas fa-book"></i>
+                <span>目次を開く</span>
+            </button>
+            
+            <nav class="toc" id="toc">
+                <div class="toc-header">
+                    <h3>目次</h3>
+                    <button class="toc-close" id="tocClose">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <ol>
+                    <li><a href="#prologue">プロローグ：記憶の中の財前五郎</a></li>
+                    <li><a href="#chapter1">第1章：2003年の医療風景──財前五郎が生きた世界</a></li>
+                    <li><a href="#chapter2">第2章：免疫療法という革命──がん治療のパラダイムシフト</a></li>
+                    <li><a href="#chapter3">第3章：一人ひとりに最適化された治療──プレシジョンメディシンの時代</a></li>
+                    <li><a href="#chapter4">第4章：数字が語る希望──生存率はどう変わったのか</a></li>
+                    <li><a href="#chapter5">第5章：患者の権利──「お任せします」から「一緒に決める」へ</a></li>
+                    <li><a href="#chapter6">第6章：緩和ケアと在宅医療──「生き方を選ぶ」時代へ</a></li>
+                    <li><a href="#chapter7">第7章：残された課題と、未来への希望</a></li>
+                </ol>
+            </nav>
+        </div>
+
         
         <!-- Article Body -->
         <article class="article-body">
@@ -1556,6 +1569,39 @@
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
+            });
+        });
+        
+        // 目次の開閉
+        document.getElementById('tocToggle').addEventListener('click', function() {
+            const toc = document.getElementById('toc');
+            const toggle = document.getElementById('tocToggle');
+            
+            if (toc.classList.contains('show')) {
+                toc.classList.remove('show');
+                toggle.innerHTML = '<i class="fas fa-book"></i><span>目次を開く</span>';
+            } else {
+                toc.classList.add('show');
+                toggle.innerHTML = '<i class="fas fa-book-open"></i><span>目次を閉じる</span>';
+            }
+        });
+
+        document.getElementById('tocClose').addEventListener('click', function() {
+            const toc = document.getElementById('toc');
+            const toggle = document.getElementById('tocToggle');
+            
+            toc.classList.remove('show');
+            toggle.innerHTML = '<i class="fas fa-book"></i><span>目次を開く</span>';
+        });
+
+        // 目次のリンクをクリックしたら自動で閉じる
+        document.querySelectorAll('.toc a').forEach(link => {
+            link.addEventListener('click', function() {
+                const toc = document.getElementById('toc');
+                const toggle = document.getElementById('tocToggle');
+                
+                toc.classList.remove('show');
+                toggle.innerHTML = '<i class="fas fa-book"></i><span>目次を開く</span>';
             });
         });
     </script>
