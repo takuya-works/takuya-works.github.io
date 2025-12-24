@@ -125,67 +125,26 @@ body {
 }
 
 /* ===================================
-   Table of Contents (Collapsible)
+   Table of Contents (常に開いた状態)
    =================================== */
 .toc-container {
     margin: 40px;
 }
 
-/* 開くボタン */
+/* 開くボタン - 非表示 */
 .toc-toggle {
-    width: 100%;
-    padding: 20px 30px;
-    background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
-    border: 2px solid var(--primary);
-    border-radius: 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--primary);
-    transition: all var(--transition-normal);
-    font-family: 'Noto Sans JP', sans-serif;
-}
-
-.toc-toggle:hover {
-    background: linear-gradient(135deg, #bbdefb 0%, #e3f2fd 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(44, 95, 141, 0.15);
-}
-
-.toc-toggle i {
-    font-size: 1.3rem;
-}
-
-/* 目次本体（初期状態は非表示） */
-.toc {
     display: none;
+}
+
+/* 目次本体（常に表示） */
+.toc {
+    display: block;
     background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
     border-left: 5px solid var(--primary);
     border-radius: 15px;
     padding: 0;
-    margin-top: 15px;
     box-shadow: 0 2px 12px rgba(44, 95, 141, 0.08);
     overflow: hidden;
-}
-
-.toc.show {
-    display: block;
-    animation: slideDown 0.3s ease;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* 目次ヘッダー */
@@ -203,18 +162,9 @@ body {
     color: var(--text-primary);
 }
 
+/* 閉じるボタン - 非表示 */
 .toc-close {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.3rem;
-    color: var(--text-muted);
-    padding: 5px;
-    transition: color var(--transition-fast);
-}
-
-.toc-close:hover {
-    color: var(--primary);
+    display: none;
 }
 
 /* 目次リスト */
@@ -270,11 +220,6 @@ body {
 @media (max-width: 768px) {
     .toc-container {
         margin: 30px 20px;
-    }
-    
-    .toc-toggle {
-        padding: 16px 20px;
-        font-size: 1rem;
     }
     
     .toc-header {
