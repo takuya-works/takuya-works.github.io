@@ -310,6 +310,12 @@ body {
 
 .chapter {
     margin-bottom: 80px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid var(--bg-tertiary);
+}
+
+.chapter:last-child {
+    border-bottom: none;
 }
 
 .chapter h2 {
@@ -371,12 +377,52 @@ body {
 }
 
 /* ===================================
-   Strong Emphasis
+   Note Box (ワンポイント)
+   =================================== */
+.note {
+    margin: 35px 0;
+    padding: 25px 30px;
+    background: linear-gradient(135deg, #fff9e6 0%, #fffbf0 100%);
+    border-radius: 10px;
+    border-left: 5px solid #f59e0b;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.1);
+}
+
+.note p {
+    margin-bottom: 1em;
+    color: var(--text-secondary);
+    line-height: 1.9;
+}
+
+.note p:last-child {
+    margin-bottom: 0;
+}
+
+.note strong {
+    color: #f59e0b;
+    font-weight: 700;
+    font-size: 1.05em;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.note strong::before {
+    content: "💡";
+    font-size: 1.2em;
+}
+
+/* ===================================
+   Strong Emphasis - ワインレッド
    =================================== */
 strong {
-    color: var(--primary);
-    font-weight: 600;
+    color: #c62828;
+    font-weight: 700;
+    background: linear-gradient(transparent 60%, rgba(198, 40, 40, 0.1) 60%);
+    padding: 0 0.2em;
 }
+
+
 
 /* ===================================
    Responsive Design
@@ -410,6 +456,10 @@ strong {
     
     .chapter ul li {
         padding-left: 25px;
+    }
+    
+    .note {
+        padding: 20px 25px;
     }
 }
 
@@ -445,7 +495,12 @@ strong {
     .chapter ul li {
         padding-left: 22px;
     }
+    
+    .note {
+        padding: 18px 20px;
+    }
 }
+
 /* ===================================
    About & References Section
    =================================== */
@@ -501,6 +556,7 @@ strong {
     left: 0;
     font-size: 1em;
 }
+
 /* ===================================
    Back to Top Button
    =================================== */
@@ -568,6 +624,7 @@ strong {
         font-size: 0.6rem;
     }
 }
+
 /* ===================================
    Chapter Images
    =================================== */
@@ -587,6 +644,7 @@ strong {
         border-radius: 8px;
     }
 }
+
 /* ===================================
    Current Position Header
    =================================== */
@@ -656,12 +714,137 @@ strong {
         margin-top: 50px;
     }
 }
-.chapter {
-    margin-bottom: 80px;
-    padding-bottom: 60px;
-    border-bottom: 1px solid var(--bg-tertiary);
+/* ===================================
+   Note Box (ワンポイント) - パターン強調版
+   =================================== */
+.note {
+    margin: 40px 0;
+    padding: 35px 35px 35px 90px;
+    background: 
+        linear-gradient(135deg, #fff9e6 0%, #fffbf0 100%),
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(245, 158, 11, 0.03) 10px,
+            rgba(245, 158, 11, 0.03) 20px
+        );
+    border-radius: 12px;
+    border: 3px solid #f59e0b;
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15);
+    position: relative;
 }
 
-.chapter:last-child {
-    border-bottom: none;
+.note::before {
+    content: "💡";
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3em;
+    filter: drop-shadow(0 4px 8px rgba(245, 158, 11, 0.3));
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { 
+        filter: drop-shadow(0 4px 8px rgba(245, 158, 11, 0.3));
+        transform: translateY(-50%) scale(1);
+    }
+    50% { 
+        filter: drop-shadow(0 6px 12px rgba(245, 158, 11, 0.5));
+        transform: translateY(-50%) scale(1.05);
+    }
+}
+
+.note p {
+    margin-bottom: 1em;
+    color: var(--text-secondary);
+    line-height: 1.9;
+}
+
+.note p:last-child {
+    margin-bottom: 0;
+}
+
+.note strong {
+    color: #f59e0b;
+    font-weight: 700;
+    font-size: 1.15em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.note strong::before {
+    content: "▼ ";
+    color: #f59e0b;
+}
+
+@media (max-width: 768px) {
+    .note {
+        padding: 70px 25px 25px 25px;
+    }
+    
+    .note::before {
+        left: 50%;
+        top: 20px;
+        transform: translateX(-50%);
+        font-size: 2.5em;
+    }
+}
+/* ===================================
+   Yellow Marker Highlight
+   =================================== */
+mark {
+    background: linear-gradient(transparent 0%, #fff176 0%);
+    background-position: 0 0.6em;
+    background-repeat: no-repeat;
+    background-size: 100% 0.7em;
+    padding: 0.1em 0.3em;
+    color: var(--text-primary);
+    font-weight: 500;
+    border-radius: 2px;
+    position: relative;
+}
+
+/* より自然なマーカー風（蛍光ペン効果） */
+mark.natural {
+    background: 
+        linear-gradient(104deg, 
+            rgba(255, 241, 118, 0) 0.9%, 
+            rgba(255, 241, 118, 1) 2.4%, 
+            rgba(255, 241, 118, 0.5) 5.8%, 
+            rgba(255, 241, 118, 0.8) 93%, 
+            rgba(255, 241, 118, 0.4) 96%, 
+            transparent 98%),
+        linear-gradient(183deg, 
+            rgba(255, 241, 118, 0) 0%, 
+            rgba(255, 241, 118, 0.3) 7.9%, 
+            rgba(255, 241, 118, 0) 15%);
+    padding: 0.1em 0.2em;
+    border-radius: 1em 0.5em;
+}
+
+/* ピンク系マーカー（オプション） */
+mark.pink {
+    background: linear-gradient(transparent 0%, #ffb3d9 0%);
+    background-position: 0 0.6em;
+    background-repeat: no-repeat;
+    background-size: 100% 0.7em;
+}
+
+/* 緑系マーカー（オプション） */
+mark.green {
+    background: linear-gradient(transparent 0%, #b9f6ca 0%);
+    background-position: 0 0.6em;
+    background-repeat: no-repeat;
+    background-size: 100% 0.7em;
+}
+
+/* 青系マーカー（オプション） */
+mark.blue {
+    background: linear-gradient(transparent 0%, #b3e5fc 0%);
+    background-position: 0 0.6em;
+    background-repeat: no-repeat;
+    background-size: 100% 0.7em;
 }
