@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -43,7 +42,6 @@
     
     [hidden] { display: none !important; }
   </style>
-<link rel="stylesheet" href="/index.css">
 </head>
 <body class="bg-[#fafafa] text-slate-900 min-h-screen flex flex-col">
   <!-- Background Decorations -->
@@ -54,17 +52,18 @@
   </div>
 
   <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-      <div class="flex items-center space-x-2 sm:space-x-3 group cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-tr from-indigo-600 to-violet-500 rounded-xl sm:rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-200 group-hover:rotate-6 transition-transform">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-        </div>
-        <span class="text-xl sm:text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600">
-          Bright<span class="text-indigo-600">Quotes</span>
-        </span>
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-center">
+    <div class="flex items-center space-x-2 sm:space-x-3 group cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+      <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-tr from-indigo-600 to-violet-500 rounded-xl sm:rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-200 group-hover:rotate-6 transition-transform">
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
       </div>
+      <span class="text-xl sm:text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600">
+        Bright<span class="text-indigo-600">Quotes</span>
+      </span>
     </div>
-  </header>
+  </div>
+</header>
+
 
   <main class="flex-grow">
     <div class="py-8 px-4 sm:py-16 sm:px-6 md:py-24 max-w-5xl mx-auto space-y-10 sm:space-y-16">
@@ -85,7 +84,6 @@
           <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
         </div>
         <div class="relative w-full max-w-2xl mx-auto flex justify-center">
-          <!-- 改修箇所: justify-centerを追加し、w-fitで中央寄せを確実に -->
           <div id="category-nav" class="category-container flex flex-nowrap justify-center gap-1.5 sm:gap-2 p-1.5 bg-slate-100/60 rounded-2xl sm:rounded-[28px] border border-slate-200/50 backdrop-blur-sm overflow-x-auto no-scrollbar scroll-smooth relative w-fit min-w-[300px]">
             <div id="indicator" class="category-indicator absolute bg-gradient-to-r from-indigo-600 to-violet-600 rounded-xl sm:rounded-[22px] shadow-lg shadow-indigo-200/50 z-0 pointer-events-none opacity-0"></div>
           </div>
@@ -191,7 +189,426 @@
     </div>
   </footer>
 
-  <script src="index.js"></script>
-<script type="module" src="/index.tsx"></script>
+  <script>
+/**
+ * BrightQuotes - Complete Edition with 50 quotes per category
+ */
+
+let QUOTE_LIBRARY = {
+  "Success": [
+    { "author": "ウィンストン・チャーチル", "quote": "成功は終わりではなく、失敗は致命的ではない。大切なのは、続ける勇気だ。", "translation": "Success is not final, failure is not fatal: it is the courage to continue that counts.", "interpretation": "成功してもそこで終わりではなく、たとえ失敗したとしても、それが人生のすべてを決めるわけではありません。一番素晴らしいのは、どんな時も一歩ずつ前に進もうとするあなたの心の強さです。結果に一喜一憂しすぎず、今日という日を大切に積み重ねていきましょう。あなたは今のままでも十分に頑張っていますよ。", "actions": ["今日できたことを1つメモする", "深呼吸して心を落ち着ける", "明日の小さな目標を決める"], "category": "成功" },
+    { "author": "スティーブ・ジョブズ", "quote": "偉大な仕事をする唯一の方法は、自分のしていることを愛することだ。", "translation": "The only way to do great work is to love what you do.", "interpretation": "無理に頑張るよりも、心から楽しめることを見つけることが、あなたを輝かせます。今の仕事や日常の中に、小さな「好き」を探してみてください。それがあなたの原動力になります。完璧を目指さなくても、好きという気持ちがあれば自然と良い結果がついてきますよ。", "actions": ["好きな作業を一つ見つける", "楽しいと感じる瞬間を大切にする", "自分の強みを書き出す"], "category": "成功" },
+    { "author": "アルベルト・アインシュタイン", "quote": "成功者になろうとするのではなく、価値のある人間になろうとしなさい。", "translation": "Try not to become a man of success. Rather become a man of value.", "interpretation": "人と比べて焦る必要はありません。あなたが誰かの役に立ち、笑顔を作れるなら、それは立派な成功です。小さな親切や優しさが、あなたの価値を高めます。今日一日、誰かのために何か一つできたら、それで十分素晴らしいのです。", "actions": ["誰かに感謝を伝える", "小さな親切をする", "自分の良いところを認める"], "category": "成功" },
+    { "author": "トーマス・エジソン", "quote": "私は失敗したことがない。ただ、うまくいかない1万通りの方法を見つけただけだ。", "translation": "I have not failed. I've just found 10,000 ways that won't work.", "interpretation": "失敗は恥ずかしいことではなく、成長のための大切な経験です。うまくいかないことがあっても、それはあなたが挑戦している証拠。一つずつ学んでいけば、必ず正解に近づいています。焦らず、自分のペースで進んでいきましょう。", "actions": ["失敗から学んだことを書く", "新しい方法を一つ試す", "自分を責めるのをやめる"], "category": "成功" },
+    { "author": "松下幸之助", "quote": "失敗したところで止めてしまうから失敗になる。成功するところまで続ければ、それは成功になる。", "translation": "Don't stop when you fail. If you keep going until you succeed, that's success.", "interpretation": "諦めなければ、失敗は失敗のままでは終わりません。今は辛くても、続けていれば必ず道は開けます。大きな一歩でなくても、小さな一歩を踏み出し続けることが、あなたを成功へと導きます。今日だけ、もう一度頑張ってみましょう。", "actions": ["今日一日だけ続けると決める", "小さな進歩を喜ぶ", "目標を見直す"], "category": "成功" },
+    { "author": "ウォルト・ディズニー", "quote": "始める方法は、しゃべるのをやめて、やり始めることだ。", "translation": "The way to get started is to quit talking and begin doing.", "interpretation": "完璧な計画を立てるより、まず動き出すことが大切です。不安があっても、小さな一歩を踏み出せば、景色が変わり始めます。考えすぎずに、できることから始めてみてください。行動することで、新しい発見があなたを待っていますよ。", "actions": ["5分だけ作業を始める", "簡単なことから手をつける", "考えすぎるのをやめる"], "category": "成功" },
+    { "author": "本田宗一郎", "quote": "私の最大の光栄は、一度も失敗しないことではなく、倒れるごとに起き上がることにある。", "translation": "My greatest glory is not in never failing, but in rising every time I fall.", "interpretation": "何度転んでも立ち上がるあなたの姿は、誰よりも美しく強いものです。失敗の数は、あなたが挑戦し続けた証です。今日もまた立ち上がったあなたを、心から誇りに思ってください。その勇気が、明日への希望になります。", "actions": ["立ち上がった自分を褒める", "次の一歩を計画する", "温かい飲み物を飲む"], "category": "成功" },
+    { "author": "ビル・ゲイツ", "quote": "成功を祝うのはいいが、失敗の教訓に留意することのほうが重要だ。", "translation": "It's fine to celebrate success but it is more important to heed the lessons of failure.", "interpretation": "失敗から学ぶことで、あなたは確実に成長しています。成功だけでなく、うまくいかなかった経験も大切な宝物です。そこから得た知恵が、次のあなたを支えます。失敗を恐れず、そこから学ぶ姿勢が、あなたを強くしますよ。", "actions": ["失敗から学んだことを書く", "次はどうするか考える", "自分の成長を認める"], "category": "成功" },
+    { "author": "マーク・トウェイン", "quote": "この人生で必要なのは無知と自信だけだ。そうすれば成功は確実だ。", "translation": "All you need in this life is ignorance and confidence; then success is sure.", "interpretation": "深く考えすぎず、自分を信じて進むことも大切です。完璧な知識がなくても、やってみようという勇気があれば道は開けます。不安があっても、自分の可能性を信じてください。あなたには、思っている以上の力が備わっていますよ。", "actions": ["自分を信じると決める", "難しく考えすぎない", "前向きな言葉を口にする"], "category": "成功" },
+    { "author": "レオナルド・ダ・ヴィンチ", "quote": "何かを成し遂げる人々は座って待たない。外に出て、物事を起こすのだ。", "translation": "It had long since come to my attention that people of accomplishment rarely sat back and let things happen to them. They went out and happened to things.", "interpretation": "待っているだけでは何も変わりません。小さくても、自分から動き出すことが大切です。完璧なタイミングを待つより、今できることから始めてみましょう。あなたの行動一つひとつが、未来を作っていきます。勇気を出して、一歩踏み出してみてください。", "actions": ["今日できることを一つやる", "待つのをやめて動く", "新しいことに挑戦する"], "category": "成功" },
+    { "author": "ロイ・T・ベネット", "quote": "成功とは、どれだけ高く登ったかではなく、世界にどれだけポジティブな影響を与えたかだ。", "translation": "Success is not how high you have climbed, but how you make a positive difference to the world.", "interpretation": "誰かの笑顔を作れたなら、それは立派な成功です。大きなことを成し遂げなくても、あなたの優しさや思いやりが、誰かの心を温めています。小さな親切の積み重ねが、あなたの人生を豊かにします。今日も、誰かのために何かできることがきっとありますよ。", "actions": ["誰かを笑顔にする", "感謝の気持ちを伝える", "小さな親切をする"], "category": "成功" },
+    { "author": "セオドア・ルーズベルト", "quote": "失敗することは辛いが、成功しようと努力しなかったことはもっと悪い。", "translation": "It is hard to fail, but it is worse never to have tried to succeed.", "interpretation": "挑戦して失敗するより、何もせずに後悔する方が辛いものです。結果がどうであれ、挑戦したあなたは素晴らしい。失敗を恐れずに、やってみたいことに手を伸ばしてください。その勇気が、あなたの人生を輝かせますよ。", "actions": ["やりたいことリストを作る", "小さな挑戦をする", "後悔しない選択をする"], "category": "成功" },
+    { "author": "ヴィクトール・フランクル", "quote": "成功を目指してはいけない。成功は、より大きな何かに献身した結果として自然についてくるものだ。", "translation": "Don't aim at success. The more you aim at it and make it a target, the more you are going to miss it. For success, like happiness, cannot be pursued; it must ensue.", "interpretation": "成功ばかり追いかけるのではなく、今目の前にあることに心を込めて取り組んでください。一生懸命に、誠実に生きていれば、成功は自然とあなたのもとに訪れます。焦らず、今日この瞬間を大切に過ごしましょう。", "actions": ["目の前のことに集中する", "丁寧に仕事をする", "過程を楽しむ"], "category": "成功" },
+    { "author": "ボブ・ディラン", "quote": "朝起きて夜寝るまでの間に、やりたいことができるなら、その人は成功者だ。", "translation": "A man is a success if he gets up in the morning and gets to bed at night, and in between he does what he wants to do.", "interpretation": "成功の定義は人それぞれです。誰かと比べる必要はありません。あなたが心から楽しめることをして、満足して眠りにつけるなら、それは素晴らしい成功です。自分らしい幸せを大切にしてくださいね。", "actions": ["自分の幸せを定義する", "好きなことをする時間を作る", "心地よい一日を過ごす"], "category": "成功" },
+    { "author": "コンフューシウス（孔子）", "quote": "止まらなければ、どんなにゆっくりでも構わない。", "translation": "It does not matter how slowly you go as long as you do not stop.", "interpretation": "速く進む必要はありません。亀のようにゆっくりでも、歩み続けることが大切です。自分のペースで、焦らず一歩ずつ進んでいきましょう。あなたのペースは、あなたが決めていいのです。今日も一歩、前に進めていますよ。", "actions": ["自分のペースを大切にする", "小さな進歩を喜ぶ", "焦る気持ちを手放す"], "category": "成功" },
+    { "author": "ヘンリー・デイヴィッド・ソロー", "quote": "成功は、それを成し遂げるまで不可能に思える。", "translation": "It always seems impossible until it's done.", "interpretation": "今は難しく感じても、一歩ずつ進めば必ずたどり着けます。不可能に見える目標も、努力を続ければ可能になります。自分の力を信じて、諦めずに進んでください。あなたならきっとできますよ。", "actions": ["小さな目標を設定する", "一歩ずつ進む", "自分の可能性を信じる"], "category": "成功" },
+    { "author": "ラルフ・ワルド・エマーソン", "quote": "この世で成功するための秘訣を教えよう。自分の機会を待つな。自ら機会を作り出せ。", "translation": "Don't wait for your ship to come in, swim out to it.", "interpretation": "待っているだけでは何も始まりません。自分から行動を起こすことで、チャンスは生まれます。不安があっても、勇気を出して一歩踏み出してください。その行動が、あなたの未来を変えていきます。", "actions": ["自分からチャンスを作る", "行動を起こす", "勇気を出して挑戦する"], "category": "成功" },
+    { "author": "アリストテレス", "quote": "我々は繰り返し行うことの結果である。したがって、卓越とは行為ではなく、習慣なのだ。", "translation": "We are what we repeatedly do. Excellence, then, is not an act, but a habit.", "interpretation": "一度の頑張りより、毎日の小さな積み重ねが、あなたを成長させます。完璧を目指さなくても、少しずつ続けることが力になります。今日も、小さな良い習慣を続けてみましょう。それがあなたを素晴らしい人にしていきますよ。", "actions": ["良い習慣を一つ続ける", "毎日少しずつ進む", "継続を大切にする"], "category": "成功" },
+    { "author": "マヤ・アンジェロウ", "quote": "成功するには情熱が必要だ。しかし、持続させるには規律が必要だ。", "translation": "You can't use up creativity. The more you use, the more you have.", "interpretation": "好きという気持ちだけでなく、コツコツ続ける力も大切です。毎日少しずつでも、続けることで大きな力になります。完璧でなくても、続けることを大切にしてください。あなたの努力は、必ず実を結びますよ。", "actions": ["毎日少しずつ続ける", "規律を持つ", "自分を信じる"], "category": "成功" },
+    { "author": "スティーブン・コヴィー", "quote": "重要なことを最優先にする。", "translation": "The key is not to prioritize what's on your schedule, but to schedule your priorities.", "interpretation": "すべてを完璧にこなす必要はありません。本当に大切なことに時間を使いましょう。優先順位をつけることで、心に余裕が生まれます。無理をせず、大切なことから始めてみてください。", "actions": ["大切なことを一つ決める", "優先順位をつける", "余計なことを減らす"], "category": "成功" },
+    { "author": "ジョン・ウッデン", "quote": "成功とは、最善を尽くしたという自己満足から得られる心の平和だ。", "translation": "Success is peace of mind, which is a direct result of self-satisfaction in knowing you made the effort to become the best of which you are capable.", "interpretation": "他人と比べる必要はありません。あなたが全力を尽くしたなら、それで十分です。結果がどうであれ、頑張った自分を認めてあげてください。その自己肯定感が、あなたの心を満たします。", "actions": ["全力を尽くす", "自分を認める", "結果より過程を大切にする"], "category": "成功" },
+    { "author": "トニー・ロビンズ", "quote": "人生の質は、あなたが尋ねる質問の質によって決まる。", "translation": "The quality of your life is a direct reflection of the quality of the questions you are asking yourself.", "interpretation": "自分にどんな質問をするかで、人生は変わります。「できない理由」ではなく「どうすればできるか」を考えてみましょう。前向きな問いかけが、あなたの可能性を広げますよ。", "actions": ["前向きな質問をする", "可能性を探す", "自分に優しく問いかける"], "category": "成功" },
+    { "author": "ベンジャミン・フランクリン", "quote": "話して聞かせれば忘れる。見せれば思い出す。体験させれば理解する。", "translation": "Tell me and I forget. Teach me and I remember. Involve me and I learn.", "interpretation": "頭で理解するより、実際に体験することが一番の学びです。失敗を恐れず、やってみることで成長できます。小さなことでも、自分で体験してみましょう。その経験が、あなたの財産になります。", "actions": ["新しいことを体験する", "失敗を恐れない", "行動から学ぶ"], "category": "成功" },
+    { "author": "ジグ・ジグラー", "quote": "成功への第一歩は、自分が何を望んでいるかを正確に知ることだ。", "translation": "You don't have to be great to start, but you have to start to be great.", "interpretation": "大きなことを成し遂げる前に、まず始めることが大切です。完璧でなくても、今できることから始めてみましょう。小さな一歩が、やがて大きな成果につながります。勇気を出して、スタートを切ってくださいね。", "actions": ["今すぐ始める", "完璧を求めない", "小さな一歩を踏み出す"], "category": "成功" },
+    { "author": "ロバート・フロスト", "quote": "最高の出口は常に突き抜けることだ。", "translation": "The best way out is always through.", "interpretation": "困難から逃げるのではなく、向き合って乗り越えることが大切です。辛い時こそ、一歩ずつ進んでいきましょう。あなたには、それを乗り越える力があります。今は辛くても、必ず抜け出せますよ。", "actions": ["困難に向き合う", "一歩ずつ進む", "自分の強さを信じる"], "category": "成功" },
+    { "author": "ウィリアム・ジェームズ", "quote": "行動は、気分によって生まれるのではない。行動によって気分が生まれるのだ。", "translation": "Act as if what you do makes a difference. It does.", "interpretation": "気分が乗らなくても、まず動いてみることで、気持ちは後からついてきます。完璧な気分を待たずに、小さな行動から始めてみましょう。動き出すことで、心も軽くなりますよ。", "actions": ["気分に関係なく動く", "小さなことから始める", "行動が気分を変える"], "category": "成功" },
+    { "author": "エレノア・ルーズベルト", "quote": "未来は、今日何をするかにかかっている。", "translation": "The future belongs to those who believe in the beauty of their dreams.", "interpretation": "明日の自分は、今日のあなたが作ります。大きな夢を持ち、今日できることを一つずつやっていきましょう。未来は、あなたの行動次第で変えられます。今日も、小さな一歩を踏み出してくださいね。", "actions": ["今日できることをする", "夢を持つ", "未来を信じる"], "category": "成功" },
+    { "author": "ナポレオン・ヒル", "quote": "思考は現実化する。", "translation": "Whatever the mind can conceive and believe, it can achieve.", "interpretation": "あなたが信じたことは、現実になる可能性があります。ネガティブなことより、ポジティブなことを考えましょう。心が明るくなれば、行動も変わり、人生も変わっていきますよ。", "actions": ["前向きに考える", "良いイメージを持つ", "自分の可能性を信じる"], "category": "成功" },
+    { "author": "デール・カーネギー", "quote": "成功の秘訣は、批判を恐れないことだ。", "translation": "Don't be afraid to give your best to what seemingly are small jobs. Every time you conquer one it makes you that much stronger.", "interpretation": "小さな仕事でも、全力で取り組むことが大切です。批判を恐れず、自分を信じて進みましょう。一つひとつの積み重ねが、あなたを強くしていきます。", "actions": ["批判を恐れない", "小さな仕事にも全力で取り組む", "自分を信じる"], "category": "成功" },
+    { "author": "マハトマ・ガンジー", "quote": "明日死ぬかのように生き、永遠に生きるかのように学べ。", "translation": "Live as if you were to die tomorrow. Learn as if you were to live forever.", "interpretation": "今日を大切に生きながら、学び続ける姿勢を持ちましょう。毎日を全力で生きることと、成長し続けることの両方が大切です。今日という日を、精一杯楽しんでくださいね。", "actions": ["今日を大切に生きる", "学び続ける", "毎日を楽しむ"], "category": "成功" },
+    { "author": "ピーター・ドラッカー", "quote": "最善の未来を予測する方法は、それを創り出すことだ。", "translation": "The best way to predict the future is to create it.", "interpretation": "未来は待つものではなく、自分で作るものです。あなたの行動一つひとつが、未来を形作ります。今日も、理想の未来に向かって一歩進んでみましょう。", "actions": ["未来を創る行動をする", "理想を描く", "今日できることをする"], "category": "成功" },
+    { "author": "セネカ", "quote": "運は、準備が機会と出会った時に起こる。", "translation": "Luck is what happens when preparation meets opportunity.", "interpretation": "チャンスは突然やってきます。その時のために、今できる準備をしておきましょう。小さな努力の積み重ねが、いつか大きな幸運を呼び込みますよ。", "actions": ["準備をしておく", "機会を待つ", "努力を続ける"], "category": "成功" },
+    { "author": "オプラ・ウィンフリー", "quote": "最大の冒険は、あなたの夢の人生を生きることだ。", "translation": "The biggest adventure you can take is to live the life of your dreams.", "interpretation": "夢を諦めないでください。あなたの人生は、あなたが主人公です。理想の人生を思い描き、その実現に向かって進んでいきましょう。あなたには、その力がありますよ。", "actions": ["夢を描く", "理想の人生をイメージする", "一歩ずつ近づく"], "category": "成功" },
+    { "author": "リチャード・ブランソン", "quote": "チャンスは待っていても来ない。自分で作るものだ。", "translation": "Opportunities are made, they don't just happen.", "interpretation": "受け身でいるのではなく、自分から動いてチャンスを作りましょう。行動することで、新しい可能性が開けます。今日も、小さな一歩を踏み出してみてくださいね。", "actions": ["自分からチャンスを作る", "行動する", "新しいことに挑戦する"], "category": "成功" },
+    { "author": "マイケル・ジョーダン", "quote": "私は9000回以上シュートを外し、300試合に敗れた。決勝シュートを任されて26回も外した。人生で何度も何度も失敗してきた。だから私は成功したのだ。", "translation": "I've missed more than 9000 shots in my career. I've lost almost 300 games. 26 times, I've been trusted to take the game winning shot and missed. I've failed over and over and over again in my life. And that is why I succeed.", "interpretation": "失敗の数だけ、成功に近づいています。恐れずに挑戦し続けることが、最終的な成功につながります。失敗を恐れず、何度でも立ち上がってください。あなたの挑戦は、必ず報われますよ。", "actions": ["失敗を恐れない", "何度でも挑戦する", "経験から学ぶ"], "category": "成功" },
+    { "author": "J・K・ローリング", "quote": "失敗は避けられない。大切なのは、失敗から何を学ぶかだ。", "translation": "It is impossible to live without failing at something, unless you live so cautiously that you might as well not have lived at all - in which case, you fail by default.", "interpretation": "生きていれば、失敗は避けられません。でも、その失敗があなたを成長させます。恐れずに生きて、失敗から学び続けてください。その経験が、あなたを強くしますよ。", "actions": ["失敗を受け入れる", "学びを見つける", "前を向く"], "category": "成功" },
+    { "author": "ヴィンス・ロンバルディ", "quote": "完璧は達成できないが、完璧を追求すれば、卓越に到達できる。", "translation": "Perfection is not attainable, but if we chase perfection we can catch excellence.", "interpretation": "完璧である必要はありません。でも、より良くなろうと努力することが大切です。その過程で、あなたは素晴らしい成果を手にします。焦らず、一歩ずつ進んでいきましょう。", "actions": ["完璧を求めすぎない", "向上心を持つ", "少しずつ良くなる"], "category": "成功" },
+    { "author": "ブルース・リー", "quote": "目標を持たない者は、常に目標を持つ者のために働く。", "translation": "A goal is not always meant to be reached, it often serves simply as something to aim at.", "interpretation": "目標を持つことで、人生に方向性が生まれます。達成できなくても、目指すことに意味があります。小さな目標でもいいので、何か一つ目指してみましょう。それがあなたを前に進ませますよ。", "actions": ["目標を一つ決める", "方向性を持つ", "少しずつ近づく"], "category": "成功" },
+    { "author": "アンディ・ウォーホル", "quote": "成功するための最善の復讐は、大いなる成功である。", "translation": "Don't think about making art, just get it done. Let everyone else decide if it's good or bad, whether they love it or hate it. While they are deciding, make even more art.", "interpretation": "他人の評価を気にせず、自分の道を進みましょう。あなたの成功が、最高の答えになります。批判されても、諦めずに前進してください。あなたの努力は、必ず実を結びますよ。", "actions": ["他人の評価を気にしない", "自分の道を進む", "成功に集中する"], "category": "成功" },
+    { "author": "ジェフ・ベゾス", "quote": "後悔を最小化することが重要だ。", "translation": "I knew that if I failed I wouldn't regret that, but I knew the one thing I might regret is not trying.", "interpretation": "やらずに後悔するより、やって後悔する方がいい。挑戦しなかったことが、一番の後悔になります。勇気を出して、一歩踏み出してください。あなたの人生は、あなたが決めるものですよ。", "actions": ["挑戦する", "後悔しない選択をする", "勇気を持つ"], "category": "成功" },
+    { "author": "ウォーレン・バフェット", "quote": "リスクは、自分が何をしているか理解していない時に生じる。", "translation": "Risk comes from not knowing what you're doing.", "interpretation": "恐れを感じるのは、わからないからです。学び、理解することで、不安は小さくなります。知識を身につけながら、一歩ずつ進んでいきましょう。準備があれば、恐れることはありませんよ。", "actions": ["学ぶ", "理解を深める", "準備をする"], "category": "成功" },
+    { "author": "イーロン・マスク", "quote": "失敗は選択肢の一つだ。失敗しないなら、十分に革新的ではない。", "translation": "Failure is an option here. If things are not failing, you are not innovating enough.", "interpretation": "失敗を恐れていては、新しいことはできません。失敗は成長のチャンスです。革新的なことに挑戦し、失敗から学びましょう。その経験が、あなたを成長させますよ。", "actions": ["新しいことに挑戦する", "失敗を恐れない", "革新的に考える"], "category": "成功" },
+    { "author": "リンダ・イーグルマン", "quote": "成功とは、最後まで諦めないことだ。", "translation": "Success is not final, failure is not fatal: it is the courage to continue that counts.", "interpretation": "諦めなければ、成功は必ず訪れます。辛い時こそ、もう少しだけ頑張ってみましょう。その一歩が、あなたを成功へと導きます。今日も、諦めずに進んでくださいね。", "actions": ["諦めない", "もう一歩進む", "継続する"], "category": "成功" },
+    { "author": "サイモン・シネック", "quote": "人は、あなたが「何を」するかではなく、「なぜ」するかで動かされる。", "translation": "People don't buy what you do; they buy why you do it.", "interpretation": "目的を持つことが、あなたを突き動かします。なぜそれをするのか、理由を明確にしましょう。その「なぜ」が、困難な時にあなたを支えますよ。", "actions": ["目的を明確にする", "理由を考える", "意味を見つける"], "category": "成功" },
+    { "author": "マーティン・ルーサー・キング・ジュニア", "quote": "階段全体が見えなくても、最初の一段を登りなさい。", "translation": "You don't have to see the whole staircase, just take the first step.", "interpretation": "全体像が見えなくても、今できることから始めましょう。一歩ずつ進めば、必ず頂上にたどり着けます。不安があっても、まずは一歩を踏み出してくださいね。", "actions": ["最初の一歩を踏み出す", "全体を見ようとしない", "今できることをする"], "category": "成功" },
+    { "author": "ヘンリー・フォード", "quote": "できると思えばできる。できないと思えばできない。どちらにしても、それが真実となる。", "translation": "Whether you think you can, or you think you can't – you're right.", "interpretation": "あなたの心が、現実を作ります。自分を信じることで、不可能が可能になります。ネガティブな思考を手放し、「できる」と信じてください。その信念が、あなたを成功へと導きますよ。", "actions": ["自分を信じる", "ポジティブに考える", "「できる」と言う"], "category": "成功" },
+    { "author": "トーマス・カーライル", "quote": "私たちの最大の栄光は、決して倒れないことではなく、倒れるたびに起き上がることにある。", "translation": "Our greatest glory is not in never falling, but in rising every time we fall.", "interpretation": "何度転んでも、また立ち上がることが素晴らしいのです。失敗を恐れず、何度でも挑戦してください。その姿勢が、あなたを成功へと導きますよ。", "actions": ["何度でも立ち上がる", "失敗を恐れない", "挑戦し続ける"], "category": "成功" },
+    { "author": "チャールズ・スウィンドル", "quote": "人生は10%が自分に起こることで、90%がそれにどう反応するかだ。", "translation": "Life is 10% what happens to you and 90% how you react to it.", "interpretation": "起こった出来事よりも、あなたの反応が人生を決めます。ネガティブな出来事も、前向きに捉えることで成長のチャンスになります。反応を選ぶことができるのは、あなただけですよ。", "actions": ["前向きに反応する", "出来事を受け入れる", "成長の機会と捉える"], "category": "成功" },
+    { "author": "ジム・ローン", "quote": "成功する人は、失敗する人がやりたがらないことをする。", "translation": "Successful people do what unsuccessful people are not willing to do. Don't wish it were easier; wish you were better.", "interpretation": "楽な道を選ばず、困難な道を進むことが成功への近道です。他の人がやりたがらないことにも挑戦してみましょう。その努力が、あなたを特別な存在にしますよ。", "actions": ["困難に立ち向かう", "他の人がやらないことをする", "努力を惜しまない"], "category": "成功" },
+    { "author": "レス・ブラウン", "quote": "可能性の限界を決めるのは、自分自身だけだ。", "translation": "Shoot for the moon. Even if you miss, you'll land among the stars.", "interpretation": "高い目標を掲げることを恐れないでください。たとえ届かなくても、努力した分だけ成長できます。自分の可能性を信じて、大きな夢を追いかけましょう。", "actions": ["高い目標を持つ", "可能性を信じる", "大きな夢を追う"], "category": "成功" },
+    { "author": "ジョン・C・マクスウェル", "quote": "失敗は終わりではない。失敗が恐怖に変わった時が終わりだ。", "translation": "Fail early, fail often, but always fail forward.", "interpretation": "失敗を恐れず、そこから学び続けることが大切です。失敗は終わりではなく、新しい始まりです。前を向いて、一歩ずつ進んでいきましょう。", "actions": ["失敗から学ぶ", "前を向く", "恐れを乗り越える"], "category": "成功" },
+    { "author": "カルロス・カスタネダ", "quote": "目的地に着くことだけが目的ではない。旅そのものが目的なのだ。", "translation": "The trick is in what one emphasizes. We either make ourselves miserable, or we make ourselves strong. The amount of work is the same.", "interpretation": "結果だけでなく、そこに至る過程を楽しみましょう。旅の途中で得られる経験こそが、あなたを豊かにします。焦らず、今この瞬間を大切にしてくださいね。", "actions": ["過程を楽しむ", "今を大切にする", "経験を積む"], "category": "成功" }
+  ],
+  "Resilience": [
+    { "author": "マヤ・アンジェロウ", "quote": "何度も打ちのめされるかもしれない。だが、屈してはならない。", "translation": "You may encounter many defeats, but you must not be defeated.", "interpretation": "負けることと心が折れることは違います。何度転んでも、心まで負けなければ大丈夫です。今は辛くても、あなたの中には立ち上がる力があります。深呼吸をして、もう少しだけ頑張ってみましょう。あなたは思っている以上に強いですよ。", "actions": ["深呼吸をして心を落ち着ける", "温かい飲み物を飲む", "自分の強さを信じる"], "category": "逆境" },
+    { "author": "ネルソン・マンデラ", "quote": "何事も、成し遂げるまでは不可能に見えるものだ。", "translation": "It always seems impossible until it's done.", "interpretation": "今は山のように大きく見える問題も、一歩ずつ進めば必ず乗り越えられます。不可能に思えることも、諦めずに続ければ可能になります。焦らず、今日できることを一つずつやっていきましょう。あなたならきっとできますよ。", "actions": ["小さな目標を立てる", "一つずつクリアしていく", "自分を信じる"], "category": "逆境" },
+    { "author": "ヴィクトール・フランクル", "quote": "状況を変えられない時、自分自身を変える挑戦を突きつけられている。", "translation": "When we are no longer able to change a situation, we are challenged to change ourselves.", "interpretation": "変えられないことに悩むより、自分の心の持ちようを変えることができます。外の世界は変えられなくても、あなたの心は自由です。視点を変えるだけで、見える景色が変わりますよ。今日も、自分にできることを見つけていきましょう。", "actions": ["視点を変えてみる", "心の持ちようを変える", "自分にできることをする"], "category": "逆境" },
+    { "author": "福沢諭吉", "quote": "進まざる者は退く。ひとりでに退くにあらず、これに代わるべき者が進んでくるからなり。", "translation": "He who does not advance retreats. Not because he retreats, but because others advance.", "interpretation": "立ち止まっていることは、実は後退と同じです。完璧でなくても、少しずつ前に進むことが大切です。小さな一歩でも、歩み続けることで道は開けます。今日も、ほんの少しだけ前に進んでみましょう。", "actions": ["小さな一歩を踏み出す", "立ち止まらない", "少しずつ進む"], "category": "逆境" },
+    { "author": "ニーチェ", "quote": "私を殺さないものは、私をより強くする。", "translation": "What does not kill us makes us stronger.", "interpretation": "今の苦しみは、未来のあなたを強くするための試練です。乗り越えた先には、今より強く、たくましいあなたがいます。辛い時こそ、成長のチャンスです。今日を耐えた自分を、誇りに思ってくださいね。", "actions": ["今日を乗り越える", "自分を褒める", "強くなることを信じる"], "category": "逆境" },
+    { "author": "坂本龍馬", "quote": "世の人は我を何とも言わば言え。我が成す事は我のみぞ知る。", "translation": "Let the world say what it will. Only I know what I am doing.", "interpretation": "周りの声に惑わされないでください。あなたの人生は、あなたのものです。信じる道を進むことが、最も大切です。他人の評価より、自分の心に正直に生きましょう。あなたの選択を信じてくださいね。", "actions": ["自分の道を信じる", "周りの声を気にしすぎない", "心に正直に生きる"], "category": "逆境" },
+    { "author": "ヘレン・ケラー", "quote": "世界で最も美しいものは、見ることも触ることもできない。心で感じるものだ。", "translation": "The best and most beautiful things in the world cannot be seen or even touched - they must be felt with the heart.", "interpretation": "目に見えるものだけが全てではありません。愛、優しさ、希望など、心で感じるものこそが本当に大切です。辛い時こそ、心の中にある温かさを感じてみてください。あなたの心には、たくさんの美しいものがありますよ。", "actions": ["心で感じる", "大切なものを思い出す", "内面に目を向ける"], "category": "逆境" },
+    { "author": "アルベール・カミュ", "quote": "冬の真っただ中で、私は自分の中に無敵の夏があることを発見した。", "translation": "In the depths of winter, I finally learned that within me there lay an invincible summer.", "interpretation": "どんなに辛い状況でも、あなたの中には希望の光があります。その光を信じて、前を向いていきましょう。今は冬でも、必ず春は来ます。心の中にある温かさを大切にしてくださいね。", "actions": ["希望を持つ", "心の光を信じる", "春を待つ"], "category": "逆境" },
+    { "author": "マーティン・ルーサー・キング・ジュニア", "quote": "勇気とは、恐怖がないことではない。恐怖があっても行動することだ。", "translation": "Courage is not the absence of fear, but the triumph over it.", "interpretation": "怖くても、不安でも、それでも一歩踏み出すことが勇気です。完璧な自信がなくても大丈夫。少しずつ、できることから始めてみましょう。あなたの小さな勇気が、大きな力になりますよ。", "actions": ["恐怖を認める", "それでも一歩踏み出す", "小さな勇気を持つ"], "category": "逆境" },
+    { "author": "ラルフ・ワルド・エマーソン", "quote": "常に自分らしくいなさい。他の席はすでに埋まっている。", "translation": "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.", "interpretation": "誰かと比べる必要はありません。あなたはあなたのままで素晴らしい。無理に誰かになろうとせず、自分らしく生きることが一番大切です。ありのままのあなたを、誇りに思ってくださいね。", "actions": ["自分らしくいる", "他人と比べない", "ありのままを受け入れる"], "category": "逆境" },
+    { "author": "ウィンストン・チャーチル", "quote": "成功とは、情熱を失わずに失敗から失敗へと進むことだ。", "translation": "Success is going from failure to failure without losing your enthusiasm.", "interpretation": "失敗しても、心の火を消さないでください。何度つまずいても、また立ち上がる情熱があれば大丈夫です。失敗は成功への階段です。諦めずに、前を向いて進んでいきましょう。", "actions": ["情熱を持ち続ける", "失敗を恐れない", "前向きでいる"], "category": "逆境" },
+    { "author": "オスカー・ワイルド", "quote": "すべての経験は貴重だ。悪いものなどない。", "translation": "Experience is simply the name we give our mistakes.", "interpretation": "うまくいかなかった経験も、すべてあなたの財産です。無駄な経験などありません。失敗も含めて、すべてがあなたを成長させます。今の経験を、未来に活かしていきましょう。", "actions": ["経験から学ぶ", "失敗を財産にする", "すべてに意味があると信じる"], "category": "逆境" },
+    { "author": "ジョン・レノン", "quote": "人生とは、計画を立てている間に起こってしまうことだ。", "translation": "Life is what happens when you're busy making other plans.", "interpretation": "完璧な計画を立てても、思い通りにならないことがあります。でも、それが人生です。予期せぬ出来事も、新しいチャンスかもしれません。柔軟に、今を楽しみながら生きていきましょう。", "actions": ["柔軟に対応する", "今を楽しむ", "予期せぬことを受け入れる"], "category": "逆境" },
+    { "author": "ソクラテス", "quote": "変化の秘密は、古いものと戦うのではなく、新しいものを作ることに集中することだ。", "translation": "The secret of change is to focus all of your energy not on fighting the old, but on building the new.", "interpretation": "過去にこだわるより、これから作る未来に目を向けましょう。変えられない過去を悔やむより、今から始められることに集中してください。新しい一歩が、あなたの未来を変えますよ。", "actions": ["過去を手放す", "未来に集中する", "新しいことを始める"], "category": "逆境" },
+    { "author": "セオドア・ルーズベルト", "quote": "できると信じれば、道は半分開けたも同然だ。", "translation": "Believe you can and you're halfway there.", "interpretation": "自分を信じることが、成功への第一歩です。「できる」と思うだけで、心が軽くなります。不安があっても、自分の力を信じてください。その信念が、あなたを前に進ませますよ。", "actions": ["自分を信じる", "ポジティブに考える", "できると言い聞かせる"], "category": "逆境" },
+    { "author": "アンネ・フランク", "quote": "どんな困難な中でも、私は人間の善良さを信じている。", "translation": "In spite of everything, I still believe that people are really good at heart.", "interpretation": "辛い状況でも、希望を持ち続けることが大切です。人の優しさや、世界の美しさを信じてください。その信念が、あなたの心を温かく保ちます。明るい未来を信じて、今日を生きましょう。", "actions": ["希望を持つ", "人の善良さを信じる", "前向きでいる"], "category": "逆境" },
+    { "author": "ダライ・ラマ", "quote": "悲観主義者は風を嘆き、楽観主義者は風向きが変わることを期待する。現実主義者は帆を調整する。", "translation": "A pessimist sees the difficulty in every opportunity; an optimist sees the opportunity in every difficulty.", "interpretation": "状況を嘆くより、今できることをしましょう。風向きは変えられなくても、帆の向きは変えられます。自分にできることに集中して、一歩ずつ進んでいきましょう。", "actions": ["できることをする", "状況に適応する", "工夫する"], "category": "逆境" },
+    { "author": "ミヒャエル・エンデ", "quote": "時間とは命そのものである。それを無駄にすることは、命を無駄にすることだ。", "translation": "Time is life itself, and life resides in the human heart.", "interpretation": "今この瞬間を大切に生きましょう。過去を後悔したり、未来を心配しすぎるより、今日を精一杯生きることが大切です。今日という日は、二度と戻ってきません。大切にしてくださいね。", "actions": ["今を大切に生きる", "時間を大切にする", "この瞬間を楽しむ"], "category": "逆境" },
+    { "author": "パウロ・コエーリョ", "quote": "試練に直面した時こそ、自分を変えるチャンスが与えられている。", "translation": "When we least expect it, life sets us a challenge to test our courage and willingness to change.", "interpretation": "困難は、あなたが成長するためのチャンスです。辛い時こそ、新しい自分に出会えるかもしれません。変化を恐れず、今の試練を乗り越えていきましょう。その先には、強くなったあなたがいますよ。", "actions": ["試練を受け入れる", "変化を恐れない", "成長の機会と捉える"], "category": "逆境" },
+    { "author": "ボブ・マーリー", "quote": "雨が降るのを感じることができるなら、太陽も感じることができる。", "translation": "You never know how strong you are until being strong is your only choice.", "interpretation": "辛い時があるから、幸せな時の喜びが大きくなります。雨の日があるからこそ、晴れの日が輝いて見えます。今は辛くても、必ず晴れの日が来ます。その日を信じて、今日を乗り越えましょう。", "actions": ["辛さを受け入れる", "晴れの日を信じる", "希望を持つ"], "category": "逆境" },
+    { "author": "エイブラハム・リンカーン", "quote": "私が歩むのが遅いのは、決して後戻りしないからだ。", "translation": "I am a slow walker, but I never walk back.", "interpretation": "速く進む必要はありません。大切なのは、諦めずに前に進み続けることです。ゆっくりでも、一歩ずつ確実に進んでいきましょう。あなたのペースで大丈夫ですよ。", "actions": ["ゆっくり進む", "後戻りしない", "自分のペースで歩む"], "category": "逆境" },
+    { "author": "トルストイ", "quote": "人生の意義は、幸福になることではなく、有意義であること、生産的であること、価値があることだ。", "translation": "The sole meaning of life is to serve humanity.", "interpretation": "幸せだけを追い求めなくても大丈夫です。誰かの役に立つこと、意味のあることをすることが、あなたの人生を豊かにします。小さな親切が、あなたに喜びをもたらしますよ。", "actions": ["誰かの役に立つ", "意味のあることをする", "小さな親切をする"], "category": "逆境" },
+    { "author": "ガンジー", "quote": "明日死ぬかのように生きよ。永遠に生きるかのように学べ。", "translation": "Live as if you were to die tomorrow. Learn as if you were to live forever.", "interpretation": "今日を精一杯生きながら、学び続ける姿勢を持ちましょう。毎日を大切にすることと、成長し続けることの両方が大切です。今日という日を、心から楽しんでくださいね。", "actions": ["今日を大切に生きる", "学び続ける", "毎日を楽しむ"], "category": "逆境" },
+    { "author": "アリストテレス", "quote": "希望は目覚めている人の夢である。", "translation": "Hope is a waking dream.", "interpretation": "夢を持ち続けることが、辛い時の支えになります。希望があれば、どんな困難も乗り越えられます。未来への希望を、心の中に灯し続けてください。その光が、あなたを導きますよ。", "actions": ["希望を持つ", "夢を描く", "前を向く"], "category": "逆境" },
+    { "author": "ミルトン", "quote": "心は天国を地獄に、地獄を天国に変えることができる。", "translation": "The mind is its own place, and in itself can make a heaven of hell, a hell of heaven.", "interpretation": "状況は変わらなくても、心の持ちようで世界は変わります。ネガティブに考えるか、ポジティブに考えるかは、あなた次第です。心を明るく保つことで、人生はより良いものになりますよ。", "actions": ["前向きに考える", "心を明るく保つ", "良い面を見る"], "category": "逆境" },
+    { "author": "孔子", "quote": "倒れることは恥ではない。倒れたまま起き上がらないことが恥なのだ。", "translation": "Our greatest glory is not in never falling, but in rising every time we fall.", "interpretation": "転ぶことは誰にでもあります。大切なのは、また立ち上がることです。何度でも起き上がる勇気を持ってください。その姿勢が、あなたを強くしますよ。", "actions": ["立ち上がる", "何度でも挑戦する", "勇気を持つ"], "category": "逆境" },
+    { "author": "ブッダ", "quote": "心はすべての源である。すべては心によって作られる。", "translation": "All that we are is the result of what we have thought.", "interpretation": "あなたの心が、あなたの世界を作ります。ネガティブな思考より、ポジティブな思考を選びましょう。心を変えることで、人生も変わっていきますよ。", "actions": ["ポジティブに考える", "心を整える", "良いことを思い描く"], "category": "逆境" },
+    { "author": "ヴォルテール", "quote": "完璧は善の敵である。", "translation": "Perfect is the enemy of good.", "interpretation": "完璧を求めすぎると、何も始められません。70点でも、80点でも十分素晴らしいです。完璧でなくても、一歩踏み出すことが大切です。今できることから、始めてみましょう。", "actions": ["完璧を求めすぎない", "できることから始める", "70点で良しとする"], "category": "逆境" },
+    { "author": "セネカ", "quote": "困難は、それを乗り越える人に光を与える。", "translation": "Difficulties strengthen the mind, as labor does the body.", "interpretation": "今の困難は、あなたを強くするためのトレーニングです。乗り越えた先には、強くなったあなたがいます。辛い時こそ、成長のチャンスです。今日も、一歩ずつ進んでいきましょう。", "actions": ["困難を受け入れる", "成長の機会と捉える", "強くなることを信じる"], "category": "逆境" },
+    { "author": "ロバート・フロスト", "quote": "地獄を抜ける最良の方法は、突き抜けることだ。", "translation": "The best way out is always through.", "interpretation": "逃げずに向き合うことが、最終的には楽になります。困難から目を背けず、一歩ずつ進んでいきましょう。その先には、明るい未来が待っていますよ。", "actions": ["向き合う", "逃げない", "一歩ずつ進む"], "category": "逆境" },
+    { "author": "エピクテトス", "quote": "起こることを変えることはできないが、それにどう反応するかは選べる。", "translation": "It's not what happens to you, but how you react to it that matters.", "interpretation": "出来事そのものは変えられなくても、あなたの反応は選べます。ネガティブに反応するか、ポジティブに反応するかは、あなた次第です。前向きな反応を選ぶことで、人生は変わりますよ。", "actions": ["前向きに反応する", "選択肢を意識する", "ポジティブでいる"], "category": "逆境" },
+    { "author": "エマーソン", "quote": "自分の弱さを克服することが、真の勝利である。", "translation": "For every minute you are angry you lose sixty seconds of happiness.", "interpretation": "怒りや悲しみに時間を使うより、幸せなことに時間を使いましょう。ネガティブな感情は、あなたの貴重な時間を奪います。心を明るく保つことで、人生はより良いものになりますよ。", "actions": ["怒りを手放す", "幸せに時間を使う", "ポジティブでいる"], "category": "逆境" },
+    { "author": "マーク・トウェイン", "quote": "20年後、あなたはやったことよりも、やらなかったことを後悔する。", "translation": "Twenty years from now you will be more disappointed by the things that you didn't do than by the ones you did do.", "interpretation": "挑戦しなかったことが、一番の後悔になります。失敗を恐れず、やってみたいことに挑戦してください。後悔のない人生を送るために、今日一歩踏み出しましょう。", "actions": ["挑戦する", "後悔しない選択をする", "勇気を持つ"], "category": "逆境" },
+    { "author": "ベンジャミン・フランクリン", "quote": "教えてもらったことは忘れる。見せてもらったことは覚える。体験したことは理解する。", "translation": "Tell me and I forget. Teach me and I remember. Involve me and I learn.", "interpretation": "失敗も含めて、自分で体験することが一番の学びです。恐れずに、新しいことに挑戦してみましょう。その経験が、あなたを成長させますよ。", "actions": ["体験する", "失敗を恐れない", "行動から学ぶ"], "category": "逆境" },
+    { "author": "ジョージ・エリオット", "quote": "遅すぎるということは決してない。", "translation": "It is never too late to be what you might have been.", "interpretation": "何歳からでも、新しいことを始められます。遅すぎるということはありません。今日から、やりたかったことに挑戦してみましょう。あなたの人生は、あなたが決めるものですよ。", "actions": ["今日から始める", "年齢を気にしない", "新しいことに挑戦する"], "category": "逆境" },
+    { "author": "スティーブン・ホーキング", "quote": "人生がどんなに辛くても、何かできることがある。成功できることがある。諦めないことが大切だ。", "translation": "However difficult life may seem, there is always something you can do and succeed at.", "interpretation": "どんな状況でも、あなたにできることは必ずあります。小さなことでも、できることから始めてみましょう。諦めずに続けることで、道は開けます。", "actions": ["できることを見つける", "諦めない", "小さなことから始める"], "category": "逆境" },
+    { "author": "ラオ・ツー（老子）", "quote": "他人を知るものは賢い。自分を知るものは明智である。", "translation": "He who knows others is wise; he who knows himself is enlightened.", "interpretation": "他人と比べるより、自分自身を理解することが大切です。自分の強みや弱みを知ることで、より良い人生を送れます。自分と向き合う時間を持ちましょう。", "actions": ["自分を知る", "内面を見つめる", "自己理解を深める"], "category": "逆境" },
+    { "author": "ドロシア・ブランド", "quote": "成功する人と失敗する人の違いは、成功する人は行動するということだ。", "translation": "Act as if it were impossible to fail.", "interpretation": "失敗を恐れずに行動することが、成功への道です。動き出さなければ、何も変わりません。小さな一歩でも、行動することが大切です。今日も、一歩踏み出してみましょう。", "actions": ["行動する", "失敗を恐れない", "一歩踏み出す"], "category": "逆境" },
+    { "author": "ヘルマン・ヘッセ", "quote": "鳥は卵から抜け出そうと戦う。卵は世界だ。生まれようとする者は、一つの世界を破壊しなければならない。", "translation": "The bird fights its way out of the egg. The egg is the world. Whoever will be born must destroy a world.", "interpretation": "新しい自分に生まれ変わるには、古い自分を手放す必要があります。変化は怖いけれど、その先には成長したあなたがいます。勇気を出して、一歩踏み出しましょう。", "actions": ["変化を受け入れる", "古い自分を手放す", "新しい自分になる"], "category": "逆境" },
+    { "author": "ルイス・キャロル", "quote": "どこに行きたいか分からなければ、どの道を行っても同じだ。", "translation": "If you don't know where you are going, any road will get you there.", "interpretation": "目標を持つことが、困難を乗り越える力になります。何のために頑張るのか、明確にしましょう。目標があれば、辛い時も前を向いて進めますよ。", "actions": ["目標を明確にする", "方向性を持つ", "目的を見つける"], "category": "逆境" },
+    { "author": "アンドレ・ジッド", "quote": "新しい花を咲かせるために、古い花を摘み取ることを恐れてはいけない。", "translation": "Man cannot discover new oceans unless he has the courage to lose sight of the shore.", "interpretation": "新しいことを始めるには、古いものを手放す勇気が必要です。変化を恐れずに、新しい挑戦をしてみましょう。その先には、新しい可能性が広がっていますよ。", "actions": ["古いものを手放す", "新しいことに挑戦する", "変化を恐れない"], "category": "逆境" },
+    { "author": "ワシントン・アーヴィング", "quote": "偉大なことは、小さなことの積み重ねによって成し遂げられる。", "translation": "Great minds have purposes; others have wishes.", "interpretation": "大きな目標も、小さな一歩の積み重ねです。今日できる小さなことから始めましょう。毎日少しずつ進めば、必ず目標に到達できますよ。", "actions": ["小さなことから始める", "毎日少しずつ進む", "積み重ねる"], "category": "逆境" },
+    { "author": "ヘンリー・デイヴィッド・ソロー", "quote": "自分が信じる方向に自信を持って進め。そして、夢見た人生を送ろうとすれば、思いがけない成功に出会うだろう。", "translation": "Go confidently in the direction of your dreams. Live the life you have imagined.", "interpretation": "自分の夢を信じて進むことが大切です。他人の期待ではなく、自分の心に従いましょう。その先には、あなたが望む人生が待っていますよ。", "actions": ["夢に向かって進む", "自分を信じる", "心に従う"], "category": "逆境" },
+    { "author": "ミゲル・デ・セルバンテス", "quote": "準備しておこう。チャンスはいつか必ずやってくる。", "translation": "To be prepared is half the victory.", "interpretation": "今できる準備をしておくことが大切です。チャンスは突然やってきます。その時のために、今日も少しずつ準備を進めていきましょう。", "actions": ["準備をする", "学び続ける", "チャンスを待つ"], "category": "逆境" },
+    { "author": "カール・ユング", "quote": "人生で最も大切なことは、自分らしく生きることだ。", "translation": "I am not what happened to me, I am what I choose to become.", "interpretation": "過去の出来事があなたを定義するのではありません。これからどう生きるかが大切です。自分らしく、前を向いて生きていきましょう。", "actions": ["自分らしく生きる", "過去にとらわれない", "未来を選ぶ"], "category": "逆境" },
+    { "author": "マザー・テレサ", "quote": "愛は、行動によってのみ証明される。", "translation": "It's not how much we give but how much love we put into giving.", "interpretation": "大きなことをしなくても、小さな愛の行動が誰かを幸せにします。今日も、誰かのために何か一つできることがあるはずです。その行動が、あなた自身も幸せにしますよ。", "actions": ["小さな親切をする", "愛を行動で示す", "誰かのために何かする"], "category": "逆境" },
+    { "author": "レフ・トルストイ", "quote": "幸福は、自分の外にあるのではなく、自分の中にある。", "translation": "If you want to be happy, be.", "interpretation": "幸せは、外からやってくるものではありません。あなたの心の持ちようで決まります。今この瞬間に、幸せを感じることができますよ。", "actions": ["今を楽しむ", "小さな幸せを見つける", "心を満たす"], "category": "逆境" },
+    { "author": "ジェームズ・ディーン", "quote": "夢は追い求める勇気がある人だけのものだ。", "translation": "Dream as if you'll live forever. Live as if you'll die today.", "interpretation": "夢を持ち、それを追い求める勇気を持ちましょう。今日という日を大切にしながら、夢に向かって進んでください。あなたの人生は、あなたが作るものですよ。", "actions": ["夢を追いかける", "今日を大切に生きる", "勇気を持つ"], "category": "逆境" },
+    { "author": "ソフォクレス", "quote": "試練に耐える力があることを知らないだけだ。", "translation": "One must wait until the evening to see how splendid the day has been.", "interpretation": "今は辛くても、後から振り返ればきっと意味のある経験だったと思えます。終わってみないと、一日の素晴らしさはわかりません。今日も、最後まで歩み続けましょう。", "actions": ["最後まで歩む", "希望を持つ", "今日を信じる"], "category": "逆境" }
+  ],
+  "Wisdom": [
+    { "author": "ソクラテス", "quote": "変化の秘密は、古いものと戦うのではなく、新しいものを作ることに集中することだ。", "translation": "The secret of change is to focus all of your energy not on fighting the old, but on building the new.", "interpretation": "過去にこだわるのではなく、これから作る未来に目を向けましょう。変えられないことを悔やむより、今日からできることに集中してください。新しい一歩が、あなたの人生を変えていきますよ。小さなことでも、今日から始めてみましょう。", "actions": ["過去を手放す", "新しいことを始める", "今日できることに集中する"], "category": "知恵" },
+    { "author": "マハトマ・ガンジー", "quote": "明日死ぬかのように生き、永遠に生きるかのように学べ。", "translation": "Live as if you were to die tomorrow. Learn as if you were to live forever.", "interpretation": "今日という日を大切に生きながら、学び続ける姿勢を持ちましょう。毎日を精一杯楽しみながら、成長し続けることが豊かな人生を作ります。学ぶことに終わりはありません。今日も、新しい発見を楽しみましょう。", "actions": ["今日を大切に過ごす", "本を1ページ読む", "新しいことを一つ学ぶ"], "category": "知恵" },
+    { "author": "アルベルト・アインシュタイン", "quote": "想像力は知識よりも重要だ。", "translation": "Imagination is more important than knowledge.", "interpretation": "知識だけでなく、自由な発想を大切にしましょう。常識にとらわれず、あなたらしい考え方を持ってください。想像力が、新しい可能性を生み出します。子供の頃のように、自由に夢を描いてみましょう。", "actions": ["自由に想像する", "常識を疑ってみる", "新しいアイデアを考える"], "category": "知恵" },
+    { "author": "ブッダ", "quote": "心はすべての源である。すべては心によって作られる。", "translation": "All that we are is the result of what we have thought. The mind is everything. What you think you become.", "interpretation": "あなたの心が、あなたの世界を作ります。ネガティブなことより、ポジティブなことを考えましょう。心を美しいもので満たせば、人生も美しくなります。今日も、良いことを思い描いてくださいね。", "actions": ["ポジティブに考える", "心を整える", "美しいものに触れる"], "category": "知恵" },
+    { "author": "孔子", "quote": "止まらなければ、どんなにゆっくりでも構わない。", "translation": "It does not matter how slowly you go as long as you do not stop.", "interpretation": "速く進む必要はありません。自分のペースで、焦らず一歩ずつ進んでいきましょう。大切なのは、諦めずに続けることです。ゆっくりでも、着実に前に進んでいるあなたは素晴らしいですよ。", "actions": ["自分のペースを大切にする", "一歩ずつ進む", "焦る気持ちを手放す"], "category": "知恵" },
+    { "author": "ベンジャミン・フランクリン", "quote": "教えてもらったことは忘れる。見せてもらったことは思い出す。体験させてもらったことは理解する。", "translation": "Tell me and I forget. Teach me and I remember. Involve me and I learn.", "interpretation": "頭で理解するより、実際に体験することが一番の学びです。失敗を恐れず、自分で試してみましょう。その経験が、あなたの本当の知恵になります。今日も、何か一つ新しいことに挑戦してみてくださいね。", "actions": ["新しいことを体験する", "自分で試してみる", "失敗を恐れない"], "category": "知恵" },
+    { "author": "レオナルド・ダ・ヴィンチ", "quote": "シンプルさは究極の洗練である。", "translation": "Simplicity is the ultimate sophistication.", "interpretation": "複雑に考えすぎないことが、本当の賢さです。物事をシンプルに捉えることで、本質が見えてきます。余計なものを削ぎ落として、大切なことに集中しましょう。シンプルに生きることが、心の平和をもたらしますよ。", "actions": ["シンプルに考える", "余計なものを減らす", "本質を見極める"], "category": "知恵" },
+    { "author": "プラトン", "quote": "賢者は、話すべきことがあるから話す。愚者は、何か言わなければならないから話す。", "translation": "Wise men speak because they have something to say; fools because they have to say something.", "interpretation": "無理に話す必要はありません。本当に伝えたいことがある時だけ、言葉にしましょう。沈黙も、時には雄弁です。じっくり考えてから話すことで、あなたの言葉に重みが出ますよ。", "actions": ["よく考えてから話す", "無理に話さない", "沈黙を恐れない"], "category": "知恵" },
+    { "author": "ラルフ・ワルド・エマーソン", "quote": "人生は旅であり、目的地ではない。", "translation": "Life is a journey, not a destination.", "interpretation": "結果だけでなく、そこに至る過程を楽しみましょう。今この瞬間が、あなたの人生そのものです。目的地に着くことだけを考えず、今日という日を大切に過ごしてください。旅の途中で出会うすべてが、あなたを豊かにしますよ。", "actions": ["過程を楽しむ", "今を大切にする", "小さな喜びを見つける"], "category": "知恵" },
+    { "author": "ラオ・ツー（老子）", "quote": "千里の道も一歩から。", "translation": "A journey of a thousand miles begins with a single step.", "interpretation": "どんなに大きな目標も、最初の一歩から始まります。完璧な計画を立てるより、まず始めることが大切です。小さな一歩が、やがて大きな成果につながります。今日も、できることから始めてみましょう。", "actions": ["最初の一歩を踏み出す", "小さなことから始める", "行動する"], "category": "知恵" },
+    { "author": "アリストテレス", "quote": "我々は繰り返し行うことの結果である。したがって、卓越とは行為ではなく、習慣なのだ。", "translation": "We are what we repeatedly do. Excellence, then, is not an act, but a habit.", "interpretation": "一度の頑張りより、毎日の小さな積み重ねが、あなたを成長させます。良い習慣を身につけることが、素晴らしい人生を作ります。完璧でなくても、少しずつ続けることが大切です。今日も、良い習慣を一つ続けてみましょう。", "actions": ["良い習慣を一つ続ける", "毎日少しずつ進む", "継続を大切にする"], "category": "知恵" },
+    { "author": "マーカス・アウレリウス", "quote": "あなたの人生は、あなたの思考の反映である。", "translation": "The happiness of your life depends upon the quality of your thoughts.", "interpretation": "どんな考えを持つかで、人生は変わります。ネガティブな思考より、ポジティブな思考を選びましょう。心を明るく保つことで、人生はより良いものになります。今日も、良いことを考えてくださいね。", "actions": ["ポジティブに考える", "良いことを思い描く", "心を明るく保つ"], "category": "知恵" },
+    { "author": "セネカ", "quote": "困難は、それを乗り越える人に光を与える。", "translation": "Difficulties strengthen the mind, as labor does the body.", "interpretation": "困難は、あなたを強くするためのトレーニングです。辛い経験も、すべてあなたの成長につながります。乗り越えた先には、強くなったあなたがいます。今日も、一歩ずつ前に進んでいきましょう。", "actions": ["困難を受け入れる", "成長の機会と捉える", "前を向く"], "category": "知恵" },
+    { "author": "ニーチェ", "quote": "音楽がなければ、人生は間違いだ。", "translation": "Without music, life would be a mistake.", "interpretation": "人生には、楽しみや喜びが必要です。音楽や芸術など、心を豊かにするものを大切にしましょう。美しいものに触れることで、あなたの心は潤います。今日も、好きな音楽を聴いてみてくださいね。", "actions": ["好きな音楽を聴く", "美しいものに触れる", "心を豊かにする"], "category": "知恵" },
+    { "author": "ヴォルテール", "quote": "完璧は善の敵である。", "translation": "Perfect is the enemy of good.", "interpretation": "完璧を求めすぎると、何も始められません。70点でも、80点でも十分素晴らしいです。完璧でなくても、一歩踏み出すことが大切です。今日も、できることから始めてみましょう。", "actions": ["完璧を求めすぎない", "できることから始める", "70点で良しとする"], "category": "知恵" },
+    { "author": "ヘンリー・デイヴィッド・ソロー", "quote": "自分が信じる方向に自信を持って進め。そして、夢見た人生を送ろうとすれば、思いがけない成功に出会うだろう。", "translation": "Go confidently in the direction of your dreams. Live the life you have imagined.", "interpretation": "自分の夢を信じて進むことが大切です。他人の期待ではなく、自分の心に従いましょう。その先には、あなたが望む人生が待っています。勇気を出して、一歩踏み出してくださいね。", "actions": ["夢に向かって進む", "自分を信じる", "心に従う"], "category": "知恵" },
+    { "author": "アルベール・カミュ", "quote": "幸福とは何かを探すのをやめれば、幸福になれる。人生の意味を探すのをやめれば、生きることができる。", "translation": "You will never be happy if you continue to search for what happiness consists of. You will never live if you are looking for the meaning of life.", "interpretation": "幸せは、探すものではなく、今ここにあるものです。難しく考えすぎず、今この瞬間を楽しみましょう。小さな喜びに気づくことで、人生は輝き始めますよ。", "actions": ["今を楽しむ", "小さな幸せに気づく", "難しく考えすぎない"], "category": "知恵" },
+    { "author": "オスカー・ワイルド", "quote": "自分らしくあれ。他の席はすでに埋まっている。", "translation": "Be yourself; everyone else is already taken.", "interpretation": "誰かの真似をする必要はありません。あなたはあなたのままで素晴らしい。自分らしく生きることが、一番大切です。ありのままのあなたを、誇りに思ってくださいね。", "actions": ["自分らしくいる", "他人と比べない", "ありのままを受け入れる"], "category": "知恵" },
+    { "author": "ミヒャエル・エンデ", "quote": "時間とは命そのものである。それを無駄にすることは、命を無駄にすることだ。", "translation": "Time is life itself, and life resides in the human heart.", "interpretation": "時間は、あなたの命そのものです。大切に使いましょう。今この瞬間を大切に生きることが、豊かな人生を作ります。後悔のないように、今日を精一杯楽しんでくださいね。", "actions": ["時間を大切にする", "今を大切に生きる", "優先順位をつける"], "category": "知恵" },
+    { "author": "ヘルマン・ヘッセ", "quote": "鳥は卵から抜け出そうと戦う。卵は世界だ。生まれようとする者は、一つの世界を破壊しなければならない。", "translation": "The bird fights its way out of the egg. The egg is the world. Whoever will be born must destroy a world.", "interpretation": "新しい自分に生まれ変わるには、古い自分を手放す必要があります。変化は怖いけれど、その先には成長したあなたがいます。勇気を出して、新しい一歩を踏み出しましょう。", "actions": ["変化を受け入れる", "古い自分を手放す", "新しい挑戦をする"], "category": "知恵" },
+    { "author": "ルイス・キャロル", "quote": "どこに行きたいか分からなければ、どの道を行っても同じだ。", "translation": "If you don't know where you are going, any road will get you there.", "interpretation": "目標を持つことが、人生に方向性を与えます。何のために生きるのか、考えてみましょう。目標があれば、迷った時も道を見失いません。今日も、小さな目標を一つ決めてみてくださいね。", "actions": ["目標を明確にする", "方向性を持つ", "目的を見つける"], "category": "知恵" },
+    { "author": "ミゲル・デ・セルバンテス", "quote": "準備しておこう。チャンスはいつか必ずやってくる。", "translation": "To be prepared is half the victory.", "interpretation": "今できる準備をしておくことが大切です。チャンスは突然やってきます。その時のために、今日も少しずつ準備を進めていきましょう。準備があれば、チャンスを掴めますよ。", "actions": ["準備をする", "学び続ける", "チャンスを待つ"], "category": "知恵" },
+    { "author": "カール・ユング", "quote": "あなたの人生で起こることは、あなたが学ぶ必要があることだ。", "translation": "I am not what happened to me, I am what I choose to become.", "interpretation": "過去の出来事があなたを定義するのではありません。これからどう生きるかが大切です。すべての経験から学び、成長していきましょう。あなたの未来は、あなたが作るものですよ。", "actions": ["経験から学ぶ", "過去にとらわれない", "未来を選ぶ"], "category": "知恵" },
+    { "author": "ジョン・ロック", "quote": "読書は心の栄養である。", "translation": "Reading furnishes the mind only with materials of knowledge; it is thinking that makes what we read ours.", "interpretation": "読書は、あなたの心を豊かにします。でも、ただ読むだけでなく、考えることが大切です。読んだことを自分のものにして、人生に活かしましょう。今日も、本を一ページ読んでみてくださいね。", "actions": ["本を読む", "読んだことを考える", "学びを活かす"], "category": "知恵" },
+    { "author": "エピクテトス", "quote": "起こることを変えることはできないが、それにどう反応するかは選べる。", "translation": "It's not what happens to you, but how you react to it that matters.", "interpretation": "出来事そのものは変えられなくても、あなたの反応は選べます。ネガティブに反応するか、ポジティブに反応するかは、あなた次第です。前向きな反応を選ぶことで、人生は変わりますよ。", "actions": ["前向きに反応する", "選択肢を意識する", "ポジティブでいる"], "category": "知恵" },
+    { "author": "ショーペンハウアー", "quote": "健康は富に勝る。", "translation": "Health is not valued till sickness comes.", "interpretation": "健康こそが最大の財産です。体と心を大切にしましょう。どんなに成功しても、健康でなければ楽しめません。今日も、自分の体をいたわってくださいね。", "actions": ["体を大切にする", "健康的な生活をする", "休息を取る"], "category": "知恵" },
+    { "author": "パスカル", "quote": "人間は考える葦である。", "translation": "Man is but a reed, the most feeble thing in nature; but he is a thinking reed.", "interpretation": "人間は弱い存在ですが、考える力を持っています。その力が、あなたを強くします。よく考え、学び続けることで、あなたは成長します。今日も、一つのことについて深く考えてみましょう。", "actions": ["深く考える", "学び続ける", "思考を大切にする"], "category": "知恵" },
+    { "author": "デカルト", "quote": "我思う、ゆえに我あり。", "translation": "I think, therefore I am.", "interpretation": "あなたが考えることで、あなたは存在します。あなたの思考が、あなたを作ります。どんな考えを持つかが、人生を決めます。今日も、良いことを考えてくださいね。", "actions": ["自分の考えを持つ", "よく考える", "思考を整理する"], "category": "知恵" },
+    { "author": "ゲーテ", "quote": "知識を持つだけでは不十分だ。それを使わなければならない。意志を持つだけでは不十分だ。それを実行しなければならない。", "translation": "Knowing is not enough; we must apply. Willing is not enough; we must do.", "interpretation": "知識や意志だけでは不十分です。行動することが大切です。学んだことを実践し、やりたいことを実行しましょう。今日も、一つのことを実行してみてくださいね。", "actions": ["学んだことを実践する", "行動する", "実行に移す"], "category": "知恵" },
+    { "author": "トルストイ", "quote": "人生の意義は、幸福になることではなく、有意義であること、生産的であること、価値があることだ。", "translation": "The sole meaning of life is to serve humanity.", "interpretation": "幸せだけを追い求めなくても大丈夫です。誰かの役に立つこと、意味のあることをすることが、あなたの人生を豊かにします。小さな親切が、あなたに喜びをもたらしますよ。", "actions": ["誰かの役に立つ", "意味のあることをする", "小さな親切をする"], "category": "知恵" },
+    { "author": "スピノザ", "quote": "平和は戦争の不在ではなく、心の状態である。", "translation": "Peace is not an absence of war, it is a virtue, a state of mind, a disposition for benevolence, confidence, justice.", "interpretation": "本当の平和は、心の中にあります。外の世界がどうであれ、あなたの心は平和でいられます。心を穏やかに保つことを大切にしましょう。今日も、深呼吸をして心を落ち着けてくださいね。", "actions": ["心を穏やかに保つ", "深呼吸をする", "内面の平和を大切にする"], "category": "知恵" },
+    { "author": "モンテーニュ", "quote": "誰も死なずに生きることはできないが、多くの人は生きずに死んでいく。", "translation": "My life has been full of terrible misfortunes most of which never happened.", "interpretation": "心配しすぎないでください。多くの心配事は、実際には起こりません。今を生きることに集中しましょう。過度な心配は、あなたの貴重な時間を奪います。今日という日を、精一杯楽しんでくださいね。", "actions": ["心配しすぎない", "今を生きる", "過度な不安を手放す"], "category": "知恵" },
+    { "author": "フランシス・ベーコン", "quote": "知は力なり。", "translation": "Knowledge itself is power.", "interpretation": "学ぶことが、あなたに力を与えます。知識があれば、より良い選択ができます。今日も、新しいことを一つ学んでみましょう。学び続けることで、あなたは成長しますよ。", "actions": ["新しいことを学ぶ", "知識を身につける", "学び続ける"], "category": "知恵" },
+    { "author": "ジョージ・サンタヤナ", "quote": "過去を忘れる者は、それを繰り返す運命にある。", "translation": "Those who cannot remember the past are condemned to repeat it.", "interpretation": "過去から学ぶことが大切です。同じ失敗を繰り返さないように、経験を活かしましょう。過去を振り返り、そこから学んだことを未来に活かしてください。", "actions": ["過去から学ぶ", "経験を活かす", "同じ失敗を繰り返さない"], "category": "知恵" },
+    { "author": "サミュエル・ジョンソン", "quote": "人生のほとんどは、何かを待つことに費やされる。", "translation": "The future is purchased by the present.", "interpretation": "未来は、今日の行動で決まります。待っているだけでは何も変わりません。今日できることをして、未来を作りましょう。行動することで、人生は変わりますよ。", "actions": ["今日行動する", "待つのをやめる", "未来を作る"], "category": "知恵" },
+    { "author": "エマーソン", "quote": "恐れは常に無知から生まれる。", "translation": "Fear defeats more people than any other one thing in the world.", "interpretation": "恐れを感じるのは、わからないからです。学び、理解することで、恐れは小さくなります。知識を身につけることで、勇気が湧いてきますよ。", "actions": ["学ぶ", "理解を深める", "恐れを克服する"], "category": "知恵" },
+    { "author": "セルバンテス", "quote": "旅は目的地ではなく、そこに至る道のりだ。", "translation": "The journey is better than the inn.", "interpretation": "結果だけでなく、そこに至る過程を楽しみましょう。旅の途中で出会うすべてが、あなたを豊かにします。焦らず、今この瞬間を大切にしてくださいね。", "actions": ["過程を楽しむ", "今を大切にする", "小さな喜びを見つける"], "category": "知恵" },
+        { "author": "ソフォクレス", "quote": "試練に耐える力があることを知らないだけだ。", "translation": "One must wait until the evening to see how splendid the day has been.", "interpretation": "今は辛くても、後から振り返ればきっと意味のある経験だったと思えます。一日が終わってみないと、その素晴らしさはわかりません。今日も、最後まで歩み続けましょう。あなたには、乗り越える力がありますよ。", "actions": ["最後まで歩む", "希望を持つ", "今日を信じる"], "category": "知恵" },
+    { "author": "キケロ", "quote": "本を読まない人は、読めない人と変わらない。", "translation": "A room without books is like a body without a soul.", "interpretation": "読書は、あなたの心を豊かにします。本から学ぶことで、人生はより深いものになります。今日も、本を一ページでも読んでみましょう。読書があなたの世界を広げますよ。", "actions": ["本を読む", "学びを得る", "知識を広げる"], "category": "知恵" },
+    { "author": "ワシントン・アーヴィング", "quote": "偉大なことは、小さなことの積み重ねによって成し遂げられる。", "translation": "Great minds have purposes; others have wishes.", "interpretation": "大きな目標も、小さな一歩の積み重ねです。今日できる小さなことから始めましょう。毎日少しずつ進めば、必ず目標に到達できます。焦らず、コツコツと続けてくださいね。", "actions": ["小さなことから始める", "毎日少しずつ進む", "積み重ねる"], "category": "知恵" },
+    { "author": "孟子", "quote": "人は皆、他人に忍びざる心を持っている。", "translation": "All men have a mind which cannot bear to see the sufferings of others.", "interpretation": "人は本来、優しい心を持っています。その優しさを信じて、人と接しましょう。あなたの中にも、他人を思いやる心があります。その心を大切にしてくださいね。", "actions": ["優しさを大切にする", "他人を思いやる", "人の善良さを信じる"], "category": "知恵" },
+    { "author": "荀子", "quote": "学びて思わざれば則ち罔し、思いて学ばざれば則ち殆し。", "translation": "Learning without thought is labor lost; thought without learning is perilous.", "interpretation": "学ぶだけでなく、考えることが大切です。また、考えるだけでなく、学ぶことも必要です。この二つのバランスが、真の知恵を生みます。今日も、学びと思考の両方を大切にしましょう。", "actions": ["学び、考える", "バランスを取る", "深く理解する"], "category": "知恵" },
+    { "author": "墨子", "quote": "愛は、すべての人に平等に注がれるべきだ。", "translation": "Universal love is the way of the sage.", "interpretation": "誰に対しても、分け隔てなく優しくすることが大切です。特定の人だけでなく、すべての人に愛を注ぎましょう。その優しさが、世界を良くしていきますよ。", "actions": ["すべての人に優しくする", "分け隔てなく接する", "愛を広げる"], "category": "知恵" },
+    { "author": "荘子", "quote": "至人は己なし、神人は功なし、聖人は名なし。", "translation": "The perfect man has no self; the spiritual man has no achievement; the sage has no name.", "interpretation": "自分にこだわりすぎないことが、本当の強さです。名声や功績を求めず、ただ誠実に生きることが大切です。ありのままでいることが、一番美しいですよ。", "actions": ["自分にこだわりすぎない", "誠実に生きる", "ありのままでいる"], "category": "知恵" },
+    { "author": "韓非子", "quote": "千里の堤も蟻の一穴から崩れる。", "translation": "A thousand-mile dam can collapse because of an ant's hole.", "interpretation": "小さなことを疎かにしないでください。小さな問題が、大きな問題になることがあります。今日も、小さなことに丁寧に取り組みましょう。その積み重ねが、大きな成果を生みますよ。", "actions": ["小さなことを大切にする", "丁寧に取り組む", "注意深くいる"], "category": "知恵" },
+    { "author": "老子", "quote": "知る者は言わず、言う者は知らず。", "translation": "Those who know do not speak. Those who speak do not know.", "interpretation": "本当に理解している人は、無駄に話しません。沈黙の中にも、深い知恵があります。よく考えてから話すことを心がけましょう。言葉を選ぶことが、賢さの証ですよ。", "actions": ["よく考えてから話す", "沈黙を大切にする", "言葉を選ぶ"], "category": "知恵" },
+    { "author": "プルタルコス", "quote": "心は耳から満たされるものではなく、火のように点火されるものだ。", "translation": "The mind is not a vessel to be filled, but a fire to be kindled.", "interpretation": "知識を詰め込むだけでなく、心に火を灯すことが大切です。好奇心や情熱を持って学びましょう。その情熱が、あなたを成長させますよ。", "actions": ["好奇心を持つ", "情熱を持って学ぶ", "心に火を灯す"], "category": "知恵" },
+    { "author": "ディオゲネス", "quote": "幸福への道は一つではない。", "translation": "The foundation of every state is the education of its youth.", "interpretation": "幸せの形は人それぞれです。他人と同じ道を歩む必要はありません。あなたらしい幸せを見つけてください。自分の道を信じて進みましょう。", "actions": ["自分の幸せを見つける", "他人と比べない", "自分の道を歩む"], "category": "知恵" },
+    { "author": "ヘラクレイトス", "quote": "同じ川に二度入ることはできない。", "translation": "No man ever steps in the same river twice, for it's not the same river and he's not the same man.", "interpretation": "すべては変化し続けています。過去にこだわらず、今を生きましょう。変化を受け入れることで、人生はより豊かになります。今日も、新しい自分を楽しんでくださいね。", "actions": ["変化を受け入れる", "今を生きる", "過去にこだわらない"], "category": "知恵" },
+    { "author": "ピタゴラス", "quote": "数は万物の原理である。", "translation": "Number is the ruler of forms and ideas, and the cause of gods and demons.", "interpretation": "物事には、秩序やパターンがあります。それを理解することで、世界がより明確に見えます。論理的に考えることも、時には大切です。バランスを取りながら、人生を楽しみましょう。", "actions": ["論理的に考える", "秩序を見つける", "バランスを取る"], "category": "知恵" },
+    { "author": "ゼノン", "quote": "賢者は、自然に従って生きる。", "translation": "The goal of life is living in agreement with nature.", "interpretation": "自然のリズムに合わせて生きることが大切です。無理をせず、自分のペースで生きましょう。自然体でいることが、心の平和をもたらしますよ。", "actions": ["自然体でいる", "無理をしない", "自分のペースで生きる"], "category": "知恵" },
+    { "author": "エンペドクレス", "quote": "愛と憎しみが世界を動かす。", "translation": "Love and strife are the two forces that govern the universe.", "interpretation": "人生には、良いことも悪いこともあります。その両方を受け入れることが大切です。愛を選び、憎しみを手放しましょう。愛で満たされた人生は、美しいですよ。", "actions": ["愛を選ぶ", "憎しみを手放す", "両方を受け入れる"], "category": "知恵" }
+  ],
+  "Happiness": [
+    { "author": "オードリー・ヘップバーン", "quote": "何より大切なのは人生を楽しむこと。幸せを感じること。それがすべてよ。", "translation": "The most important thing is to enjoy your life—to be happy—it's all that matters.", "interpretation": "深刻になりすぎないでください。人生を楽しむことが一番大切です。あなたが笑顔でいることが、周りの人も幸せにします。今日も、小さな喜びを見つけて、心から楽しんでくださいね。難しく考えず、シンプルに幸せを感じましょう。", "actions": ["好きなことをする", "笑顔で過ごす", "小さな喜びを見つける"], "category": "幸福" },
+    { "author": "ヘレン・ケラー", "quote": "常に太陽の方を向いて。そうすれば影を見ることはないわ。", "translation": "Keep your face to the sunshine and you cannot see a shadow.", "interpretation": "明るい部分に目を向けることで、暗い部分は気にならなくなります。ネガティブなことより、ポジティブなことに意識を向けましょう。あなたの視点次第で、世界は明るく見えます。今日も、良いことを探してみてくださいね。", "actions": ["ポジティブなことに目を向ける", "明るい部分を見る", "太陽の光を浴びる"], "category": "幸福" },
+    { "author": "マザー・テレサ", "quote": "平和は微笑みから始まります。", "translation": "Peace begins with a smile.", "interpretation": "小さな笑顔が、世界を変える第一歩です。まずはあなたが笑顔でいることから始めましょう。その笑顔が、周りの人にも伝染します。今日も、鏡の前で笑顔を作ってみてくださいね。", "actions": ["笑顔を作る", "鏡の前で笑う", "誰かに笑顔を向ける"], "category": "幸福" },
+    { "author": "宮沢賢治", "quote": "世界がぜんたい幸福にならないうちは、個人の幸福はあり得ない。", "translation": "Until the whole world is happy, there can be no individual happiness.", "interpretation": "誰かの幸せを願うことが、あなた自身の幸せにつながります。自分だけでなく、周りの人の幸せも考えてみましょう。小さな親切が、巡り巡ってあなたのもとに返ってきますよ。", "actions": ["誰かの幸せを願う", "小さな親切をする", "優しく接する"], "category": "幸福" },
+    { "author": "チャールズ・M・シュルツ", "quote": "幸せとは、温かい子犬のことだ。", "translation": "Happiness is a warm puppy.", "interpretation": "幸せは、身近なところにあります。温かさ、優しさ、小さな喜び。そんなシンプルなものが、本当の幸せです。今日も、身の回りの温かさを感じてみてくださいね。", "actions": ["温かいものに触れる", "ペットと触れ合う", "身近な幸せを感じる"], "category": "幸福" },
+    { "author": "エイブラハム・リンカーン", "quote": "人は大抵、自分で決めた分だけ幸せになる。", "translation": "Folks are usually about as happy as they make their minds up to be.", "interpretation": "幸せは、外からやってくるものではありません。あなたの心が決めるものです。幸せになると決めれば、幸せになれます。今日も、幸せを選んでくださいね。", "actions": ["幸せになると決める", "前向きに考える", "幸せを選ぶ"], "category": "幸福" },
+    { "author": "ダライ・ラマ14世", "quote": "幸福は、既に用意されているものではない。自分の行動から生まれるものだ。", "translation": "Happiness is not something ready made. It comes from your own actions.", "interpretation": "待っているだけでは幸せは来ません。自分から行動することで、幸せは生まれます。今日も、誰かを笑顔にする行動をしてみましょう。その行動が、あなたを幸せにしますよ。", "actions": ["行動する", "誰かを笑顔にする", "幸せを作る"], "category": "幸福" },
+    { "author": "ロバート・A・ハインライン", "quote": "愛とは、相手の幸福があなた自身の幸福に不可欠な状態のことだ。", "translation": "Love is that condition in which the happiness of another person is essential to your own.", "interpretation": "誰かの幸せを願うことが、あなたの幸せになります。愛する人の笑顔が、あなたを満たします。今日も、大切な人の幸せを願ってみてくださいね。", "actions": ["大切な人の幸せを願う", "感謝を伝える", "愛を表現する"], "category": "幸福" },
+    { "author": "マルト・トローリー＝カーティン", "quote": "楽しんで過ごした時間は、無駄な時間ではない。", "translation": "Time you enjoy wasting is not wasted time.", "interpretation": "何もせずにのんびりする時間も、大切な時間です。無駄だと思わないでください。心を休めることが、明日への活力になります。今日も、好きなことをして楽しんでくださいね。", "actions": ["好きなことをする", "のんびり過ごす", "休息を取る"], "category": "幸福" },
+    { "author": "アルベール・カミュ", "quote": "幸福とは何かを探すのをやめれば、幸福になれる。", "translation": "You will never be happy if you continue to search for what happiness consists of.", "interpretation": "幸せは、探すものではなく、今ここにあるものです。難しく考えすぎず、今この瞬間を楽しみましょう。小さな喜びに気づくことで、人生は輝き始めますよ。", "actions": ["今を楽しむ", "小さな幸せに気づく", "難しく考えすぎない"], "category": "幸福" },
+    { "author": "チャック・パラニューク", "quote": "痛みを忘れるのは難しいが、甘さを思い出すのはもっと難しい。幸せには傷跡がない。", "translation": "It's so hard to forget pain, but it's even harder to remember sweetness. We have no scar to show for happiness.", "interpretation": "辛いことは記憶に残りやすいけれど、幸せな瞬間も大切にしましょう。意識的に、良かったことを思い出す時間を持ってください。その習慣が、あなたの心を明るくしますよ。", "actions": ["良かったことを思い出す", "幸せな瞬間を記録する", "感謝日記をつける"], "category": "幸福" },
+    { "author": "アーネスト・ヘミングウェイ", "quote": "知的な人々の幸福は、私が知る限り最も希少なものだ。", "translation": "Happiness in intelligent people is the rarest thing I know.", "interpretation": "考えすぎると、幸せを感じにくくなります。時には、頭を休めてシンプルに楽しむことも大切です。難しく考えず、今この瞬間を味わってくださいね。", "actions": ["考えすぎない", "シンプルに楽しむ", "頭を休める"], "category": "幸福" },
+    { "author": "J.R.R.トールキン", "quote": "食べ物と歓声と歌を、貯め込んだ黄金よりも大切にする人が増えれば、世界はもっと楽しくなるだろう。", "translation": "If more of us valued food and cheer and song above hoarded gold, it would be a merrier world.", "interpretation": "お金や物より、楽しい時間や温かい人間関係を大切にしましょう。本当に価値があるのは、心を満たすものです。今日も、大切な人と楽しい時間を過ごしてくださいね。", "actions": ["大切な人と過ごす", "楽しい時間を作る", "物より思い出を大切にする"], "category": "幸福" },
+    { "author": "トム・ボデット", "quote": "幸せになるために必要なのは、愛する誰か、やるべきこと、希望することの三つだけだ。", "translation": "They say a person needs just three things to be truly happy in this world: someone to love, something to do, and something to hope for.", "interpretation": "複雑に考える必要はありません。愛する人がいて、やることがあって、希望があれば十分です。この三つを大切にしながら、シンプルに生きましょう。あなたにも、きっとこの三つがありますよ。", "actions": ["愛する人を大切にする", "やるべきことを見つける", "希望を持つ"], "category": "幸福" },
+    { "author": "ロイ・T・ベネット", "quote": "あなたの幸福の責任は、あなた自身にある。他人の手に委ねてはいけない。", "translation": "Take responsibility of your own happiness, never put it in other people's hands.", "interpretation": "誰かに幸せにしてもらおうと期待しないでください。あなたの幸せは、あなたが作るものです。自分で幸せを見つけ、作り出していきましょう。その力は、あなたの中にありますよ。", "actions": ["自分で幸せを作る", "他人に期待しすぎない", "主体的に生きる"], "category": "幸福" },
+    { "author": "ジョナサン・サフラン・フォア", "quote": "悲しみから身を守ることはできない。同時に幸せからも身を守ってしまうから。", "translation": "You cannot protect yourself from sadness without protecting yourself from happiness.", "interpretation": "感情を閉ざさないでください。悲しみを感じることを恐れると、幸せも感じられなくなります。すべての感情を受け入れることで、人生はより豊かになりますよ。", "actions": ["感情を受け入れる", "心を開く", "悲しみも幸せも感じる"], "category": "幸福" },
+    { "author": "デール・カーネギー", "quote": "幸せか不幸かは、何を持っているか、誰であるか、どこにいるか、何をしているかではない。何を考えているかで決まる。", "translation": "It isn't what you have or who you are or where you are or what you are doing that makes you happy or unhappy. It is what you think about it.", "interpretation": "状況ではなく、あなたの考え方が幸せを決めます。どんな状況でも、前向きに考えることで幸せを感じられます。今日も、良い面を見ることを心がけてくださいね。", "actions": ["前向きに考える", "良い面を見る", "考え方を変える"], "category": "幸福" },
+    { "author": "ガブリエル・ガルシア・マルケス", "quote": "幸福が治せない病気を、薬では治せない。", "translation": "No medicine cures what happiness cannot.", "interpretation": "幸せな気持ちは、何よりも強い薬です。心が満たされていれば、体も元気になります。今日も、心を幸せで満たすことを大切にしてくださいね。", "actions": ["心を満たす", "幸せを感じる", "ポジティブでいる"], "category": "幸福" },
+    { "author": "ジョージ・バーンズ", "quote": "幸福とは、愛情深く、世話好きで、仲の良い大家族が、別の街に住んでいることだ。", "translation": "Happiness is having a large, loving, caring, close-knit family in another city.", "interpretation": "ユーモアを忘れないでください。人生を楽しむには、笑いも大切です。深刻になりすぎず、時には冗談を言って笑いましょう。笑顔が、あなたの心を軽くしますよ。", "actions": ["ユーモアを持つ", "笑う", "深刻になりすぎない"], "category": "幸福" },
+    { "author": "マルセル・プルースト", "quote": "私たちを幸せにしてくれる人々に感謝しよう。彼らは、私たちの魂を花開かせる魅力的な庭師だ。", "translation": "Let us be grateful to the people who make us happy; they are the charming gardeners who make our souls blossom.", "interpretation": "あなたを幸せにしてくれる人に、感謝の気持ちを持ちましょう。その人たちが、あなたの人生を豊かにしています。今日も、大切な人に「ありがとう」と伝えてくださいね。", "actions": ["感謝を伝える", "大切な人を思う", "ありがとうと言う"], "category": "幸福" },
+    { "author": "シルヴィア・プラス", "quote": "景色が押し寄せてくる感覚で肺が膨らむのを感じた。空気、山、木、人々。これが幸せというものなのだと思った。", "translation": "I felt my lungs inflate with the onrush of scenery—air, mountains, trees, people. I thought, 'This is what it is to be happy.'", "interpretation": "幸せは、シンプルな瞬間にあります。美しい景色、新鮮な空気、周りの人々。そんな当たり前のことに、幸せを感じてください。今日も、深呼吸をして、周りを見渡してみましょう。", "actions": ["深呼吸をする", "周りを見渡す", "自然を感じる"], "category": "幸福" },
+    { "author": "クリスチャン・D・ラーソン", "quote": "自分自身に約束しよう。心の平和を乱すものは何もないほど強くなろう。", "translation": "Promise yourself to be so strong that nothing can disturb your peace of mind.", "interpretation": "心の平和を守ることが、幸せの基盤です。外の世界に左右されず、内面の平和を大切にしましょう。今日も、心を穏やかに保つことを意識してくださいね。", "actions": ["心を穏やかに保つ", "平和を守る", "動じない"], "category": "幸福" },
+    { "author": "ラルフ・ワルド・エマーソン", "quote": "怒っている間の1分間で、60秒の幸せを失う。", "translation": "For every minute you are angry you lose sixty seconds of happiness.", "interpretation": "怒りや悲しみに時間を使うのはもったいないです。その時間を、幸せなことに使いましょう。ネガティブな感情は、できるだけ早く手放してくださいね。", "actions": ["怒りを手放す", "幸せに時間を使う", "ポジティブでいる"], "category": "幸福" },
+    { "author": "ヘンリー・ワズワース・ロングフェロー", "quote": "すべての人には、世界が知らない秘密の悲しみがある。しばしば私たちは、冷たい人と呼ぶが、それはただ悲しい人なのだ。", "translation": "Every man has his secret sorrows which the world knows not; and often times we call a man cold when he is only sad.", "interpretation": "誰もが、それぞれの悲しみを抱えています。冷たく見える人も、実は悲しんでいるだけかもしれません。優しい目で人を見て、思いやりを持って接しましょう。その優しさが、あなた自身も温めますよ。", "actions": ["人に優しくする", "思いやりを持つ", "理解しようとする"], "category": "幸福" },
+    { "author": "スティーヴン・チボスキー", "quote": "大笑いした後の深呼吸ほど素晴らしいものはない。正しい理由でお腹が痛くなることほど、世界で素晴らしいものはない。", "translation": "There's nothing like deep breaths after laughing that hard. Nothing in the world like a sore stomach for the right reasons.", "interpretation": "心から笑える瞬間を大切にしましょう。笑いは、最高の薬です。今日も、笑える瞬間を見つけて、思いっきり笑ってください。その笑顔が、あなたを幸せにしますよ。", "actions": ["笑う", "楽しいことをする", "ユーモアを楽しむ"], "category": "幸福" },
+    { "author": "ジョン・レノン", "quote": "年齢ではなく、友達の数で数えよう。涙ではなく、笑顔の数で数えよう。", "translation": "Count your age by friends, not years. Count your life by smiles, not tears.", "interpretation": "人生の豊かさは、年齢やお金ではなく、友達や笑顔で測られます。大切な人との時間を大切にしましょう。今日も、誰かと笑顔で過ごす時間を作ってくださいね。", "actions": ["友達を大切にする", "笑顔で過ごす", "良い関係を築く"], "category": "幸福" },
+    { "author": "マハトマ・ガンジー", "quote": "幸福とは、考えること、言うこと、することが調和している状態のことだ。", "translation": "Happiness is when what you think, what you say, and what you do are in harmony.", "interpretation": "心と言葉と行動が一致している時、本当の幸せを感じられます。嘘をつかず、自分に正直に生きましょう。その誠実さが、あなたの心を満たしますよ。", "actions": ["自分に正直でいる", "言行を一致させる", "誠実に生きる"], "category": "幸福" },
+    { "author": "ヘレン・ケラー", "quote": "幸福への扉の一つが閉まると、別の扉が開く。しかし、私たちはしばしば閉まった扉を長く見つめすぎて、私たちのために開かれた扉を見ない。", "translation": "When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us.", "interpretation": "過去にこだわらないでください。一つの扉が閉まっても、新しい扉が開いています。前を向いて、新しい可能性を見つけましょう。未来には、きっと良いことが待っていますよ。", "actions": ["前を向く", "新しい可能性を見つける", "過去にこだわらない"], "category": "幸福" },
+    { "author": "アン・フランク", "quote": "幸せな人は、他人を幸せにすることができる。", "translation": "Whoever is happy will make others happy too.", "interpretation": "あなたが幸せでいることが、周りの人も幸せにします。まずは自分を大切にして、心を満たしましょう。その幸せが、自然と周りに広がっていきますよ。", "actions": ["自分を大切にする", "心を満たす", "幸せを広げる"], "category": "幸福" },
+    { "author": "レオ・トルストイ", "quote": "幸福になりたいなら、幸福であれ。", "translation": "If you want to be happy, be.", "interpretation": "幸せは、難しいものではありません。幸せになると決めれば、今すぐ幸せになれます。複雑に考えず、シンプルに幸せを選んでください。あなたには、その力がありますよ。", "actions": ["幸せになると決める", "シンプルに考える", "今を楽しむ"], "category": "幸福" },
+    { "author": "孔子", "quote": "幸福な人生を送りたいなら、目標にそれを結びつけなさい。人や物にではなく。", "translation": "The will to win, the desire to succeed, the urge to reach your full potential... these are the keys that will unlock the door to personal excellence.", "interpretation": "人や物に幸せを依存しないでください。自分の目標や成長に喜びを見出しましょう。そうすることで、より安定した幸せを感じられますよ。", "actions": ["目標を持つ", "成長を楽しむ", "自立した幸せを見つける"], "category": "幸福" },
+    { "author": "ボブ・マーリー", "quote": "お金では幸せは買えない。でも、お金があれば、不幸を乗り越えやすくなる。", "translation": "Money can't buy life.", "interpretation": "お金は大切ですが、それが全てではありません。本当に価値があるのは、愛、健康、友情です。物質的な豊かさだけでなく、心の豊かさも大切にしましょう。", "actions": ["心の豊かさを大切にする", "愛を大切にする", "物質に執着しすぎない"], "category": "幸福" },
+    { "author": "ウォルト・ディズニー", "quote": "すべての夢は叶う。追い求める勇気があれば。", "translation": "All our dreams can come true, if we have the courage to pursue them.", "interpretation": "夢を持ち続けることが、幸せへの道です。諦めずに追い求めれば、夢は必ず叶います。今日も、あなたの夢に向かって一歩進んでくださいね。", "actions": ["夢を持つ", "追い求める", "諦めない"], "category": "幸福" },
+    { "author": "セオドア・ルーズベルト", "quote": "比較は喜びの泥棒だ。", "translation": "Comparison is the thief of joy.", "interpretation": "他人と比べることをやめましょう。比較は、あなたの幸せを奪います。自分の人生に集中して、自分のペースで歩んでください。あなたはあなたのままで素晴らしいですよ。", "actions": ["他人と比べない", "自分に集中する", "自分のペースで歩む"], "category": "幸福" },
+    { "author": "ロバート・ルイス・スティーヴンソン", "quote": "幸福な人は、あまりにも忙しくて、自分が幸せかどうか気づかない。", "translation": "There is no duty we so much underrate as the duty of being happy.", "interpretation": "幸せでいることも、大切な責任です。忙しさに追われて、幸せを感じる時間を忘れないでください。今日も、立ち止まって、幸せを感じる瞬間を持ちましょう。", "actions": ["立ち止まる", "幸せを感じる", "忙しさから離れる"], "category": "幸福" },
+    { "author": "アラン（エミール＝オーギュスト・シャルティエ）", "quote": "幸福は、幸福を求めて探すものではない。幸福は、待つのではなく、作るものだ。", "translation": "Happiness is not to be sought, but to be created.", "interpretation": "幸せは、待っていても来ません。自分から作り出すものです。今日も、小さな幸せを作る行動をしてみましょう。その積み重ねが、あなたの人生を幸せで満たしますよ。", "actions": ["幸せを作る", "行動する", "待たない"], "category": "幸福" },
+    { "author": "ヴィクトール・フランクル", "quote": "幸福は追い求めるものではない。自然に訪れるものだ。", "translation": "Happiness cannot be pursued; it must ensue.", "interpretation": "無理に幸せを追いかけないでください。自然体で、誠実に生きていれば、幸せは自然とやってきます。今日も、自分らしく、心穏やかに過ごしましょう。", "actions": ["自然体でいる", "誠実に生きる", "無理をしない"], "category": "幸福" },
+    { "author": "エピクロス", "quote": "満足することを知る者は、真に富める者だ。", "translation": "He is a wise man who does not grieve for the things which he has not, but rejoices for those which he has.", "interpretation": "ないものを嘆くより、あるものに感謝しましょう。今持っているものに目を向けることで、幸せを感じられます。今日も、感謝の気持ちを持って過ごしてくださいね。", "actions": ["あるものに感謝する", "満足する", "感謝の気持ちを持つ"], "category": "幸福" },
+    { "author": "バートランド・ラッセル", "quote": "幸福の秘訣は、できるだけ多くの興味を持ち、できるだけ多くの反応を友好的にすることだ。", "translation": "The secret of happiness is this: let your interests be as wide as possible, and let your reactions to the things and persons that interest you be as far as possible friendly rather than hostile.", "interpretation": "広い視野を持ち、人や物事に対して友好的でいましょう。興味を持つことが、人生を豊かにします。今日も、新しいことに興味を持ってみてくださいね。", "actions": ["興味を持つ", "友好的でいる", "広い視野を持つ"], "category": "幸福" },
+    { "author": "ソーニャ・リュボミアスキー", "quote": "幸福の40%は、意図的な活動によって決まる。", "translation": "40% of our happiness is determined by intentional activity.", "interpretation": "あなたの行動次第で、幸せは増やせます。意識的に、幸せになる行動を選びましょう。今日も、あなたを幸せにする活動を一つしてみてくださいね。", "actions": ["幸せになる行動をする", "意識的に選ぶ", "ポジティブな活動をする"], "category": "幸福" },
+    { "author": "カール・ロジャーズ", "quote": "良い人生とは、プロセスであって、状態ではない。方向であって、目的地ではない。", "translation": "The good life is a process, not a state of being. It is a direction not a destination.", "interpretation": "人生は、目的地に着くことが目標ではありません。その過程を楽しむことが大切です。今この瞬間を大切にして、人生という旅を楽しんでくださいね。", "actions": ["過程を楽しむ", "今を大切にする", "旅を楽しむ"], "category": "幸福" },
+    { "author": "リチャード・カールソン", "quote": "小さなことにくよくよするな。すべては小さなことだ。", "translation": "Don't sweat the small stuff... and it's all small stuff.", "interpretation": "心配事の多くは、実は小さなことです。深刻に考えすぎないでください。もっとリラックスして、人生を楽しみましょう。今日も、小さなことは気にせず、笑顔で過ごしてくださいね。", "actions": ["小さなことを気にしない", "リラックスする", "楽に考える"], "category": "幸福" },
+    { "author": "ジョージ・ヴァイラント", "quote": "幸福は愛である。それ以上でもそれ以下でもない。", "translation": "Happiness is love. Full stop.", "interpretation": "愛が、幸せの本質です。愛する人がいて、愛されていると感じることが、最大の幸せです。今日も、大切な人に愛を伝えてくださいね。", "actions": ["愛を伝える", "愛する人を大切にする", "愛を感じる"], "category": "幸福" },
+    { "author": "ミハイ・チクセントミハイ", "quote": "幸福な人は、目標ではなく、プロセスに喜びを見出す。", "translation": "The best moments in our lives are not the passive, receptive, relaxing times... The best moments usually occur if a person's body or mind is stretched to its limits.", "interpretation": "何かに夢中になっている時、人は最も幸せを感じます。結果だけでなく、その過程を楽しみましょう。今日も、好きなことに没頭する時間を持ってくださいね。", "actions": ["好きなことに没頭する", "プロセスを楽しむ", "夢中になる"], "category": "幸福" },
+    { "author": "ショーペンハウアー", "quote": "人間が手に入れうる最大のものは、快活な気質である。", "translation": "A happy temperament is the greatest gift from nature.", "interpretation": "明るく前向きでいることが、最高の財産です。どんな状況でも、明るさを失わないでください。その明るさが、あなたと周りの人を幸せにしますよ。", "actions": ["明るくいる", "前向きでいる", "快活でいる"], "category": "幸福" }
+  ],
+  "Courage": [
+    { "author": "ウォルト・ディズニー", "quote": "追い求める勇気があれば、すべての夢は叶う。", "translation": "All our dreams can come true, if we have the courage to pursue them.", "interpretation": "夢を隔てているのは、勇気だけです。恐れを乗り越えて、一歩踏み出してみましょう。失敗を恐れず、あなたの夢に向かって進んでください。その勇気が、必ず道を開きます。今日も、小さな一歩を踏み出してくださいね。", "actions": ["夢に向かって一歩踏み出す", "恐れを乗り越える", "行動する"], "category": "勇気" },
+    { "author": "ネルソン・マンデラ", "quote": "勇気とは、恐怖がないことではない。恐怖を克服することだ。勇敢な人とは、恐れを感じない人ではなく、恐怖を克服する人だ。", "translation": "I learned that courage was not the absence of fear, but the triumph over it. The brave man is not he who does not feel afraid, but he who conquers that fear.", "interpretation": "怖くても大丈夫です。恐怖を感じることは、自然なことです。大切なのは、その恐怖に向き合い、乗り越えることです。一歩ずつ、勇気を出してみましょう。あなたには、その力がありますよ。", "actions": ["恐怖を認める", "一歩ずつ進む", "向き合う"], "category": "勇気" },
+    { "author": "老子", "quote": "深く愛されることは、強さを与える。深く愛することは、勇気を与える。", "translation": "Being deeply loved by someone gives you strength, while loving someone deeply gives you courage.", "interpretation": "愛が、あなたに強さと勇気を与えます。愛する人のために、勇気を出すことができます。大切な人を思い浮かべてください。その人のために、あなたは強くなれますよ。", "actions": ["大切な人を思い浮かべる", "愛を力に変える", "愛する人のために頑張る"], "category": "勇気" },
+    { "author": "マヤ・アンジェロウ", "quote": "勇気は、すべての美徳の中で最も重要なものだ。勇気がなければ、他のどの美徳も一貫して実践できない。", "translation": "Courage is the most important of all the virtues because without courage, you can't practice any other virtue consistently.", "interpretation": "勇気がすべての基盤です。優しさも、誠実さも、勇気があって初めて貫けます。まずは勇気を持つことから始めましょう。その勇気が、あなたを素晴らしい人にしますよ。", "actions": ["勇気を持つ", "一貫して行動する", "恐れずに実践する"], "category": "勇気" },
+    { "author": "ハーパー・リー", "quote": "本当の勇気とは、始める前から負けるとわかっていても、それでも始めて最後までやり遂げることだ。", "translation": "I wanted you to see what real courage is, instead of getting the idea that courage is a man with a gun in his hand. It's when you know you're licked before you begin, but you begin anyway and see it through no matter what.", "interpretation": "結果がどうであれ、挑戦することが勇気です。勝ち負けではなく、最後までやり遂げることが大切です。今日も、諦めずに続けてください。その姿勢が、本当の勇気ですよ。", "actions": ["挑戦する", "最後までやり遂げる", "諦めない"], "category": "勇気" },
+    { "author": "ジョージ・R・R・マーティン", "quote": "恐れているときにだけ、人は勇敢になれる。", "translation": "Can a man still be brave if he's afraid? That is the only time a man can be brave.", "interpretation": "恐怖を感じているからこそ、勇気を出すことに意味があります。怖くないことをするのは、勇気ではありません。恐れを感じながらも進むことが、真の勇気です。あなたは十分勇敢ですよ。", "actions": ["恐れを認める", "それでも進む", "勇敢でいる"], "category": "勇気" },
+    { "author": "ココ・シャネル", "quote": "最も勇気ある行為は、自分自身で考えることだ。そして、それを声に出すことだ。", "translation": "The most courageous act is still to think for yourself. Aloud.", "interpretation": "周りの意見に流されず、自分の考えを持つことが勇気です。そして、それを表現することも大切です。あなたの意見を、恐れずに言ってみましょう。その勇気が、あなたを成長させますよ。", "actions": ["自分で考える", "意見を言う", "周りに流されない"], "category": "勇気" },
+    { "author": "ウィリアム・フォークナー", "quote": "新しい地平線を見るには、岸を見失う勇気が必要だ。", "translation": "You cannot swim for new horizons until you have courage to lose sight of the shore.", "interpretation": "安全地帯を離れることは怖いです。でも、新しいことに挑戦するには、その勇気が必要です。今の場所から一歩踏み出してみましょう。その先には、新しい世界が待っていますよ。", "actions": ["安全地帯を離れる", "新しいことに挑戦する", "一歩踏み出す"], "category": "勇気" },
+    { "author": "マーク・トウェイン", "quote": "勇気とは、恐怖に抵抗し、恐怖を制御することであって、恐怖がないことではない。", "translation": "Courage is resistance to fear, mastery of fear - not absence of fear.", "interpretation": "恐怖を感じるのは自然なことです。大切なのは、その恐怖に負けないことです。恐れを感じながらも、前に進むあなたは勇敢です。今日も、一歩ずつ進んでいきましょう。", "actions": ["恐怖を認める", "恐怖に負けない", "前に進む"], "category": "勇気" },
+    { "author": "ヴィンセント・ヴァン・ゴッホ", "quote": "挑戦する勇気がなければ、人生に何の意味があるだろうか。", "translation": "What would life be if we had no courage to attempt anything?", "interpretation": "挑戦しない人生は、色のない人生です。失敗を恐れず、やってみたいことに挑戦しましょう。その勇気が、あなたの人生を鮮やかに彩ります。今日も、新しいことに挑戦してみてくださいね。", "actions": ["挑戦する", "失敗を恐れない", "新しいことをやってみる"], "category": "勇気" },
+    { "author": "ムハンマド・アリ", "quote": "リスクを取る勇気がない者は、人生で何も成し遂げられない。", "translation": "He who is not courageous enough to take risks will accomplish nothing in life.", "interpretation": "リスクを恐れていては、何も得られません。安全な道ばかり選んでいると、成長できません。少しのリスクを取って、挑戦してみましょう。その経験が、あなたを強くしますよ。", "actions": ["リスクを取る", "挑戦する", "安全な道ばかり選ばない"], "category": "勇気" },
+    { "author": "野口英世", "quote": "誰よりも三倍、四倍、五倍勉強する。それが私のやり方だ。", "translation": "Study three, four, five times harder than anyone else. That's my way.", "interpretation": "圧倒的な努力が、勇気を支えます。人の何倍も努力することで、恐れは消えていきます。今日も、もう少しだけ頑張ってみましょう。その努力が、あなたに自信を与えますよ。", "actions": ["努力する", "もう少し頑張る", "人の何倍も頑張る"], "category": "勇気" },
+    { "author": "セオドア・ルーズベルト", "quote": "できると信じれば、道は半分開けたも同然だ。", "translation": "Believe you can and you're halfway there.", "interpretation": "自分を信じることが、勇気の第一歩です。「できる」と信じるだけで、心が軽くなります。自分の可能性を信じてください。その信念が、あなたを前に進ませますよ。", "actions": ["自分を信じる", "できると思う", "可能性を信じる"], "category": "勇気" },
+    { "author": "アナイス・ニン", "quote": "人生は、勇気の量に比例して拡大したり縮小したりする。", "translation": "Life shrinks or expands in proportion to one's courage.", "interpretation": "勇気を出せば出すほど、あなたの世界は広がります。恐れていては、人生は小さくなってしまいます。今日も、勇気を出して新しい一歩を踏み出しましょう。", "actions": ["勇気を出す", "世界を広げる", "新しいことに挑戦する"], "category": "勇気" },
+    { "author": "エミリー・ディキンソン", "quote": "運命は大胆な者に味方する。", "translation": "Fortune befriends the bold.", "interpretation": "勇敢に行動する人に、チャンスはやってきます。臆病でいては、何も手に入りません。大胆に、勇気を持って進んでください。その勇気が、幸運を呼び込みますよ。", "actions": ["大胆に行動する", "勇気を持つ", "チャンスを掴む"], "category": "勇気" },
+    { "author": "ロイ・T・ベネット", "quote": "自分を信じなさい。あなたは思っているより勇敢で、知っているより才能があり、想像しているより多くのことができる。", "translation": "Believe in yourself. You are braver than you think, more talented than you know, and capable of more than you imagine.", "interpretation": "あなたは自分が思っている以上に強いです。自分を過小評価しないでください。もっと自分を信じて、可能性に挑戦しましょう。あなたには、できることがたくさんありますよ。", "actions": ["自分を信じる", "可能性に挑戦する", "自分を過小評価しない"], "category": "勇気" },
+    { "author": "オペラ・ウィンフリー", "quote": "あなたの夢の人生を生きることが、最大の冒険だ。", "translation": "The biggest adventure you can take is to live the life of your dreams.", "interpretation": "夢を追いかけることは、最高の冒険です。安全な道を選ぶより、夢に向かって進む勇気を持ちましょう。その冒険が、あなたの人生を輝かせますよ。", "actions": ["夢を追いかける", "冒険する", "勇気を持つ"], "category": "勇気" },
+    { "author": "ヘンリー・フォード", "quote": "できると思えばできる。できないと思えばできない。どちらにしても、それが真実となる。", "translation": "Whether you think you can, or you think you can't – you're right.", "interpretation": "あなたの心が、現実を作ります。「できる」と信じることで、本当にできるようになります。ネガティブな思考を手放し、自分を信じてください。その信念が、勇気を生みますよ。", "actions": ["できると信じる", "ポジティブに考える", "自分を信じる"], "category": "勇気" },
+    { "author": "エリカ・ジョング", "quote": "才能は誰にでもある。珍しいのは、それを暗い場所まで追いかける勇気だ。", "translation": "Everyone has talent. What's rare is the courage to follow it to the dark places where it leads.", "interpretation": "才能を活かすには、勇気が必要です。時には、怖い道を進まなければなりません。その勇気を持ってください。才能を信じて、どこまでも追いかけましょう。", "actions": ["才能を活かす", "勇気を持つ", "怖い道でも進む"], "category": "勇気" },
+    { "author": "ルミ", "quote": "他人の話に満足してはいけない。自分自身の神話を展開しなさい。", "translation": "Don't be satisfied with stories, how things have gone with others. Unfold your own myth.", "interpretation": "他人の人生ではなく、あなた自身の人生を生きましょう。自分の道を切り開く勇気を持ってください。あなただけの物語を、自分で作っていきましょう。", "actions": ["自分の道を切り開く", "他人を真似しない", "自分の人生を生きる"], "category": "勇気" },
+    { "author": "スティーヴン・キング", "quote": "できる、すべきだ、そして勇敢ならば、するだろう。", "translation": "You can, you should, and if you're brave enough to start, you will.", "interpretation": "あなたにはできます。そして、やるべきです。あとは、始める勇気だけです。その勇気を出せば、必ずできます。今日も、一歩踏み出してくださいね。", "actions": ["始める勇気を持つ", "一歩踏み出す", "やるべきことをする"], "category": "勇気" },
+    { "author": "ノーラ・エフロン", "quote": "あなたの人生の主人公になりなさい。被害者ではなく。", "translation": "Above all, be the heroine of your life, not the victim.", "interpretation": "自分の人生の主役は、あなたです。被害者のように振る舞わず、勇敢に立ち向かいましょう。あなたには、人生をコントロールする力があります。今日も、主人公として生きてくださいね。", "actions": ["主人公として生きる", "被害者にならない", "勇敢に立ち向かう"], "category": "勇気" },
+    { "author": "オノレ・ド・バルザック", "quote": "すべての幸福は、勇気と努力に依存する。", "translation": "All happiness depends on courage and work.", "interpretation": "幸せになるには、勇気と努力が必要です。待っているだけでは、幸せは来ません。勇気を出して行動し、努力を続けましょう。その先に、幸せがありますよ。", "actions": ["勇気を出す", "努力する", "行動する"], "category": "勇気" },
+    { "author": "パウロ・コエーリョ", "quote": "忍耐強く正しい瞬間を待つこと、そして出会ったものに失望しない勇気を持つこと。これが精神の道の二つの最も困難な試練だ。", "translation": "The two hardest tests on the spiritual road are the patience to wait for the right moment and the courage not to be disappointed with what we encounter.", "interpretation": "待つことと、失望しないことの両方に勇気が必要です。すぐに結果が出なくても、諦めないでください。忍耐強く待ち、どんな結果も受け入れる勇気を持ちましょう。", "actions": ["忍耐強く待つ", "失望しない", "結果を受け入れる"], "category": "勇気" },
+    { "author": "C・ジョイベル・C", "quote": "恐れを恐れてはいけない。恐れは、それが価値あることを知らせている。", "translation": "Don't be afraid of your fears. They're not there to scare you. They're there to let you know that something is worth it.", "interpretation": "恐れは、それが大切なことだと教えてくれています。恐怖を感じるということは、挑戦する価値があるということです。恐れを乗り越えて、進んでいきましょう。", "actions": ["恐れを乗り越える", "価値を見出す", "挑戦する"], "category": "勇気" },
+    { "author": "エマ・ドノヒュー", "quote": "怖いのは、あなたが感じていること。勇敢なのは、あなたがしていること。", "translation": "Scared is what you're feeling. Brave is what you're doing.", "interpretation": "怖くても、行動していれば、それは勇敢です。恐怖を感じながらも進むあなたは、十分勇気があります。今日も、その勇気を誇りに思ってくださいね。", "actions": ["恐怖を感じながらも行動する", "勇敢でいる", "自分を誇りに思う"], "category": "勇気" },
+    { "author": "J.R.R.トールキン", "quote": "勇気は、予想外の場所に見つかる。", "translation": "Courage is found in unlikely places.", "interpretation": "勇気は、思わぬところから湧いてきます。自分には無理だと思っても、やってみると意外とできることがあります。今日も、小さな勇気を見つけてくださいね。", "actions": ["小さな勇気を見つける", "意外なことに挑戦する", "自分を信じる"], "category": "勇気" },
+    { "author": "ヴェロニカ・ロス", "quote": "勇気には多くの形がある。時には、何かより大きなもののために命を捧げることだ。時には、より良い人生のために毎日の苦痛に耐えることだ。", "translation": "There are so many ways to be brave in this world. Sometimes bravery involves laying down your life for something bigger than yourself, or for someone else. Sometimes it involves giving up everything you have ever known, or everyone you have ever loved, for the sake of something greater. But sometimes it doesn't. Sometimes it is nothing more than gritting your teeth through pain, and the work of every day, the slow walk toward a better life.", "interpretation": "勇気は、大きなことだけではありません。毎日を耐えて生きることも、立派な勇気です。あなたが今日を生きていることが、すでに勇敢なのです。その勇気を、誇りに思ってくださいね。", "actions": ["毎日を生きる", "耐える", "自分の勇気を認める"], "category": "勇気" },
+    { "author": "エリック・ロス", "quote": "遅すぎるということは決してない。自分になりたい人になるのに、時間制限はない。", "translation": "For what it's worth: it's never too late or, in my case, too early to be whoever you want to be. There's no time limit, stop whenever you want. You can change or stay the same, there are no rules to this thing.", "interpretation": "何歳からでも、新しい自分になれます。変わる勇気を持ってください。遅すぎるということはありません。今日から、なりたい自分になる一歩を踏み出しましょう。", "actions": ["変わる勇気を持つ", "今日から始める", "なりたい自分になる"], "category": "勇気" },
+    { "author": "ブルース・リー", "quote": "恐れることを恐れるな。", "translation": "Don't fear failure.", "interpretation": "失敗を恐れないでください。失敗は、成功への道のりです。恐れを手放し、挑戦してみましょう。その勇気が、あなたを成長させますよ。", "actions": ["失敗を恐れない", "挑戦する", "恐れを手放す"], "category": "勇気" },
+    { "author": "エレノア・ルーズベルト", "quote": "毎日、自分を怖がらせることを一つしなさい。", "translation": "Do one thing every day that scares you.", "interpretation": "恐怖を乗り越えることで、勇気は育ちます。毎日、少しだけ怖いことに挑戦してみましょう。その積み重ねが、あなたを強くしますよ。", "actions": ["毎日怖いことに挑戦する", "恐怖を乗り越える", "勇気を育てる"], "category": "勇気" },
+    { "author": "スーザン・ジェファーズ", "quote": "恐怖を感じながら、それでもやる。", "translation": "Feel the fear and do it anyway.", "interpretation": "恐怖を感じても、それでも行動することが大切です。完璧な勇気を待たないでください。恐れながらも進むことが、本当の勇気です。今日も、一歩踏み出しましょう。", "actions": ["恐怖を感じながら行動する", "それでもやる", "一歩踏み出す"], "category": "勇気" },
+    { "author": "ジョン・ウェイン", "quote": "勇気とは、死ぬほど怖いのに、それでも馬に乗ることだ。", "translation": "Courage is being scared to death, but saddling up anyway.", "interpretation": "死ぬほど怖くても、それでもやることが勇気です。恐怖に負けないでください。一歩踏み出す勇気を持ちましょう。その勇気が、あなたを成長させますよ。", "actions": ["恐怖に負けない", "それでもやる", "一歩踏み出す"], "category": "勇気" },
+    { "author": "アンブローズ・レッドムーン", "quote": "勇気とは、暗闇の中でろうそくに火を灯すことではない。暗闇の中で前進することだ。", "translation": "Courage is not the towering oak that sees storms come and go; it is the fragile blossom that opens in the snow.", "interpretation": "勇気は、完璧な準備ができてから示すものではありません。不完全な状態でも、前に進むことが勇気です。今日も、準備が整っていなくても、一歩踏み出してみましょう。", "actions": ["不完全でも進む", "前に進む", "準備を待たない"], "category": "勇気" },
+    { "author": "メアリー・アン・ラドマッカー", "quote": "勇気は、一日の終わりに静かに言う声だ。『明日、もう一度やってみる』", "translation": "Courage doesn't always roar. Sometimes courage is the quiet voice at the end of the day saying, 'I will try again tomorrow.'", "interpretation": "勇気は、大きな声で叫ぶものではありません。静かに、もう一度挑戦すると決めることも勇気です。今日がうまくいかなくても、明日また挑戦する勇気を持ちましょう。", "actions": ["もう一度挑戦する", "諦めない", "静かな勇気を持つ"], "category": "勇気" },
+    { "author": "マルコム・グラッドウェル", "quote": "勇気は伝染する。", "translation": "Courage is contagious.", "interpretation": "あなたの勇気は、周りの人にも伝わります。勇敢に行動することで、他の人も勇気づけられます。今日も、勇気を持って行動してください。その姿が、誰かの力になりますよ。", "actions": ["勇敢に行動する", "周りを勇気づける", "手本になる"], "category": "勇気" },
+    { "author": "ジョン・F・ケネディ", "quote": "勇気のある人は、過半数を形成する。", "translation": "One man with courage makes a majority.", "interpretation": "一人の勇気ある行動が、大きな変化を生みます。多数派に従う必要はありません。あなたの勇気が、周りを変えるかもしれません。今日も、勇気を持って行動しましょう。", "actions": ["勇気を持って行動する", "多数派に従わない", "変化を生む"], "category": "勇気" },
+    { "author": "ラインホルド・ニーバー", "quote": "神よ、変えられないものを受け入れる平静さと、変えられるものを変える勇気と、その違いを見分ける知恵を与えたまえ。", "translation": "God, grant me the serenity to accept the things I cannot change, courage to change the things I can, and wisdom to know the difference.", "interpretation": "変えられないことを受け入れ、変えられることに勇気を持つことが大切です。その違いを見分ける知恵も必要です。今日も、変えられることに集中して、勇気を持って行動しましょう。", "actions": ["変えられることに集中する", "勇気を持つ", "知恵を持つ"], "category": "勇気" },
+    { "author": "シェリル・サンドバーグ", "quote": "もし怖くなかったら、何をするだろうか？", "translation": "What would you do if you weren't afraid?", "interpretation": "恐怖がなかったら、あなたは何をしますか？その答えが、あなたの本当にやりたいことです。恐れを手放して、それに挑戦してみましょう。勇気を出して、一歩踏み出してくださいね。", "actions": ["本当にやりたいことをする", "恐れを手放す", "挑戦する"], "category": "勇気" },
+    { "author": "リタ・メイ・ブラウン", "quote": "勇気は、筋肉のようなものだ。使えば使うほど強くなる。", "translation": "Courage is like a muscle. The more we use it, the stronger it gets.", "interpretation": "勇気は、鍛えることができます。小さな勇気を積み重ねることで、大きな勇気が育ちます。今日も、小さな勇気を出して行動してみましょう。その積み重ねが、あなたを強くしますよ。", "actions": ["小さな勇気を積み重ねる", "勇気を鍛える", "行動する"], "category": "勇気" },
+    { "author": "ダンテ・アリギエーリ", "quote": "天国への最も美しい道は、地獄を通る道だ。", "translation": "The hottest places in hell are reserved for those who, in times of great moral crisis, maintain their neutrality.", "interpretation": "困難を乗り越えることで、より良い場所にたどり着けます。辛い時期を恐れないでください。その先には、素晴らしい未来が待っていますよ。勇気を持って、進んでいきましょう。", "actions": ["困難を乗り越える", "辛い時期を恐れない", "前に進む"], "category": "勇気" },
+    { "author": "ジョセフ・キャンベル", "quote": "洞窟の中で、あなたが最も恐れるものが、探している宝物だ。", "translation": "The cave you fear to enter holds the treasure you seek.", "interpretation": "最も怖いことの中に、あなたが求めているものがあります。恐れずに、その洞窟に入ってみましょう。そこには、あなたの成長が待っていますよ。", "actions": ["恐れる場所に入る", "挑戦する", "宝物を見つける"], "category": "勇気" },
+    { "author": "ヘレン・ケラー", "quote": "人生は大胆な冒険か、何でもないかのどちらかだ。", "translation": "Life is either a daring adventure or nothing at all.", "interpretation": "安全に生きることだけが人生ではありません。冒険する勇気を持ちましょう。大胆に生きることで、人生はより豊かになります。今日も、小さな冒険をしてみてくださいね。", "actions": ["冒険する", "大胆に生きる", "リスクを取る"], "category": "勇気" },
+    { "author": "オリソン・スウェット・マーデン", "quote": "達成は、勇気ある試みの報酬だ。", "translation": "Achievement is the reward of courageous effort.", "interpretation": "成功は、勇気ある行動の結果です。勇気を出して挑戦すれば、必ず何かを得られます。今日も、勇気を持って一歩踏み出してください。その勇気が、成功につながりますよ。", "actions": ["勇気を出す", "挑戦する", "行動する"], "category": "勇気" },
+    { "author": "クリストファー・リーヴ", "quote": "ヒーローは、普通の人が並外れた勇気を持つことだ。", "translation": "A hero is an ordinary individual who finds the strength to persevere and endure in spite of overwhelming obstacles.", "interpretation": "特別な人だけがヒーローではありません。普通の人でも、勇気を持てばヒーローになれます。あなたにも、その力があります。今日も、勇気を持って生きてくださいね。", "actions": ["勇気を持つ", "耐える", "ヒーローになる"], "category": "勇気" },
+    { "author": "ジョン・A・シェッド", "quote": "船は港にいれば安全だ。しかし、船はそのために作られたのではない。", "translation": "A ship is safe in harbor, but that's not what ships are for.", "interpretation": "安全な場所にいることは楽ですが、それでは成長できません。船が海に出るように、あなたも冒険に出ましょう。勇気を出して、新しい世界に飛び込んでくださいね。", "actions": ["安全な場所を出る", "冒険する", "新しい世界に飛び込む"], "category": "勇気" },
+    { "author": "マイケル・ジョーダン", "quote": "私は失敗し続けてきた。だから成功したのだ。", "translation": "I've failed over and over and over again in my life. And that is why I succeed.", "interpretation": "失敗を恐れないでください。失敗の数だけ、成功に近づいています。勇気を持って挑戦し続けることが、成功への道です。今日も、失敗を恐れずに挑戦しましょう。", "actions": ["失敗を恐れない", "挑戦し続ける", "成功に近づく"], "category": "勇気" },
+    { "author": "ウィンストン・チャーチル", "quote": "成功は決定的ではなく、失敗は致命的ではない。大切なのは続ける勇気だ。", "translation": "Success is not final, failure is not fatal: it is the courage to continue that counts.", "interpretation": "成功も失敗も、通過点です。大切なのは、諦めずに続けることです。勇気を持って、前に進み続けてください。その勇気が、あなたを成功に導きますよ。", "actions": ["諦めない", "続ける", "前に進む"], "category": "勇気" }
+  ]
+};
+
+// 以下、元のコード（変更なし）
+let currentCategory = 'Success';
+let isLoading = false;
+let lastUsedQuoteIndex = -1;
+
+const categoryNav = document.getElementById('category-nav');
+const envelopeView = document.getElementById('envelope-view');
+const contentView = document.getElementById('content-view');
+const envelopeBody = document.getElementById('envelope-body');
+const envelopeFlap = document.getElementById('envelope-flap');
+const letterCard = document.getElementById('letter-card');
+const statusText = document.getElementById('status-text');
+
+const quoteCatBadge = document.getElementById('quote-cat-badge');
+const quoteTranslation = document.getElementById('quote-translation');
+const quoteOriginal = document.getElementById('quote-original');
+const quoteAuthor = document.getElementById('quote-author');
+const quoteInterpretation = document.getElementById('quote-interpretation');
+const quoteActions = document.getElementById('quote-actions');
+
+const CATEGORY_MAP = [
+  { id: 'Success', label: '成功' },
+  { id: 'Resilience', label: '逆境' },
+  { id: 'Wisdom', label: '知恵' },
+  { id: 'Happiness', label: '幸福' },
+  { id: 'Courage', label: '勇気' }
+];
+
+function init() {
+  renderCategoryButtons();
+  injectShuffleButton();
+  window.addEventListener('resize', () => updateIndicator(currentCategory));
+  fetchQuote(currentCategory);
+}
+
+function renderCategoryButtons() {
+  categoryNav.innerHTML = '<div id="indicator" class="category-indicator absolute bg-gradient-to-r from-indigo-600 to-violet-600 rounded-xl sm:rounded-[22px] shadow-lg shadow-indigo-200/50 z-0 pointer-events-none opacity-0"></div>';
+  CATEGORY_MAP.forEach(cat => {
+    const btn = document.createElement('button');
+    btn.id = `btn-${cat.id}`;
+    btn.className = "relative z-10 px-5 py-2.5 sm:px-8 sm:py-3.5 rounded-xl sm:rounded-[22px] text-xs sm:text-sm font-black transition-all duration-300 flex items-center justify-center whitespace-nowrap flex-shrink-0 text-slate-500 hover:text-slate-800 hover:bg-white/50";
+    btn.innerText = cat.label;
+    btn.onclick = () => handleCategoryChange(cat.id);
+    categoryNav.appendChild(btn);
+  });
+  setTimeout(() => updateIndicator(currentCategory), 100);
+}
+
+function updateIndicator(catId) {
+  const btn = document.getElementById(`btn-${catId}`);
+  const indicator = document.getElementById('indicator');
+  if (!btn || !indicator) return;
+  indicator.style.width = `${btn.offsetWidth}px`;
+  indicator.style.height = `${btn.offsetHeight}px`;
+  indicator.style.left = `${btn.offsetLeft}px`;
+  indicator.style.top = `${btn.offsetTop}px`;
+  indicator.style.opacity = '1';
+  CATEGORY_MAP.forEach(c => {
+    const b = document.getElementById(`btn-${c.id}`);
+    if (b) {
+      if (c.id === catId) {
+        b.classList.add('text-white');
+        b.classList.remove('text-slate-500');
+      } else {
+        b.classList.remove('text-white');
+        b.classList.add('text-slate-500');
+      }
+    }
+  });
+  btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
+
+function handleCategoryChange(catId) {
+  if (isLoading || !QUOTE_LIBRARY || (catId === currentCategory && !contentView.classList.contains('hidden'))) {
+    if (catId === currentCategory) fetchQuote(catId);
+    return;
+  }
+  currentCategory = catId;
+  lastUsedQuoteIndex = -1; 
+  updateIndicator(catId);
+  fetchQuote(catId);
+}
+
+async function fetchQuote(category) {
+  if (!QUOTE_LIBRARY) return;
+  isLoading = true;
+  showEnvelope();
+  await sleep(600);
+  const categoryQuotes = QUOTE_LIBRARY[category];
+  let randomIndex;
+  do {
+    randomIndex = Math.floor(Math.random() * categoryQuotes.length);
+  } while (randomIndex === lastUsedQuoteIndex && categoryQuotes.length > 1);
+  lastUsedQuoteIndex = randomIndex;
+  const data = categoryQuotes[randomIndex];
+  await playRevealAnimation(data);
+}
+
+function showEnvelope() {
+  contentView.classList.add('hidden');
+  envelopeView.classList.remove('hidden');
+  envelopeBody.classList.remove('animate-envelope-float');
+  envelopeFlap.classList.remove('animate-flap-open');
+  letterCard.classList.add('hidden');
+  letterCard.classList.remove('animate-letter-out');
+  statusText.innerText = "メッセージを準備中...";
+  void envelopeBody.offsetWidth; 
+  envelopeBody.classList.add('animate-envelope-float');
+}
+
+async function playRevealAnimation(data) {
+  await sleep(300);
+  statusText.innerText = "手紙を開いています...";
+  envelopeFlap.classList.add('animate-flap-open');
+  letterCard.classList.remove('hidden');
+  letterCard.classList.add('animate-letter-out');
+  await sleep(1100);
+  updateContent(data);
+  envelopeView.classList.add('hidden');
+  contentView.classList.remove('hidden');
+  contentView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  isLoading = false;
+}
+
+function updateContent(data) {
+  quoteCatBadge.innerText = data.category;
+  quoteTranslation.innerText = data.quote;
+  quoteOriginal.innerText = `"${data.translation}"`;
+  quoteAuthor.innerText = data.author;
+  quoteInterpretation.innerText = data.interpretation;
+  quoteActions.innerHTML = "";
+  data.actions.forEach((action, idx) => {
+    const li = document.createElement('li');
+    li.className = "flex items-start group";
+    li.innerHTML = `<span class="flex-shrink-0 w-8 h-8 rounded-full bg-white text-amber-600 text-xs font-black flex items-center justify-center mr-5 shadow-sm group-hover:scale-110 transition-transform border border-amber-100">${idx + 1}</span><span class="text-slate-600 font-bold leading-relaxed pt-1 text-sm sm:text-base">${action}</span>`;
+    quoteActions.appendChild(li);
+  });
+}
+
+function injectShuffleButton() {
+  const container = document.getElementById('shuffle-container');
+  if (!container) return;
+  
+  container.innerHTML = `
+    <button id="shuffle-btn" class="group flex items-center space-x-3 px-10 py-5 rounded-[24px] bg-violet-50 border border-violet-100 text-violet-700 hover:bg-violet-100 transition-all duration-500 shadow-xl shadow-violet-100/50 hover:shadow-violet-200/50 hover:-translate-y-1 active:scale-95">
+      <div class="bg-violet-200/50 p-1.5 rounded-lg group-hover:rotate-180 transition-transform duration-700">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+      </div>
+      <span class="font-black text-sm tracking-widest uppercase">もう一通読む</span>
+    </button>
+  `;
+  document.getElementById('shuffle-btn')?.addEventListener('click', () => fetchQuote(currentCategory));
+}
+
+function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+init();
+  </script>
 </body>
 </html>
