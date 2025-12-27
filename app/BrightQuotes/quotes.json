@@ -1,0 +1,41 @@
+
+{
+  "Success": [
+    { "author": "ウィンストン・チャーチル", "quote": "Success is not final, failure is not fatal: it is the courage to continue that counts.", "translation": "成功は終わりではなく、失敗は致命的ではない。大切なのは、続ける勇気だ。", "interpretation": "成功も失敗も通過点。歩みを止めないこと自体が成功への唯一の道です。", "actions": ["今日できたことを1つメモする", "「次はもっと良くなる」と口に出す", "10分間好きなことに没頭する"], "category": "成功" },
+    { "author": "スティーブ・ジョブズ", "quote": "The only way to do great work is to love what you do.", "translation": "偉大な仕事をする唯一の方法は、自分のしていることを愛することだ。", "interpretation": "情熱こそが最大の才能。今の役割の中に「好き」の種を見つけてください。", "actions": ["自分の長所を3つ書き出す", "明日一番楽しみなタスクを決める", "憧れの人の動画を見る"], "category": "成功" },
+    { "author": "トーマス・エジソン", "quote": "I have not failed. I've just found 10,000 ways that won't work.", "translation": "私は失敗したことがない。ただ、うまくいかない1万通りの方法を見つけただけだ。", "interpretation": "失敗は「データ」にすぎません。あなたは着実に一歩ずつ正解に近づいています。", "actions": ["失敗を「経験」と言い換える", "新しい方法を1つ試す", "学んだことを誰かに教える"], "category": "成功" },
+    { "author": "松下幸之助", "quote": "失敗したところで止めてしまうから失敗になる。成功するところまで続ければ、それは成功になる。", "translation": "Don't stop when you fail. If you keep going until you succeed, that's success.", "interpretation": "諦め時が唯一の失敗の瞬間です。粘り強さこそが最大の武器になります。", "actions": ["「まだ途中だ」と考える", "今日一日だけは続けると決める", "目標をもう一度読み返す"], "category": "成功" },
+    { "author": "ウォルト・ディズニー", "quote": "The way to get started is to quit talking and begin doing.", "translation": "始める方法は、しゃべるのをやめて、やり始めることだ。", "interpretation": "完璧な準備より、まず一歩。動き出すことで道は開けます。", "actions": ["一番簡単なことから着手する", "5分だけ作業を始める", "道具を準備する"], "category": "成功" },
+    { "author": "本田宗一郎", "quote": "私の最大の光栄は、一度も失敗しないことではなく、倒れるごとに起き上がることにある。", "translation": "My greatest glory is not in never failing, but in rising every time I fall.", "interpretation": "何度転んでも立ち上がる姿こそが、見る人に感動を与え、自分を強くします。", "actions": ["転んだ理由を1つだけ分析する", "立ち上がった自分を褒める", "明日の予定を立てる"], "category": "成功" },
+    { "author": "ビル・ゲイツ", "quote": "It's fine to celebrate success but it is more important to heed the lessons of failure.", "translation": "成功を祝うのはいいが、失敗の教訓に留意することのほうが重要だ。", "interpretation": "失敗は最高の教科書。そこから学べば、次の成功はより確実になります。", "actions": ["失敗から学んだことを1つ書く", "次はどうするか計画する", "成功した自分を想像して笑う"], "category": "成功" }
+  ],
+  "Resilience": [
+    { "author": "マヤ・アンジェロウ", "quote": "You may encounter many defeats, but you must not be defeated.", "translation": "何度も打ちのめされるかもしれない。だが、屈してはならない。", "interpretation": "負けることと屈することは別物. 不屈の炎を絶やさないでください。", "actions": ["温かい飲み物を飲む", "「次は勝つ」と決意する", "好きな音楽を聴く"], "category": "逆境" },
+    { "author": "ネルソン・マンデラ", "quote": "It always seems impossible until it's done.", "translation": "何事も、成し遂げるまでは不可能に見えるものだ。", "interpretation": "頂上は遠く見えますが、一歩ずつ進めば必ず到達できます。", "actions": ["タスクを1分単位で分ける", "一番簡単なことだけ今日やる", "未来の自分に応援を頼む"], "category": "逆境" },
+    { "author": "ヴィクトール・フランクル", "quote": "When we are no longer able to change a situation, we are challenged to change ourselves.", "translation": "状況を変えられない時、自分自身を変える挑戦を突きつけられている。", "interpretation": "外の世界がどうあっても、心の持ちようだけは誰にも奪えません。", "actions": ["今の状況の「良い面」を探す", "感情をノートに吐き出す", "深呼吸して姿勢を正す"], "category": "逆境" },
+    { "author": "福沢諭吉", "quote": "進まざる者は退く。ひとりでに退くにあらず、これに代わるべき者が進んでくるからなり。", "translation": "He who does not advance retreats. Not because he retreats, but because others advance.", "interpretation": "止まっていることは後推と同じ。少しずつでも前を向く姿勢が、あなたを守ります。", "actions": ["昨日より1ミリだけ進む", "新しいニュースをチェックする", "知らない道を歩いてみる"], "category": "逆境" },
+    { "author": "ニーチェ", "quote": "What does not kill us makes us stronger.", "translation": "私を殺さないものは、私をより強くする。", "interpretation": "今の苦しみは、未来のあなたを支える強靭な筋肉になります。", "actions": ["今日を耐えた自分を褒める", "スクワットを10回する", "お気に入りの名言を暗唱する"], "category": "逆境" },
+    { "author": "坂本龍馬", "quote": "世の人は我を何とも言わば言え。我が成す事は我のみぞ知る。", "translation": "Let the world say what it will. Only I know what I am doing.", "interpretation": "周囲の声に惑わされず、自分の信念を貫きましょう。信じる道が正解です。", "actions": ["自分の意志で夕食を決める", "SNSを1時間見ない", "自分の良いところを5つ書く"], "category": "逆境" }
+  ],
+  "Wisdom": [
+    { "author": "ソクラテス", "quote": "The secret of change is to focus all of your energy not on fighting the old, but on building the new.", "translation": "変化の秘密は、古いものと戦うのではなく、新しいものを作ることに集中することだ。", "interpretation": "過ぎたことは手放し、これから作る未来にエネルギーを使いましょう。", "actions": ["古い習慣を1つやめる", "新しい趣味を調べる", "理想の未来を絵に描く"], "category": "知恵" },
+    { "author": "マハトマ・ガンジー", "quote": "Live as if you were to die tomorrow. Learn as if you were to live forever.", "translation": "明日死ぬかのように生き、永遠に生きるかのように学べ。", "interpretation": "今日の喜びと永遠の学び。この両輪が人生を最高に豊かにします。", "actions": ["本を1ページだけ読む", "大切な人に感謝を伝える", "身の回りを掃除する"], "category": "知恵" },
+    { "author": "アインシュタイン", "quote": "Imagination is more important than knowledge.", "translation": "想像力は知識よりも重要だ。", "interpretation": "常識に縛られないで。あなたの想像力が、誰も見たことのない場所へ導きます。", "actions": ["10分間ぼーっと空想する", "子供の頃の夢を思い出す", "SFやファンタジーに触れる"], "category": "知恵" },
+    { "author": "ブッダ", "quote": "心はすべての源である。すべては心によって作られる。", "translation": "Mind is the source of all. Everything is created by the mind.", "interpretation": "世界の見え方は、あなたの心のフィルター次第。美しいもので心を満たしましょう。", "actions": ["瞑想を3分行う", "美しい風景を見る", "ポジティブな言葉を自分にかける"], "category": "知恵" },
+    { "author": "孔子", "quote": "止まらなければ、どんなにゆっくりでも構わない。", "translation": "It does not matter how slowly you go as long as you do not stop.", "interpretation": "スピードを競う必要はありません。自分のペースで歩き続けることが真の知恵です。", "actions": ["自分のペースを肯定する", "一歩の重みを感じて歩く", "焦っている自分に気づく"], "category": "知恵" }
+  ],
+  "Happiness": [
+    { "author": "オードリー・ヘップバーン", "quote": "The most important thing is to enjoy your life—to be happy—it's all that matters.", "translation": "何より大切なのは人生を楽しむこと. 幸せを感じることよ。", "interpretation": "深刻になりすぎないで。あなたが笑顔でいることが、最高の貢献です。", "actions": ["大好物をゆっくり食べる", "好きな映画を見返す", "心地よい服を着る"], "category": "幸福" },
+    { "author": "ヘレン・ケラー", "quote": "Keep your face to the sunshine and you cannot see a shadow.", "translation": "常に太陽の方を向いて。そうすれば影を見ることはないわ。", "interpretation": "影があるのは光がある証拠。意識的に明るい部分を探す癖をつけましょう。", "actions": ["太陽の光を浴びる", "明るい色の小物を身につける", "「ツイてる！」と言う"], "category": "幸福" },
+    { "author": "マザー・テレサ", "quote": "Peace begins with a smile.", "translation": "平和は微笑みから始まります。", "interpretation": "まずは鏡の中の自分に、そして目の前の人に、小さな微笑みを向けてください。", "actions": ["鏡の前で笑顔の練習", "挨拶に笑顔をプラス", "花を一輪飾る"], "category": "幸福" },
+    { "author": "宮沢賢治", "quote": "世界がぜんたい幸福にならないうちは、個人の幸福はあり得ない。", "translation": "Until the whole world is happy, there can be no individual happiness.", "interpretation": "誰かの幸せを願う気持ちが、巡り巡ってあなた自身の深い幸福に繋がります。", "actions": ["誰かの幸せを心で祈る", "少額の寄付や募金をする", "優しく接する"], "category": "幸福" },
+    { "author": "スヌーピー（シュルツ）", "quote": "Happiness is a warm puppy.", "translation": "幸せとは、温かい子犬のことだ。", "interpretation": "幸せは、手触りのある身近な温もりの中にこそ隠れています。", "actions": ["ペットやぬいぐるみと触れ合う", "温かいお茶を飲む", "柔らかいタオルを使う"], "category": "幸福" }
+  ],
+  "Courage": [
+    { "author": "ウォルト・ディズニー", "quote": "All our dreams can come true, if we have the courage to pursue them.", "translation": "追い求める勇気があれば、すべての夢は叶う。", "interpretation": "夢を隔てているのは勇気の扉。叩かなければ何も始まりません。", "actions": ["夢の関連本を読む", "やりたいことを公言する", "最初のアクションを今やる"], "category": "勇気" },
+    { "author": "ゴッホ", "quote": "What would life be if we had no courage to attempt anything?", "translation": "もし、挑戦する勇気がなかったら、人生にどんな意味があるだろうか。", "interpretation": "失敗を恐れるより、人生を鮮やかに彩る挑戦を選びましょう。", "actions": ["新しいカフェに一人で行く", "「好き」を素直に伝える", "創作活動を始める"], "category": "勇気" },
+    { "author": "ムハンマド・アリ", "quote": "He who is not courageous enough to take risks will accomplish nothing in life.", "translation": "リスクを取る勇気がない者は、人生で何も成し遂げられない。", "interpretation": "リスクは成長の必要経費。少しのハラハラを楽しみましょう。", "actions": ["断っていた勇気を受ける", "大胆なアイデアを話す", "自分への挑戦状を書く"], "category": "勇気" },
+    { "author": "野口英世", "quote": "誰よりも三倍、四倍、五倍勉強する。それが私のやり方だ。", "translation": "Study three, four, five times harder than anyone else. That's my way.", "interpretation": "圧倒的な努力が、何ものにも負けない本当の勇気を支えます。", "actions": ["あと5分だけ作業を伸ばす", "専門書を一章読む", "集中できる環境を整える"], "category": "勇気" },
+    { "author": "ルーズベルト", "quote": "Believe you can and you're halfway there.", "translation": "できると信じれば、道は半分終わったも同然だ。", "interpretation": "信じることは、成功へのチケットを手にすること. 自分を疑わないで。", "actions": ["「私はできる」と唱える", "成功イメージを膨らませる", "自信の出る音楽を聴く"], "category": "勇気" }
+  ]
+}

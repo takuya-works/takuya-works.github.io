@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BrightQuotes - ポジティブ名言集</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', 'Noto Serif JP', sans-serif; }
+    .serif { font-family: 'Noto Serif JP', serif; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* 3D Envelope Animations */
+    .perspective-1000 { perspective: 1000px; }
+    .preserve-3d { transform-style: preserve-3d; }
+
+    @keyframes envelope-float {
+      0% { transform: translateY(-100px) rotateX(-20deg) rotateZ(-5deg); opacity: 0; }
+      100% { transform: translateY(0) rotateX(0deg) rotateZ(0deg); opacity: 1; }
+    }
+    .animate-envelope-float { animation: envelope-float 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+    @keyframes flap-open {
+      0% { transform: rotateX(0deg); z-index: 40; }
+      40% { z-index: 40; }
+      100% { transform: rotateX(180deg); z-index: 10; }
+    }
+    .animate-flap-open { transform-origin: top; animation: flap-open 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+    @keyframes letter-out {
+      0% { transform: translateY(0) translateZ(0); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(-160px) translateZ(50px); opacity: 1; }
+    }
+    .animate-letter-out { animation: letter-out 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; animation-delay: 0.3s; }
+
+    .category-indicator { transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    
+    [hidden] { display: none !important; }
+  </style>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-[#fafafa] text-slate-900 min-h-screen flex flex-col">
+  <!-- Background Decorations -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10">
+    <div class="absolute -top-[10%] -left-[10%] w-[60%] sm:w-[40%] h-[40%] rounded-full bg-indigo-100/50 blur-[80px] sm:blur-[120px]"></div>
+    <div class="absolute top-[20%] -right-[5%] w-[50%] sm:w-[30%] h-[30%] rounded-full bg-amber-100/50 blur-[60px] sm:blur-[100px]"></div>
+    <div class="absolute -bottom-[10%] left-[10%] w-[60%] sm:w-[40%] h-[40%] rounded-full bg-rose-50/50 blur-[80px] sm:blur-[120px]"></div>
+  </div>
+
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+      <div class="flex items-center space-x-2 sm:space-x-3 group cursor-pointer" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <div class="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-tr from-indigo-600 to-violet-500 rounded-xl sm:rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-200 group-hover:rotate-6 transition-transform">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+        </div>
+        <span class="text-xl sm:text-2xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600">
+          Bright<span class="text-indigo-600">Quotes</span>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <div class="py-8 px-4 sm:py-16 sm:px-6 md:py-24 max-w-5xl mx-auto space-y-10 sm:space-y-16">
+      <!-- Hero -->
+      <div class="text-center space-y-5 sm:space-y-8">
+        <div class="inline-flex items-center px-3 py-1 sm:px-4 sm:py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-[10px] sm:text-xs font-bold tracking-wide">✨ あなたの毎日を彩る言葉のギフト</div>
+        <h1 class="text-3xl sm:text-5xl md:text-7xl font-black tracking-tighter text-slate-900 leading-[1.2] sm:leading-[1.1]">
+          言葉の力で、<br />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-violet-600 to-amber-500">今日を特別な一日に。</span>
+        </h1>
+      </div>
+
+      <!-- Categories -->
+      <div class="space-y-5">
+        <div class="flex justify-center items-center space-x-2">
+          <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+          <p class="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Select Category</p>
+          <div class="w-1.5 h-1.5 rounded-full bg-slate-200"></div>
+        </div>
+        <div class="relative w-full max-w-2xl mx-auto flex justify-center">
+          <!-- 改修箇所: justify-centerを追加し、w-fitで中央寄せを確実に -->
+          <div id="category-nav" class="category-container flex flex-nowrap justify-center gap-1.5 sm:gap-2 p-1.5 bg-slate-100/60 rounded-2xl sm:rounded-[28px] border border-slate-200/50 backdrop-blur-sm overflow-x-auto no-scrollbar scroll-smooth relative w-fit min-w-[300px]">
+            <div id="indicator" class="category-indicator absolute bg-gradient-to-r from-indigo-600 to-violet-600 rounded-xl sm:rounded-[22px] shadow-lg shadow-indigo-200/50 z-0 pointer-events-none opacity-0"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Envelope View -->
+      <div id="envelope-view" class="w-full flex flex-col items-center justify-center py-24 sm:py-32 min-h-[500px] perspective-1000">
+        <div id="envelope-body" class="relative w-72 h-44 sm:w-96 sm:h-60 preserve-3d transition-transform duration-700">
+          <div class="absolute inset-0 bg-[#fdfdfd] border border-slate-200 rounded-sm shadow-sm z-10 overflow-hidden">
+             <div class="absolute inset-0 bg-slate-50 opacity-50" style="background-image: radial-gradient(#cbd5e1 0.5px, transparent 0.5px); background-size: 24px 24px;"></div>
+          </div>
+          <div id="letter-card" class="hidden absolute left-4 right-4 bottom-4 top-4 bg-white rounded-sm shadow-xl border border-slate-100 p-6 z-20 flex flex-col items-center justify-center">
+             <div class="w-full h-full border border-slate-50 rounded-sm flex flex-col items-center justify-center p-4 space-y-4">
+                <div class="space-y-3 w-full">
+                  <div class="h-1 bg-slate-50 rounded-full w-4/5 mx-auto"></div>
+                  <div class="h-1 bg-slate-50 rounded-full w-3/4 mx-auto"></div>
+                  <div class="h-1 bg-slate-50 rounded-full w-2/3 mx-auto"></div>
+                </div>
+             </div>
+          </div>
+          <div class="absolute inset-0 z-30 pointer-events-none">
+            <svg class="w-full h-full drop-shadow-sm" viewBox="0 0 100 62" preserveAspectRatio="none">
+              <path d="M0 0 L50 31 L0 62 Z" fill="#fcfcfc" stroke="#f1f5f9" strokeWidth="0.2" />
+              <path d="M100 0 L50 31 L100 62 Z" fill="#fcfcfc" stroke="#f1f5f9" strokeWidth="0.2" />
+              <path d="M0 62 L50 31 L100 62 Z" fill="#f8fafc" stroke="#f1f5f9" strokeWidth="0.2" />
+            </svg>
+          </div>
+          <div id="envelope-flap" class="absolute top-0 left-0 w-full h-[51%] z-40 origin-top preserve-3d">
+            <div class="absolute inset-0" style="backface-visibility: hidden;">
+              <svg class="w-full h-full drop-shadow-sm" viewBox="0 0 100 31" preserveAspectRatio="none">
+                <path d="M0 0 L50 31 L100 0 Z" fill="#ffffff" stroke="#f1f5f9" strokeWidth="0.3" />
+              </svg>
+            </div>
+            <div class="absolute inset-0 bg-[#fdfdfd] border-b border-slate-100 shadow-inner" style="backface-visibility: hidden; transform: rotateX(-180deg);"></div>
+          </div>
+        </div>
+        <p id="status-text" class="mt-16 sm:mt-24 text-slate-400 font-bold tracking-[0.4em] uppercase text-[9px] sm:text-xs opacity-60">ギフトを準備中...</p>
+      </div>
+
+      <!-- Content View -->
+      <div id="content-view" class="hidden w-full max-w-4xl mx-auto space-y-8 sm:space-y-12 pb-24">
+        <div class="bg-white rounded-[40px] sm:rounded-[60px] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.06)] p-10 sm:p-20 border border-slate-50 relative overflow-hidden group/card">
+          <div class="absolute top-0 right-0 -mr-24 -mt-24 w-72 h-72 bg-indigo-50/40 rounded-full blur-[100px]"></div>
+          <div class="absolute bottom-0 left-0 -ml-24 -mb-24 w-64 h-64 bg-amber-50/40 rounded-full blur-[100px]"></div>
+          <div class="relative z-10 text-center space-y-10 sm:space-y-16">
+            <div id="quote-cat-badge" class="inline-block px-5 py-2 rounded-full bg-slate-50 text-slate-400 text-[11px] font-black tracking-[0.25em] uppercase border border-slate-100/50"></div>
+            <div class="space-y-8 sm:space-y-12">
+              <h2 id="quote-translation" class="serif text-3xl sm:text-5xl md:text-6xl font-bold text-slate-800 leading-[1.35] tracking-tight"></h2>
+              <p id="quote-original" class="text-base sm:text-2xl text-slate-400 font-medium italic serif px-4 opacity-70"></p>
+            </div>
+            <div class="pt-8 flex flex-col items-center">
+              <div class="w-12 h-0.5 bg-slate-200 mb-6"></div>
+              <p id="quote-author" class="text-xl sm:text-3xl font-black text-slate-800 tracking-tighter"></p>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 items-stretch">
+          <section class="bg-white p-10 sm:p-14 rounded-[40px] border border-slate-100 shadow-sm">
+            <div class="flex items-center mb-8">
+              <div class="w-12 h-12 rounded-2xl bg-indigo-600 flex items-center justify-center text-white mr-5 shadow-lg shadow-indigo-100">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-black text-slate-800">メッセージ</h3>
+            </div>
+            <p id="quote-interpretation" class="text-slate-600 leading-[1.8] text-base sm:text-lg font-medium whitespace-pre-wrap"></p>
+          </section>
+          <section class="bg-amber-50 p-10 sm:p-14 rounded-[40px] border border-amber-100/50 shadow-sm text-slate-800">
+            <div class="flex items-center mb-10">
+              <div class="w-12 h-12 rounded-2xl bg-amber-200/50 flex items-center justify-center text-amber-700 mr-5 shadow-sm">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-black text-slate-800">今すぐできる行動</h3>
+            </div>
+            <ul id="quote-actions" class="space-y-8"></ul>
+          </section>
+        </div>
+        
+        <!-- Shuffle button container will be injected here by JS -->
+        <div id="shuffle-container" class="flex justify-center pt-8"></div>
+      </div>
+
+      <!-- Back to Top -->
+      <div class="flex justify-center pt-8 sm:pt-12">
+        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="group flex flex-col items-center space-y-3 text-slate-400 hover:text-indigo-600 transition-all duration-500">
+          <div class="w-14 h-14 rounded-full border border-slate-200 flex items-center justify-center bg-white shadow-sm group-hover:shadow-xl group-hover:border-indigo-100 group-hover:bg-indigo-50/30 transition-all duration-500">
+            <svg class="w-6 h-6 group-hover:-translate-y-1.5 transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18" /></svg>
+          </div>
+          <span class="text-[10px] font-black uppercase tracking-[0.4em] opacity-60 group-hover:opacity-100 group-hover:tracking-[0.5em] transition-all duration-500">Back to Top</span>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-white border-t border-slate-100 py-10 sm:py-16">
+    <div class="max-w-5xl mx-auto px-6 text-center space-y-4 sm:space-y-6">
+      <div class="flex justify-center items-center space-x-2 opacity-50">
+        <div class="w-8 h-px bg-slate-300"></div>
+        <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-500">Inspiring your day</span>
+        <div class="w-8 h-px bg-slate-300"></div>
+      </div>
+      <p class="text-slate-400 text-xs sm:text-sm font-medium">© 2025 BrightQuotes.</p>
+    </div>
+  </footer>
+
+  <script src="index.js"></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
