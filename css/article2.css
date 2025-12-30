@@ -64,7 +64,7 @@ body {
 .article-header {
     background: var(--accent-gradient);
     color: white;
-    padding: 140px 20px 120px;
+    padding: 80px 20px 60px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -104,9 +104,9 @@ body {
 .article-title::before {
     content: '';
     display: block;
-    width: 60px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.5);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%); /* グラデーションに変更 */
     margin: 0 auto 20px;
     border-radius: 2px;
 }
@@ -170,7 +170,7 @@ body {
    =================================== */
 .article-container {
     max-width: 850px;
-    margin: -50px auto 0;
+    margin: 0 auto;
     background: var(--bg-primary);
     box-shadow: var(--card-shadow);
     border-radius: 20px 20px 0 0;
@@ -525,7 +525,7 @@ mark.blue {
    =================================== */
 @media (max-width: 768px) {
     .article-header {
-        padding: 100px 20px 80px;
+        padding: 60px 20px 50px;
     }
     
     .article-body {
@@ -550,13 +550,13 @@ mark.blue {
     }
     
     .article-container {
-        margin: -30px auto 0;
+        margin: 0 auto;
     }
 }
 
 @media (max-width: 480px) {
     .article-container {
-        margin: -20px 10px 0;
+        margin: 0 10px;
         border-radius: 15px 15px 0 0;
     }
     
