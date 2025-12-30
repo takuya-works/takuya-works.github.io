@@ -1,0 +1,784 @@
+/* ===================================
+   Article Page Styles
+   Calm Blue Theme
+   =================================== */
+
+/* Variables (Blue Theme) */
+:root {
+    --primary: #2C5F8D;
+    --primary-hover: #1e4a6b;
+    --primary-light: #5B8FB9;
+    
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --bg-card: #ffffff;
+    
+    --text-primary: #2c3e50;
+    --text-secondary: #546e7a;
+    --text-muted: #95a5a6;
+    
+    --accent-gradient: linear-gradient(135deg, #2C5F8D 0%, #5B8FB9 100%);
+    --card-shadow: 0 4px 20px rgba(44, 95, 141, 0.08);
+    --card-shadow-hover: 0 8px 40px rgba(44, 95, 141, 0.12);
+    
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Noto Sans JP', 'Poppins', sans-serif;
+    line-height: 1.9;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+}
+
+/* ===================================
+   Progress Bar
+   =================================== */
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: var(--accent-gradient);
+    z-index: 9999;
+    transition: width 0.2s ease;
+}
+
+/* ===================================
+   Article Header - おしゃれ版2（修正版）
+   =================================== */
+.article-header {
+    background: var(--accent-gradient);
+    color: white;
+    padding: 80px 20px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.article-header::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 20s ease-in-out infinite;
+}
+
+.article-header::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 25s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-30px, 30px) rotate(5deg); }
+}
+
+/* 装飾的な線 */
+.article-title::before {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%); /* グラデーションに変更 */
+    margin: 0 auto 20px;
+    border-radius: 2px;
+}
+
+.article-title::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%);
+    margin: 20px auto 0;
+}
+
+.article-title {
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    margin-bottom: 30px;
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.03em;
+}
+
+.article-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    opacity: 0.95;
+    font-weight: 400;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+    font-style: italic;
+}
+
+.article-meta {
+    font-size: 1rem;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    padding: 12px 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.article-meta::before {
+    content: "✎";
+    font-size: 1.3em;
+}
+
+/* ===================================
+   Container
+   =================================== */
+.article-container {
+    max-width: 850px;
+    margin: 0 auto;
+    background: var(--bg-primary);
+    box-shadow: var(--card-shadow);
+    border-radius: 20px 20px 0 0;
+    position: relative;
+    z-index: 10;
+}
+
+/* ===================================
+   Table of Contents (常に開いた状態)
+   =================================== */
+.toc-container {
+    margin: 40px;
+}
+
+/* 開くボタン - 非表示 */
+.toc-toggle {
+    display: none;
+}
+
+/* 目次本体（常に表示） */
+.toc {
+    display: block;
+    background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+    border-left: 5px solid var(--primary);
+    border-radius: 15px;
+    padding: 0;
+    box-shadow: 0 2px 12px rgba(44, 95, 141, 0.08);
+    overflow: hidden;
+}
+
+/* 目次ヘッダー */
+.toc-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px 20px;
+    border-bottom: 1px solid rgba(44, 95, 141, 0.1);
+}
+
+.toc-header h3 {
+    font-size: 1.3rem;
+    margin: 0;
+    color: var(--text-primary);
+}
+
+/* 閉じるボタン - 非表示 */
+.toc-close {
+    display: none;
+}
+
+/* 目次リスト */
+.toc ol {
+    list-style: none;
+    counter-reset: toc-counter;
+    padding: 25px 30px;
+    margin: 0;
+}
+
+.toc ol li {
+    counter-increment: toc-counter;
+    margin-bottom: 15px;
+    padding-left: 40px;
+    position: relative;
+}
+
+.toc ol li:last-child {
+    margin-bottom: 0;
+}
+
+.toc ol li::before {
+    content: counter(toc-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: var(--accent-gradient);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(44, 95, 141, 0.2);
+}
+
+.toc a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color var(--transition-normal);
+    font-weight: 500;
+    display: block;
+}
+
+.toc a:hover {
+    color: var(--primary);
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+    .toc-container {
+        margin: 30px 20px;
+    }
+    
+    .toc-header {
+        padding: 20px 25px 15px;
+    }
+    
+    .toc-header h3 {
+        font-size: 1.2rem;
+    }
+    
+    .toc ol {
+        padding: 20px 25px;
+    }
+    
+    .toc ol li {
+        padding-left: 35px;
+    }
+    
+    .toc ol li::before {
+        width: 24px;
+        height: 24px;
+        font-size: 0.8rem;
+    }
+}
+
+/* ===================================
+   Article Body
+   =================================== */
+.article-body {
+    padding: 60px 50px;
+}
+
+.chapter {
+    margin-bottom: 80px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid var(--bg-tertiary);
+}
+
+.chapter:last-child {
+    border-bottom: none;
+}
+
+.chapter h2 {
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    color: var(--primary);
+    margin-bottom: 35px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--primary);
+    font-weight: 700;
+}
+
+.chapter h3 {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    color: var(--text-primary);
+    margin: 45px 0 25px;
+    padding-left: 20px;
+    border-left: 5px solid var(--primary-light);
+    font-weight: 600;
+}
+
+.chapter p {
+    margin-bottom: 1.6em;
+    text-align: justify;
+    line-height: 2;
+    color: var(--text-secondary);
+}
+
+/* ===================================
+   Bullet Points (Background Color Style)
+   =================================== */
+.chapter ul {
+    margin: 35px 0;
+    padding: 25px 30px;
+    list-style: none;
+    background: linear-gradient(135deg, #e3f2fd 0%, #f0f7ff 100%);
+    border-radius: 10px;
+    border-left: 4px solid var(--primary);
+}
+
+.chapter ul li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    line-height: 1.9;
+    color: var(--text-secondary);
+}
+
+.chapter ul li:last-child {
+    margin-bottom: 0;
+}
+
+.chapter ul li::before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    top: 0.15em;
+    color: var(--primary);
+    font-size: 0.8em;
+}
+
+/* ===================================
+   Note Box (ワンポイント) - パターン強調版
+   =================================== */
+.note {
+    margin: 40px 0;
+    padding: 35px 35px 35px 90px;
+    background: 
+        linear-gradient(135deg, #fff9e6 0%, #fffbf0 100%),
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(245, 158, 11, 0.03) 10px,
+            rgba(245, 158, 11, 0.03) 20px
+        );
+    border-radius: 12px;
+    border: 3px solid #f59e0b;
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15);
+    position: relative;
+}
+
+.note::before {
+    content: "💡";
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3em;
+    filter: drop-shadow(0 4px 8px rgba(245, 158, 11, 0.3));
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { 
+        filter: drop-shadow(0 4px 8px rgba(245, 158, 11, 0.3));
+        transform: translateY(-50%) scale(1);
+    }
+    50% { 
+        filter: drop-shadow(0 6px 12px rgba(245, 158, 11, 0.5));
+        transform: translateY(-50%) scale(1.05);
+    }
+}
+
+.note p {
+    margin-bottom: 1em;
+    color: var(--text-secondary);
+    line-height: 1.9;
+}
+
+.note p:last-child {
+    margin-bottom: 0;
+}
+
+.note strong {
+    color: #f59e0b;
+    font-weight: 700;
+    font-size: 1.15em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.note strong::before {
+    content: "▼ ";
+    color: #f59e0b;
+}
+
+@media (max-width: 768px) {
+    .note {
+        padding: 70px 25px 25px 25px;
+    }
+    
+    .note::before {
+        left: 50%;
+        top: 20px;
+        transform: translateX(-50%);
+        font-size: 2.5em;
+    }
+}
+
+/* ===================================
+   Strong Emphasis - ワインレッド
+   =================================== */
+strong {
+    color: #c62828;
+    font-weight: 700;
+    background: linear-gradient(transparent 60%, rgba(198, 40, 40, 0.1) 60%);
+    padding: 0 0.2em;
+}
+
+/* ===================================
+   Yellow Marker Highlight
+   =================================== */
+mark {
+    background: linear-gradient(transparent 0%, #fff176 0%);
+    background-position: 0 0.6em;
+    background-repeat: no-repeat;
+    background-size: 100% 0.7em;
+    padding: 0.1em 0.3em;
+    color: var(--text-primary);
+    font-weight: 500;
+    border-radius: 2px;
+    position: relative;
+}
+
+/* より自然なマーカー風（蛍光ペン効果） */
+mark.natural {
+    background: 
+        linear-gradient(104deg, 
+            rgba(255, 241, 118, 0) 0.9%, 
+            rgba(255, 241, 118, 1) 2.4%, 
+            rgba(255, 241, 118, 0.5) 5.8%, 
+            rgba(255, 241, 118, 0.8) 93%, 
+            rgba(255, 241, 118, 0.4) 96%, 
+            transparent 98%),
+        linear-gradient(183deg, 
+            rgba(255, 241, 118, 0) 0%, 
+            rgba(255, 241, 118, 0.3) 7.9%, 
+            rgba(255, 241, 118, 0) 15%);
+    padding: 0.1em 0.2em;
+    border-radius: 1em 0.5em;
+}
+
+/* ピンク系マーカー（オプション） */
+mark.pink {
+    background: linear-gradient(transparent 0%, #ffb3d9 0%);
+    background-position: 0 0.6em;
+    background-repeat: no-repeat;
+    background-size: 100% 0.7em;
+}
+
+/* 緑系マーカー（オプション） */
+mark.green {
+    background: linear-gradient(transparent 0%, #b9f6ca 0%);
+    background-position: 0 0.6em;
+    background-repeat: no-repeat;
+    background-size: 100% 0.7em;
+}
+
+/* 青系マーカー（オプション） */
+mark.blue {
+    background: linear-gradient(transparent 0%, #b3e5fc 0%);
+    background-position: 0 0.6em;
+    background-repeat: no-repeat;
+    background-size: 100% 0.7em;
+}
+
+/* ===================================
+   Responsive Design
+   =================================== */
+@media (max-width: 768px) {
+    .article-header {
+        padding: 60px 20px 50px;
+    }
+    
+    .article-body {
+        padding: 40px 25px;
+    }
+    
+    .chapter h2 {
+        font-size: 1.5rem;
+    }
+    
+    .chapter h3 {
+        font-size: 1.2rem;
+        padding-left: 15px;
+    }
+    
+    .chapter ul {
+        padding: 20px 25px;
+    }
+    
+    .chapter ul li {
+        padding-left: 25px;
+    }
+    
+    .article-container {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .article-container {
+        margin: 0 10px;
+        border-radius: 15px 15px 0 0;
+    }
+    
+    .article-body {
+        padding: 30px 20px;
+    }
+    
+    .chapter ul {
+        padding: 18px 20px;
+    }
+    
+    .chapter ul li {
+        padding-left: 22px;
+    }
+}
+
+/* ===================================
+   About & References Section
+   =================================== */
+.about-references {
+    margin-top: 60px;
+    padding: 40px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 15px;
+    border-top: 4px solid var(--primary);
+}
+
+.about-references h2 {
+    font-size: 1.5rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.about-references h2:first-child {
+    margin-top: 0;
+}
+
+.about-references p {
+    margin-bottom: 1.3em;
+    line-height: 1.9;
+    color: var(--text-secondary);
+}
+
+.about-references ul {
+    margin: 20px 0;
+    padding: 25px 30px;
+    list-style: none;
+    background: #ffffff;
+    border-radius: 10px;
+    border-left: 4px solid var(--primary-light);
+}
+
+.about-references ul li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+.about-references ul li:last-child {
+    margin-bottom: 0;
+}
+
+.about-references ul li::before {
+    content: "📄";
+    position: absolute;
+    left: 0;
+    font-size: 1em;
+}
+
+/* ===================================
+   Back to Top Button
+   =================================== */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(44, 95, 141, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all var(--transition-normal);
+    z-index: 999;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(44, 95, 141, 0.4);
+}
+
+.back-to-top span:first-child {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.back-to-top-text {
+    font-size: 0.65rem;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+    .back-to-top {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 1rem;
+    }
+    
+    .back-to-top span:first-child {
+        font-size: 1.3rem;
+    }
+    
+    .back-to-top-text {
+        font-size: 0.6rem;
+    }
+}
+
+/* ===================================
+   Chapter Images
+   =================================== */
+.chapter-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 30px 0 40px;
+    box-shadow: 0 4px 15px rgba(44, 95, 141, 0.1);
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .chapter-image {
+        margin: 20px 0 30px;
+        border-radius: 8px;
+    }
+}
+
+/* ===================================
+   Current Position Header
+   =================================== */
+.current-position {
+    position: fixed;
+    top: 4px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    padding: 12px 20px;
+    box-shadow: 0 2px 10px rgba(44, 95, 141, 0.1);
+    z-index: 998;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    transition: all var(--transition-normal);
+}
+
+.current-position.show {
+    display: flex;
+}
+
+.current-chapter {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.current-heading {
+    color: var(--text-secondary);
+}
+
+.current-heading::before {
+    content: ">";
+    margin: 0 8px;
+    color: var(--text-muted);
+}
+
+/* スマホ対応 */
+@media (max-width: 768px) {
+    .current-position {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+    
+    .current-heading::before {
+        margin: 0 4px 0 0;
+    }
+}
+
+/* コンテナの上部余白を調整 */
+.current-position.show ~ .article-container {
+    margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+    .current-position.show ~ .article-container {
+        margin-top: 50px;
+    }
+}
