@@ -3,346 +3,432 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>海洋少年団とは？活動内容や教育的メリット、入団方法を徹底解説</title>
-    <meta name="description" content="海洋少年団は、海をフィールドに、子どもたちが一生使えるスキルと自立心を育む団体です。カッター訓練やロープワークなど、海ならではの体験を通して、子どもたちは自然と規律とチームワークを身につけます。">
-    
-    <!-- OGP -->
-    <meta property="og:title" content="海洋少年団とは？活動内容や教育的メリット、入団方法を徹底解説">
-    <meta property="og:description" content="海洋少年団は、海をフィールドに、子どもたちが一生使えるスキルと自立心を育む団体です。カッター訓練やロープワークなど、海ならではの体験を通して、子どもたちは自然と規律とチームワークを身につけます。">
-    <meta property="og:type" content="article">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="海洋少年団とは？活動内容や教育的メリット、入団方法を徹底解説">
-    <meta name="twitter:description" content="海をフィールドに、子どもたちが一生使えるスキルと自立心を育む団体です。">
+    <title>かわはらたくや | Webライター × アプリ開発者</title>
+    <meta name="description" content="Webライター＆アプリ開発者のポートフォリオサイト">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="../../css/article2.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Progress Bar -->
-    <div class="progress-bar" id="progressBar"></div>
-    
-    <!-- Current Position Header -->
-    <div class="current-position" id="currentPosition">
-        <span class="current-chapter" id="currentChapter"></span>
-        <span class="current-heading" id="currentHeading"></span>
-    </div>
-    
-    <!-- Header -->
-    <header class="article-header" style="background-image: url('images/thumbnail.webp');">
-        <h1 class="article-title">海洋少年団とは？活動内容や教育的メリット、入団方法を徹底解説</h1>
-        <p class="article-subtitle">海をフィールドに「心と体」を育てる場所</p>
-        <div class="article-meta">
-            執筆：2025年12月
-        </div>
-    </header>
-    
-    <!-- Container -->
-    <div class="article-container">
-
-
-        
-        <!-- Article Body -->
-        <article class="article-body">
-            <!-- Introduction -->
-            <section id="intro" class="chapter">
-                             
-                <p>「海洋少年団ってどんなことするの？」「ボーイスカウトと何が違うの？」って思いますよね。海洋少年団は、海をフィールドに、子どもたちが一生使えるスキルと自立心を育む団体です。</p>
-
-                <p>筆者が子どものときは、「ボーイスカウト」に所属し、さまざまな体験をしてきました。でも、調べていくと、わが娘にはぜひ「海洋少年団」に入ってほしいと考えるようになりました。</p>
-                
-                <p>カッター訓練やロープワークなど、海ならではの体験を通して、子どもたちは自然と規律とチームワークを身につけます。この記事では、活動内容、費用などを、親目線で詳しく解説します。</p>
-                
-                <p>お子さんの「生きる力」を伸ばす習い事を探している方は、ぜひ最後まで読んでみてください。</p>
-            </section>
-        <!-- Table of Contents -->
-        <div class="toc-container">
-            <button class="toc-toggle" id="tocToggle">
-                <i class="fas fa-book"></i>
-                <span>目次を開く</span>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <span class="logo-icon">✦</span>
+                <span class="logo-text">t.kawahara</span>
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#writing" class="nav-link">執筆実績</a></li>
+                <li><a href="#apps" class="nav-link">アプリ開発</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link nav-cta">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" id="nav-toggle">
+                <i class="fas fa-bars"></i>
             </button>
-            
-            <nav class="toc" id="toc">
-                <div class="toc-header">
-                    <h3>目次</h3>
-                    <button class="toc-close" id="tocClose">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <ol>
-                    <li><a href="#intro">はじめに</a></li>
-                    <li><a href="#chapter1">海洋少年団って？海で「心と体」を育てる場所</a></li>
-                    <li><a href="#chapter2">海洋少年団ではどんなことをするの？</a></li>
-                    <li><a href="#chapter3">海洋少年団をおすすめする3つの理由</a></li>
-                    <li><a href="#chapter4">入団するには？まずは近くの団を探そう</a></li>
-                    <li><a href="#chapter5">まとめ：海洋少年団で自信をつけよう</a></li>
-                </ol>
-            </nav>
         </div>
-            <!-- 第1章 -->
-            <section id="chapter1" class="chapter">
-                <h2>海洋少年団って？海で「心と体」を育てる場所</h2>
+    </nav>
 
-                <img src="images/chapter1.webp" alt=" " class="chapter-image">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background">
+            <div class="hero-gradient"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="hero-subtitle animate-fade-up">Webライター × アプリ開発者</p>
+                <h1 class="hero-title animate-fade-up delay-1">
+                    <span class="highlight">言葉</span>と<span class="highlight">コード</span>で、<br>
+                    届ける。伝える。
+                </h1>
+                <p class="hero-description animate-fade-up delay-2">
+                    読みやすい記事と、使いやすいアプリ。<br>
+                    あなたの「伝えたい」を形にします。
+                </p>
+                <div class="hero-buttons animate-fade-up delay-3">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> お問い合わせ
+                    </a>
+                    <a href="#writing" class="btn btn-secondary">
+                        <i class="fas fa-arrow-down"></i> 実績を見る
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image animate-fade-up delay-2">
+                <img src="images/profile.png" alt="プロフィール画像" class="profile-img">
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
 
-                <p>海洋少年団は、海での活動に特化していて、手旗信号やボート操縦などのプログラムを通して、社会で必要な力を育てます。</p>
+    <!-- Writing Works Section -->
+    <section class="works-section" id="writing">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-pen-fancy"></i> 執筆実績
+            </h2>
+            <p class="section-subtitle">Writing Works</p>
+        </div>
+        <div class="carousel-container">
+            <button class="carousel-btn prev" data-carousel="writing-carousel">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="carousel" id="writing-carousel">
                 
-                <h3>海洋少年団の心の柱「4つのちかい」</h3>
-                
-                <p>海洋少年団では、技術を身につけることよりも、人間として成長することを大切にしています。その基本となるのが、次の<strong>「4つのちかい」</strong>です。</p>
-                
-                <ul>
-                    <li><b>しつけ：</b>礼儀を大切にし、みんなで決めたルールを守る</li>
-                    <li><b>奉仕：</b>人のために自分にできることを考え、行動する</li>
-                    <li><b>責任：</b>最後まで自分の役割を果たす</li>
-                    <li><b>愛護：</b>自然や命を大切にする</li>
-                </ul>
-                
-                <p>これらのことを普段の活動で実践することで、きちんと礼儀正しく、優しい大人へと成長していきます。</p>
-                
-                <h3>ボーイスカウトとの違いは？</h3>
-                
-                <p>よく比べられるボーイスカウトとの大きな違いは、活動場所が<strong>「山」か「海」か</strong>ということです。ボーイスカウトはキャンプや登山が中心ですが、海洋少年団はカッターボートの操船やロープワークなど、海に関するスキルを学びます。</p>
-                
-                <p>水兵さんのようなかっこいい制服に憧れて入団する子も多いんです。海という厳しい自然の中で育まれる、<strong>「命を守るためのルール」</strong>を守ることが、海洋少年団の魅力です。</p>
-            </section>
-            
-            <!-- 第2章 -->
-            <section id="chapter2" class="chapter">
-                <h2>海洋少年団ではどんなことをするの？</h2>
-                
-                <img src="images/chapter2.webp" alt=" " class="chapter-image">
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('articles/kaiyoshonendan/images/thumbnail.webp'); background-size: cover; background-position: center;">
+                        <div class="card-category">教育・子育て</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">海洋少年団とは？活動内容や教育的メリット、入団方法を徹底解説</h3>
+                        <p class="card-description">海をフィールドに子どもたちの「生きる力」を育む海洋少年団。カッター訓練やロープワークなど、海ならではの体験を通じた教育プログラムを紹介。</p>
+                        <div class="card-tags">
+                            <span class="tag">教育</span>
+                            <span class="tag">子育て</span>
+                            <span class="tag">習い事</span>
+                        </div>
 
-                <p>海洋少年団では、海で生きる知恵を学ぶ「技術訓練」と、仲間との絆を深める「レクリエーション」を中心に活動します。この2つをバランスよく行うことで、楽しみながら自立心や集中力を育てています。</p>
+                    </div>
+                    <div class="card-overlay">
+                        <p>2歳の娘を持つ父親が、子どもの成長を願って調査・執筆。費用、活動内容、入団方法まで、親目線で徹底解説した実用的ガイド。</p>
+                        <a href="articles/kaiyoshonendan/index.html" class="card-link">記事を読む <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>         
                 
-                <h3>海に強くなる「技術訓練」</h3>
-                
-                <p>海での安全を守り、状況をしっかり把握するためのスキルを身につけることが大切です。たとえば、遠くの仲間と連絡を取り合う「手旗信号」、普段の生活でも役立つ「ロープワーク」、みんなで協力する「カッター（手漕ぎボート）」の操船訓練などを行います。</p>
-                
-                <p>これらの訓練は、ただ技術を覚えるだけではありません。一つ一つの作業をきちんと行うことで、子どもたちの<strong>集中力がアップ</strong>します。また、学んだことは災害時の「防災知識」にもつながるので、<strong>一生役に立つ知識</strong>となるでしょう。</p>
-                
-                <h3>仲間と楽しむ「野外・レクリエーション」</h3>
-                
-                <p>厳しい訓練ばかりではなく、子どもたちが楽しめるイベントもたくさんあります。夏休みにはサマーキャンプやカヌー体験、水泳訓練などがあり、全国の団員が集まるスポーツ大会も開催されます。</p>
-                
-                <p>こうしたイベントでは、学校や地域をこえた仲間とのつながりが自然と生まれます。年上の子が年下の子の面倒を見たり、年下の子がリーダーを見て学んだりすることで、<strong>相手を思いやる気持ちや協力する心</strong>が育まれます。</p>
-            </section>
-            
-            <!-- 第3章 -->
-            <section id="chapter3" class="chapter">
-                <h2>海洋少年団をおすすめする3つの理由</h2>
+                <!-- Card 1 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('articles/park/images/thumbnail.webp'); background-size: cover; background-position: center;">
+                        <div class="card-category">社会問題</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">公園の遊具撤去が進む理由と未来への展望</h3>
+                        <p class="card-description"> なぜ子ども向けの遊具は消えていくのか。少子高齢化、財政難、安全基準の変化──日本社会の構造的転換を探る。</p>
+                        <div class="card-tags">
+                            <span class="tag">社会</span>
+                            <span class="tag">少子高齢化</span>
+                            <span class="tag">調査</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>2歳の子どもを持つ父親が、近所の公園からジャングルジムが消える現実に直面。統計データと現場の声から、すべての世代が共生できる未来の公園を考える。</p>
+                        <a href="articles/park/" class="card-link">記事を読む <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
 
-                <img src="images/chapter3.webp" alt=" " class="chapter-image">
+                <!-- Card 2 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('articles/shiroi-kyoto-22years/images/thumbnail.webp'); background-size: cover; background-position: center;">
+                        <div class="card-category">特集記事</div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">『白い巨塔』から22年──がん治療の革命と希望</h3>
+                        <p class="card-description">2003年から2025年までの医療の変化を、医療素人の視点から綴った記録。</p>
+                        <div class="card-tags">
+                            <span class="tag">医療</span>
+                            <span class="tag">ノンフィクション</span>
+                            <span class="tag">長編</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>失った叔父と義父への想い、そして娘の未来への希望を込めて。40歳の父親が調査・執筆した22年間の医療史。</p>
+                        <a href="articles/shiroi-kyoto-22years/" class="card-link">記事を読む <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>         
+            </div>
+            <button class="carousel-btn next" data-carousel="writing-carousel">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
 
-                <p>海洋少年団での活動は、学校では学べない「生きる力」を育むチャンスです。たくさんの団体がある中で、海洋少年団が選ばれている理由を3つご紹介します。</p>
+    <!-- App Development Section -->
+    <section class="works-section apps-section" id="apps">
+        <div class="section-header">
+            <h2 class="section-title">
+                <i class="fas fa-mobile-alt"></i> アプリ開発
+            </h2>
+            <p class="section-subtitle">App Development</p>
+        </div>
+        <div class="carousel-container">
+            <button class="carousel-btn prev" data-carousel="apps-carousel">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="carousel" id="apps-carousel">
+                <!-- App Card 1 -->
+                <div class="card">
+                    <div class="card-image" style="background-image: url('app/BrightQuotes/images/thumbnail.webp'); background-size: cover; background-position: center;">
+                        <div class="card-category">Webアプリ</div>
+                        <i class="fas fa-quote-right card-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">BrightQuotes</h3>
+                        <p class="card-description">あなたの毎日を彩る言葉のギフト。心に響く名言を届けるWebアプリ。</p>
+                        <div class="card-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Web API</span>
+                            <span class="tag">UI/UX</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>カテゴリ別の名言と実践的なアクションを提供。今日を特別な一日にする言葉の力を体験できます。</p>
+                        <a href="https://takuya-works.github.io/app/BrightQuotes/" target="_blank" rel="noopener noreferrer" class="card-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
                 
-                <h3>1.  一生使える技術と防災の知識が身につく</h3>
-                
-                <p>水辺での安全を守る知識は、子どもの命を守る力になります。ロープワークや水難救助の基本などは、普段の生活やアウトドア、<strong>災害時にも役立ちます</strong>。</p>
-                
-                <p>海洋少年団には進級制度もあります。目標を立てて努力し、成長が目に見える形になるので、子どもたちのやる気につながるでしょう。</p>
-                
-                <h3>2.  いろんな年齢の仲間と交流して、リーダーシップが育つ</h3>
-                
-                <p>学校と違い、団によっては年長さんから高校生までが一緒に活動するので、社会性が身につきます。この<strong>年齢の違う仲間とのつながり</strong>が、海洋少年団の魅力です。</p>
-                
-                <ul>
-                    <li><b>年上の子</b>: 年下の子の面倒を見ることで、責任感や教えることを学びます。</li>
-                    <li><b>年下の子</b>: 先輩をお手本にして、どう行動すればいいかを学びます。</li>
-                </ul>
-                
-                <p>この交流を通して、相手を思いやる気持ちや、みんなをまとめる力が自然と育っていきます。</p>
-                
-                <h3>3.  費用があまりかからず続けやすい</h3>
-                
-                <p>多くの親御さんがメリットとしてあげるのが、費用があまりかからないことです。地域の方がボランティアで支えているため、他の習い事に比べて月謝が安くすみます。たとえば東京都港区では、月1,000円＋制服などの費用が20,000円くらいです（https://ws.formzu.net/fgen/S373340795/）。費用があまりかからないので、兄弟で入団しやすく、長く続けやすい環境ですね。</p>
-                
-                <p>親の出番も、今の時代に合わせて無理のない範囲で協力し合うようになっています。指導員が子どもたちをしっかり教えてくれるので、親は安心して任せられます。</p>
-            </section>
-            
-            <!-- 第4章 -->
-            <section id="chapter4" class="chapter">
-                <h2>入団するには？まずは近くの団を探そう</h2>
+                <!-- App Card 1.5 -->
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="card-category">iOS / Android</div>
+                        <i class="fas fa-tasks card-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">EasyTask</h3>
+                        <p class="card-description">シンプルで続くタスク管理アプリ。10,000DL突破。</p>
+                        <div class="card-tags">
+                            <span class="tag">Flutter</span>
+                            <span class="tag">Firebase</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>タスク完了時のフィードバックで習慣化をサポートします。</p>
+                        <a href="#" class="card-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
 
-                <img src="images/chapter4.webp" alt=" " class="chapter-image">
-                
-                <p>海洋少年団に入るには、まず近くの団を探して、どんな雰囲気か見てみましょう。お子さんに合うかどうかを確認しながら、手続きを進めるための3つのステップをご紹介します。</p>
-                
-                <h3>1.  近くの海洋少年団を探す</h3>
-                
-                <p>まずは、家から通える範囲で活動している団を探しましょう。日本海洋少年団連盟の公式サイトに、全国の団のリストが載っています（https://www.jsf-japan.or.jp/pages/33/）。</p>
-                
-                <p>活動場所や活動日は団によって違うので、まずは近くの団のスケジュールを確認してください。海沿いの地域だけでなく、川や湖の近く、都会で活動している団もあります。</p>
-                
-                <h3>2.  見学・体験に申し込む</h3>
-                
-                <p>気になる団が見つかったら、公式サイトのフォームや電話で<strong>見学・体験を申し込み</strong>ましょう。ほとんどの団で、無料で体験できる機会があります。</p>
-                
-                <p>見学に行くときは、動きやすい服装と帽子、飲み物を用意しましょう。活動の様子を見ることで、指導員との相性や団の雰囲気が<strong>お子さんに合っているか確認</strong>できます。</p>
-                
-                <h3>3.  納得してから入団</h3>
-                
-                <p>体験が終わって、お子さんが入りたそうだったら、詳しいルールや費用について説明を受けましょう。無理やり入団させられることはないので、納得できるまで質問してください。</p>
-                
-                <p>活動内容や親の協力について確認し、無理なく続けられそうだったら、入団の手続きをします。新しい制服に袖を通す日は、お子さんにとって<strong>特別な日</strong>になるでしょう。</p>
-            </section>
-            
-            <!-- 第5章 -->
-            <section id="chapter5" class="chapter">
-                <h2>まとめ：海洋少年団で自信をつけよう</h2>
+                <!-- App Card 2 -->
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                        <div class="card-category">Webアプリ</div>
+                        <i class="fas fa-pencil-alt card-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">WritersHub</h3>
+                        <p class="card-description">ライター向け案件管理・請求書作成ツール。</p>
+                        <div class="card-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>フリーランスライターの業務効率化を実現。月額利用者500人。</p>
+                        <a href="#" class="card-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
 
-                <img src="images/chapter5.webp" alt=" " class="chapter-image">
+                <!-- App Card 3 -->
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);">
+                        <div class="card-category">Chrome拡張</div>
+                        <i class="fas fa-clock card-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">FocusMode</h3>
+                        <p class="card-description">集中力を高めるポモドーロタイマー拡張機能。</p>
+                        <div class="card-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Chrome API</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>Chromeウェブストアで星4.8の高評価。5,000ユーザー利用中。</p>
+                        <a href="#" class="card-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
 
-                <p>海洋少年団は、海での活動を通して「自立心」と「社会性」を育てる最高の場所です。スキルを身につけるだけでなく、仲間と協力して困難を乗り越える経験は、お子さんの将来にとって<strong>大切な宝物</strong>になるでしょう。</p>
-                
-                <h3>海洋少年団が選ばれる理由</h3>
-                
-                <p>費用があまりかからず、地域全体で子どもたちを見守る温かいコミュニティがあるのは、親御さんにとって安心できるポイントです。きちんとした活動で身につく礼儀や、相手を思いやる気持ちは、これからの社会で生きていく上で大切な力になります。</p>
-                
-                <h3>まずは体験してみませんか？</h3>
-                
-                <p>今しかできない貴重な体験は、お子さんの可能性を広げてくれます。少しでも興味がある方は、日本海洋少年団連盟の公式サイトから近くの団を探して、見学・体験会に申し込んでみてください。</p>
-                
-                <p>海での新しい出会いが、家族の新しい物語の始まりになるかもしれません。</p>
-            </section>
-            
-            <!-- About & References Section -->
-            <section class="about-references">
-                <h2>【関連情報・参考リンク】</h2>
-                
-                <ul>
-                    <li>日本海洋少年団連盟 公式サイト<br>
-                    <a href="https://www.jsf-japan.or.jp/" target="_blank">https://www.jsf-japan.or.jp/</a></li>
-                    
-                    <li>全国の海洋少年団リスト<br>
-                    <a href="https://www.jsf-japan.or.jp/pages/33/" target="_blank">https://www.jsf-japan.or.jp/pages/33/</a></li>
-                    
-                    <li>東京都港区 海洋少年団 入団案内<br>
-                    <a href="https://ws.formzu.net/fgen/S373340795/" target="_blank">https://ws.formzu.net/fgen/S373340795/</a></li>
-                </ul>
-            </section>
-        </article>
-    </div>
-    
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="back-to-top" aria-label="ページトップへ戻る">
-        <span>↑</span>
-        <span class="back-to-top-text">TOP</span>
-    </button>
-    
-    <!-- Progress Bar & Current Position Script -->
-    <script>
-        let currentChapterElement = null;
-        let currentHeadingElement = null;
-        
-        // すべてのh2とh3要素を取得
-        const chapters = document.querySelectorAll('.chapter h2');
-        const headings = document.querySelectorAll('.chapter h3');
-        
-        window.addEventListener('scroll', function() {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('progressBar').style.width = scrolled + '%';
-            
-            // トップに戻るボタンの表示/非表示
-            const backToTopBtn = document.getElementById('backToTop');
-            if (winScroll > 300) {
-                backToTopBtn.classList.add('show');
-            } else {
-                backToTopBtn.classList.remove('show');
-            }
-            
-            // 現在位置の表示/非表示
-            const currentPosition = document.getElementById('currentPosition');
-            if (winScroll > 500) {
-                currentPosition.classList.add('show');
-            } else {
-                currentPosition.classList.remove('show');
-            }
-            
-            // 現在のh2を検出
-            let activeChapter = null;
-            chapters.forEach(chapter => {
-                const rect = chapter.getBoundingClientRect();
-                if (rect.top <= 150) {
-                    activeChapter = chapter;
-                }
-            });
-            
-            // 現在のh3を検出
-            let activeHeading = null;
-            headings.forEach(heading => {
-                const rect = heading.getBoundingClientRect();
-                if (rect.top <= 150) {
-                    // このh3が現在のh2の配下にあるか確認
-                    if (activeChapter && activeChapter.parentElement.contains(heading)) {
-                        activeHeading = heading;
-                    }
-                }
-            });
-            
-            // 表示を更新
-            if (activeChapter && activeChapter !== currentChapterElement) {
-                currentChapterElement = activeChapter;
-                document.getElementById('currentChapter').textContent = activeChapter.textContent;
-            }
-            
-            if (activeHeading && activeHeading !== currentHeadingElement) {
-                currentHeadingElement = activeHeading;
-                document.getElementById('currentHeading').textContent = activeHeading.textContent;
-            } else if (!activeHeading && currentHeadingElement) {
-                currentHeadingElement = null;
-                document.getElementById('currentHeading').textContent = '';
-            }
-        });
-        
-        // トップに戻るボタンのクリックイベント
-        document.getElementById('backToTop').addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // 目次の開閉
-        document.getElementById('tocToggle').addEventListener('click', function() {
-            const toc = document.getElementById('toc');
-            const toggle = document.getElementById('tocToggle');
-            
-            if (toc.classList.contains('show')) {
-                toc.classList.remove('show');
-                toggle.innerHTML = '<i class="fas fa-book"></i><span>目次を開く</span>';
-            } else {
-                toc.classList.add('show');
-                toggle.innerHTML = '<i class="fas fa-book-open"></i><span>目次を閉じる</span>';
-            }
-        });
+                <!-- App Card 4 -->
+                <div class="card">
+                    <div class="card-image" style="background: linear-gradient(135deg, #8360c3 0%, #2ebf91 100%);">
+                        <div class="card-category">LINE Bot</div>
+                        <i class="fab fa-line card-icon"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">毎日ポジティブBot</h3>
+                        <p class="card-description">毎朝ポジティブな言葉を届けるLINE Bot。</p>
+                        <div class="card-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">LINE API</span>
+                        </div>
+                    </div>
+                    <div class="card-overlay">
+                        <p>友だち登録3,000人。朝の習慣として愛用されています。</p>
+                        <a href="#" class="card-link">詳細を見る <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn next" data-carousel="apps-carousel">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
 
-        document.getElementById('tocClose').addEventListener('click', function() {
-            const toc = document.getElementById('toc');
-            const toggle = document.getElementById('tocToggle');
-            
-            toc.classList.remove('show');
-            toggle.innerHTML = '<i class="fas fa-book"></i><span>目次を開く</span>';
-        });
-
-        // 目次のリンクをクリックしたら自動で閉じる
-        document.querySelectorAll('.toc a').forEach(link => {
-            link.addEventListener('click', function() {
-                const toc = document.getElementById('toc');
-                const toggle = document.getElementById('tocToggle');
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="images/profile.png" alt="プロフィール画像" class="profile-img large">
+            </div>
+            <div class="about-content">
+                <h2 class="section-title">
+                    <i class="fas fa-user"></i> About Me
+                </h2>
+                <p class="about-name">かわはら たくや <span class="about-age">/ 40歳</span></p>
+                <p class="about-description">
+                    Webライターとアプリ開発者として活動しています。
+                    <br><br>
+                    「伝わる文章」と「使いやすい設計」にこだわり、
+                    読み手・ユーザーの目線に立ったモノづくりを大切にしています。
+                    <br><br>
+                    取材ではリラックスした雰囲気で本音を引き出し、
+                    開発ではシンプルで直感的なUXを追求。
+                    丁寧な仕事を心がけています。
+                </p>
                 
-                toc.classList.remove('show');
-                toggle.innerHTML = '<i class="fas fa-book"></i><span>目次を開く</span>';
-            });
-        });
-    </script>
+                <div class="skills-container">
+                    <h3 class="skills-title">Skills</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">SEOライティング</span>
+                            <span class="skill-percent">95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="95"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">取材・インタビュー</span>
+                            <span class="skill-percent">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Flutter / Dart</span>
+                            <span class="skill-percent">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">React / JavaScript</span>
+                            <span class="skill-percent">75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="75"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Python</span>
+                            <span class="skill-percent">70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-progress="70"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2 class="section-title">
+                    <i class="fas fa-paper-plane"></i> Contact
+                </h2>
+                <p class="contact-description">
+                    お仕事のご依頼・ご相談は<br>
+                    お気軽にお問い合わせください。<br>
+                    <strong>丁寧にお返事します。</strong>
+                </p>
+                
+                <div class="social-links">
+                    <a href="https://twitter.com/takuya_writes" target="_blank" class="social-link twitter">
+                        <i class="fab fa-x-twitter"></i>
+                        <span>@takuya_writes</span>
+                    </a>
+                    <a href="https://github.com/takuya-dev" target="_blank" class="social-link github">
+                        <i class="fab fa-github"></i>
+                        <span>takuya-dev</span>
+                    </a>
+                    <a href="https://www.instagram.com/takuya.life" target="_blank" class="social-link instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span>@takuya.life</span>
+                    </a>
+                    <a href="https://note.com/takuya_note" target="_blank" class="social-link note">
+                        <i class="fas fa-pen"></i>
+                        <span>note</span>
+                    </a>
+                </div>
+            </div>
+            
+            <form class="contact-form" id="contact-form">
+                <div class="form-group">
+                    <label for="name">お名前 <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" required placeholder="お名前">
+                </div>
+                <div class="form-group">
+                    <label for="email">メールアドレス <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required placeholder="example@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="subject">件名</label>
+                    <select id="subject" name="subject">
+                        <option value="">選択してください</option>
+                        <option value="writing">ライティングのご依頼</option>
+                        <option value="development">アプリ開発のご依頼</option>
+                        <option value="interview">取材のご依頼</option>
+                        <option value="other">その他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">メッセージ <span class="required">*</span></label>
+                    <textarea id="message" name="message" rows="5" required placeholder="ご依頼内容やご質問をお書きください"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-paper-plane"></i> 送信する
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-icon">✦</span>
+                <span class="logo-text">t.kawahara</span>
+            </div>
+            <p class="footer-tagline">言葉とコードで、届ける。伝える。</p>
+            <div class="footer-social">
+                <a href="https://twitter.com/takuya_writes" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://github.com/takuya-dev" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.instagram.com/takuya.life" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://note.com/takuya_note" target="_blank"><i class="fas fa-pen"></i></a>
+            </div>
+            <p class="footer-copyright">&copy; 2024 takuya kawahara. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
 </body>
 </html>
