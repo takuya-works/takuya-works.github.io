@@ -902,3 +902,187 @@ mark.blue {
         margin-top: 50px;
     }
 }
+
+
+
+/* ===================================
+   Speech Balloon (吹き出し)
+   =================================== */
+.speech-balloon {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin: 35px 0;
+    animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* アイコン画像 */
+.balloon-icon {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+}
+
+.balloon-icon img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 3px solid #ffffff;
+}
+
+/* 吹き出しの内容 */
+.balloon-content {
+    flex: 1;
+    background: #ffffff;
+    padding: 20px 25px;
+    border-radius: 15px;
+    box-shadow: 0 3px 15px rgba(44, 95, 141, 0.12);
+    position: relative;
+    border: 2px solid #f0f4f8;
+}
+
+.balloon-name {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.balloon-content p:last-child {
+    margin-bottom: 0;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+
+/* 左側の吹き出し（筆者） */
+.speech-balloon.left .balloon-content::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 20px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 12px 10px 0;
+    border-color: transparent #f0f4f8 transparent transparent;
+}
+
+.speech-balloon.left .balloon-content::after {
+    content: '';
+    position: absolute;
+    left: -9px;
+    top: 22px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 10px 8px 0;
+    border-color: transparent #ffffff transparent transparent;
+}
+
+/* 右側の吹き出し（質問者など） */
+.speech-balloon.right {
+    flex-direction: row-reverse;
+}
+
+.speech-balloon.right .balloon-content {
+    background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+}
+
+.speech-balloon.right .balloon-content::before {
+    content: '';
+    position: absolute;
+    right: -12px;
+    left: auto;
+    top: 20px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 10px 12px;
+    border-color: transparent transparent transparent #f0f4f8;
+}
+
+.speech-balloon.right .balloon-content::after {
+    content: '';
+    position: absolute;
+    right: -9px;
+    left: auto;
+    top: 22px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 10px;
+    border-color: transparent transparent transparent #e3f2fd;
+}
+
+/* 考え中の吹き出し */
+.speech-balloon.think .balloon-content {
+    background: linear-gradient(135deg, #fff9e6 0%, #fffbf0 100%);
+    border-color: #f59e0b;
+}
+
+.speech-balloon.think .balloon-content::after {
+    border-color: transparent #fff9e6 transparent transparent;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .speech-balloon {
+        gap: 12px;
+    }
+    
+    .balloon-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .balloon-content {
+        padding: 15px 18px;
+        font-size: 0.95rem;
+    }
+    
+    .balloon-name {
+        font-size: 0.85rem;
+    }
+    
+    .speech-balloon.left .balloon-content::before,
+    .speech-balloon.right .balloon-content::before {
+        border-width: 8px 10px 8px 0;
+    }
+    
+    .speech-balloon.left .balloon-content::after,
+    .speech-balloon.right .balloon-content::after {
+        border-width: 6px 8px 6px 0;
+    }
+    
+    .speech-balloon.right .balloon-content::before {
+        border-width: 8px 0 8px 10px;
+    }
+    
+    .speech-balloon.right .balloon-content::after {
+        border-width: 6px 0 6px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .balloon-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .balloon-icon img {
+        border-width: 2px;
+    }
+}
