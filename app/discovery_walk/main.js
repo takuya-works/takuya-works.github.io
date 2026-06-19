@@ -20,14 +20,10 @@ let spotMarkers = []; // 地図上のスポットマーカー
 
 // 地図タイルのURLテンプレート
 const MAP_TILES = {
-  dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
-  light: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
   osm: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 };
 
 const MAP_ATTRIBUTION = {
-  dark: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-  light: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
   osm: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 };
 
@@ -61,7 +57,6 @@ const btnCloseSpot = document.getElementById('btn-close-spot');
 // 設定項目
 const rangeFogRadius = document.getElementById('range-fog-radius');
 const valFogRadius = document.getElementById('val-fog-radius');
-const selectMapStyle = document.getElementById('select-map-style');
 const checkSimActive = document.getElementById('check-sim-active');
 const selectSimSpeed = document.getElementById('select-sim-speed');
 
@@ -153,17 +148,17 @@ function resizeCanvas() {
 }
 
 // 地図スタイルの更新
-function updateMapStyle(styleName) {
+function updateMapStyle() {
   if (activeTileLayer) {
     map.removeLayer(activeTileLayer);
   }
   
-  activeTileLayer = L.tileLayer(MAP_TILES[styleName], {
+  activeTileLayer = L.tileLayer(MAP_TILES.osm, {
     maxZoom: 19,
-    attribution: MAP_ATTRIBUTION[styleName]
+    attribution: MAP_ATTRIBUTION.osm
   }).addTo(map);
 
-  state.mapStyle = styleName;
+  state.mapStyle = 'osm';
   state.save();
 }
 
@@ -179,8 +174,8 @@ function drawFog() {
   // クリア
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // 1. 画面全体を「霧」で覆う
-  ctx.fillStyle = state.mapStyle === 'light' ? 'rgba(235, 240, 245, 0.82)' : 'rgba(11, 15, 25, 0.88)';
+  // 1. 画面全体を「霧」で覆う (ダークネイビーのゲーム風の霧)
+  ctx.fillStyle = 'rgba(11, 15, 25, 0.88)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   const points = state.history;
@@ -605,11 +600,7 @@ function setupUIEvents() {
     drawFog();
   });
 
-  // 設定値変更イベント: 地図スタイル
-  selectMapStyle.addEventListener('change', (e) => {
-    updateMapStyle(e.target.value);
-    drawFog();
-  });
+
 
   // シミュレータ有効化スイッチ
   checkSimActive.addEventListener('change', (e) => {
@@ -822,7 +813,6 @@ window.addEventListener('DOMContentLoaded', () => {
   // 初期設定値をUIに反映
   rangeFogRadius.value = state.fogRadius;
   valFogRadius.innerText = `${state.fogRadius}m`;
-  selectMapStyle.value = state.mapStyle;
 
   updateUI();
 });
