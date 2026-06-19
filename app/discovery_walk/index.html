@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DiscoveryWalk - 異世界散歩地図</title>
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+  
+  <!-- Google Fonts: ゲーム風 & プレミアム感 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Outfit:wght@300;400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <!-- アプリ本体コンテナ -->
+  <div id="app">
+    
+    <!-- 地図表示エリア -->
+    <div id="map"></div>
+    
+    <!-- フォグ描画用の透過キャンバス（Leafletの上に配置） -->
+    <canvas id="fog-canvas"></canvas>
+
+    <!-- プレミアムステータスパネル (グラスモルフィズム) -->
+    <header class="status-panel">
+      <div class="player-info">
+        <div class="avatar">
+          <i class="fa-solid fa-person-hiking walk-icon"></i>
+        </div>
+        <div class="player-stats">
+          <div class="player-name">ADVENTURER</div>
+          <div class="level-badge">LV <span id="val-level">1</span></div>
+        </div>
+      </div>
+      
+      <div class="xp-container">
+        <div class="xp-text">
+          <span>EXP</span>
+          <span id="val-xp-ratio">0 / 100</span>
+        </div>
+        <div class="xp-bar-outer">
+          <div id="xp-bar-inner" class="xp-bar-inner" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="sub-stats">
+        <div class="stat-item">
+          <i class="fa-solid fa-shoe-prints"></i>
+          <span class="stat-label">移動距離:</span>
+          <span class="stat-val" id="val-distance">0.00 km</span>
+        </div>
+        <div class="stat-item">
+          <i class="fa-solid fa-eye"></i>
+          <span class="stat-label">探索率:</span>
+          <span class="stat-val" id="val-exploration">0.0 %</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- コントロールボタン群 (右側/フローティング) -->
+    <div class="floating-controls">
+      <button id="btn-gps" class="control-btn active" title="GPSトラッキング切替">
+        <i class="fa-solid fa-location-crosshairs"></i>
+      </button>
+      <button id="btn-center" class="control-btn" title="現在地にカメラを合わせる">
+        <i class="fa-solid fa-crosshairs"></i>
+      </button>
+      <button id="btn-journal" class="control-btn" title="冒険日誌 / 実績">
+        <i class="fa-solid fa-book-bookmark"></i>
+      </button>
+      <button id="btn-settings" class="control-btn" title="設定 / デバッグ">
+        <i class="fa-solid fa-gear"></i>
+      </button>
+    </div>
+
+    <!-- ゲームイベント通知ログ (画面左下) -->
+    <div id="game-logs" class="game-logs"></div>
+
+    <!-- アチーブメント（実績解除）ポップアップ通知 -->
+    <div id="achievement-popup" class="achievement-popup hidden">
+      <div class="popup-icon">
+        <i class="fa-solid fa-trophy text-amber-400"></i>
+      </div>
+      <div class="popup-content">
+        <div class="popup-title">実績解除！</div>
+        <div class="popup-desc" id="achievement-desc">最初の一歩</div>
+      </div>
+    </div>
+
+    <!-- 冒険日誌モーダル -->
+    <div id="journal-modal" class="modal hidden">
+      <div class="modal-content glass">
+        <div class="modal-header">
+          <h2><i class="fa-solid fa-book-bookmark"></i> 冒険日誌</h2>
+          <button class="close-btn" id="btn-close-journal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="tabs">
+            <button class="tab-btn active" data-tab="tab-achievements">獲得実績</button>
+            <button class="tab-btn" data-tab="tab-locations">発見したスポット</button>
+          </div>
+          <div class="tab-content" id="tab-achievements">
+            <div class="achievements-list" id="achievements-list">
+              <!-- 動的生成 -->
+            </div>
+          </div>
+          <div class="tab-content hidden" id="tab-locations">
+            <div class="locations-list" id="locations-list">
+              <p class="empty-msg">まだチェックインしたスポットはありません。地図をダブルクリックするか、現在地でスポットを記録してみましょう！</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 設定・デバッグモーダル -->
+    <div id="settings-modal" class="modal hidden">
+      <div class="modal-content glass">
+        <div class="modal-header">
+          <h2><i class="fa-solid fa-gear"></i> 設定 & デバッグ</h2>
+          <button class="close-btn" id="btn-close-settings">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="settings-section">
+            <h3><i class="fa-solid fa-wand-magic-sparkles"></i> 霧の設定</h3>
+            <div class="setting-row">
+              <label for="range-fog-radius">霧を晴らす半径 (メートル)</label>
+              <input type="range" id="range-fog-radius" min="10" max="100" value="30">
+              <span id="val-fog-radius">30m</span>
+            </div>
+            <div class="setting-row">
+              <label for="select-map-style">地図スタイル</label>
+              <select id="select-map-style">
+                <option value="dark">ダークファンタジー (CartoDB Dark)</option>
+                <option value="light">ライトファンタジー (CartoDB Light)</option>
+                <option value="osm">通常世界 (OpenStreetMap)</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="settings-section">
+            <h3><i class="fa-solid fa-bug"></i> デバッグシミュレーター</h3>
+            <p class="desc">PCでの動作確認用。有効にすると、地図上をクリックした場所にプレイヤーが自動で移動（歩行）し、霧を晴らすことができます。</p>
+            <div class="setting-row toggle-row">
+              <span class="toggle-label">シミュレーター有効化</span>
+              <label class="switch">
+                <input type="checkbox" id="check-sim-active">
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div class="setting-row">
+              <label for="select-sim-speed">移動速度</label>
+              <select id="select-sim-speed">
+                <option value="walk">徒歩 (時速 4.5km)</option>
+                <option value="run">ダッシュ (時速 12km)</option>
+                <option value="bike">自転車 (時速 20km)</option>
+                <option value="teleport">テレポート (瞬時)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h3><i class="fa-solid fa-database"></i> データ管理</h3>
+            <div class="btn-group">
+              <button id="btn-export" class="action-btn"><i class="fa-solid fa-file-export"></i> 軌跡をエクスポート (JSON)</button>
+              <button id="btn-import-trigger" class="action-btn"><i class="fa-solid fa-file-import"></i> 軌跡をインポート</button>
+              <input type="file" id="file-import" accept=".json" class="hidden">
+              <button id="btn-reset" class="action-btn danger"><i class="fa-solid fa-trash-can"></i> 全データを初期化</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- スポット記録ダイアログ -->
+    <div id="spot-modal" class="modal hidden">
+      <div class="modal-content glass prompt-modal">
+        <div class="modal-header">
+          <h2><i class="fa-solid fa-gem"></i> スポットを発見！</h2>
+          <button class="close-btn" id="btn-close-spot">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>この場所に名前を付けて冒険日誌に記録しますか？</p>
+          <input type="text" id="input-spot-name" placeholder="例: 始まりの街のカフェ、謎の祠..." maxlength="30">
+          <div class="btn-group">
+            <button id="btn-save-spot" class="action-btn confirm">記録する</button>
+            <button id="btn-cancel-spot" class="action-btn cancel">キャンセル</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+     
+  <!-- メインJavaScript (ES Modules) -->
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

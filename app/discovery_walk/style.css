@@ -1,0 +1,964 @@
+/* ==========================================================================
+   DiscoveryWalk - プレミアムゲーム風CSS
+   ========================================================================== */
+
+/* 変数定義（カラーテーマ・フォント） */
+:root {
+  --font-game: 'Press Start 2P', monospace;
+  --font-fancy: 'Cinzel', serif;
+  --font-main: 'Outfit', sans-serif;
+
+  /* カラーパレット */
+  --bg-glass: rgba(15, 23, 42, 0.7);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --shadow-main: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  
+  --color-primary: #10b981; /* エメラルドグリーン */
+  --color-secondary: #3b82f6; /* ネオンブルー */
+  --color-accent: #f59e0b; /* ゴールド / アンバー */
+  --color-danger: #ef4444; /* レッド */
+  
+  --text-bright: #f8fafc;
+  --text-muted: #94a3b8;
+  --bg-dark: #0b0f19;
+}
+
+/* 全体設定 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-dark);
+  font-family: var(--font-main);
+  color: var(--text-bright);
+  user-select: none;
+}
+
+#app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* 地図エリア */
+#map {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* フォグキャンバス（Leafletのマップ上に完全に重ねる） */
+#fog-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none; /* 下の地図がドラッグ操作できるようにイベントを通過させる */
+  transition: opacity 0.5s ease;
+}
+
+/* --------------------------------------------------------------------------
+   UI コンポーネント (グラスモルフィズム)
+   -------------------------------------------------------------------------- */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-main);
+  border-radius: 16px;
+}
+
+/* 1. ステータスパネル (画面上部) */
+.status-panel {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  max-width: 480px;
+  margin: 0 auto;
+  z-index: 10;
+  padding: 16px;
+  
+  background: rgba(11, 15, 25, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--shadow-main);
+  border-radius: 20px;
+}
+
+@media (min-width: 768px) {
+  .status-panel {
+    left: 24px;
+    right: auto;
+    width: 420px;
+  }
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.walk-icon {
+  font-size: 24px;
+  color: var(--text-bright);
+  animation: bounce 2s infinite ease-in-out;
+}
+
+.player-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.player-name {
+  font-family: var(--font-fancy);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.level-badge {
+  font-family: var(--font-game);
+  font-size: 13px;
+  color: var(--color-accent);
+  text-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+}
+
+/* 経験値コンテナ */
+.xp-container {
+  margin-bottom: 12px;
+}
+
+.xp-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-family: var(--font-game);
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.xp-bar-outer {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.xp-bar-inner {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), #6ee7b7);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
+  width: 0%;
+  border-radius: 5px;
+  transition: width 0.4s cubic-bezier(0.1, 0.8, 0.3, 1);
+}
+
+/* サブステータス */
+.sub-stats {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 10px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.stat-item i {
+  color: var(--color-secondary);
+}
+
+.stat-label {
+  color: var(--text-muted);
+}
+
+.stat-val {
+  font-family: var(--font-game);
+  font-size: 10px;
+  color: var(--text-bright);
+}
+
+/* 2. フローティングコントロール (右側) */
+.floating-controls {
+  position: absolute;
+  right: 16px;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 10;
+}
+
+.control-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.8);
+  color: var(--text-bright);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-main);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.control-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.control-btn:active {
+  transform: translateY(1px) scale(0.95);
+}
+
+.control-btn.active {
+  background: linear-gradient(135deg, var(--color-secondary), rgba(59, 130, 246, 0.6));
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+}
+
+.control-btn.active i {
+  animation: pulse-slow 2s infinite;
+}
+
+/* 3. ゲームイベントログ (画面左下) */
+.game-logs {
+  position: absolute;
+  bottom: 24px;
+  left: 16px;
+  width: calc(100% - 100px);
+  max-width: 320px;
+  max-height: 150px;
+  overflow-y: hidden;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.log-entry {
+  background: rgba(11, 15, 25, 0.8);
+  border-left: 3px solid var(--color-secondary);
+  padding: 8px 12px;
+  border-radius: 0 8px 8px 0;
+  font-size: 12px;
+  backdrop-filter: blur(5px);
+  color: var(--text-bright);
+  animation: slide-in-left 0.3s ease-out forwards;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.log-entry.achievement {
+  border-left-color: var(--color-accent);
+  font-weight: 600;
+}
+
+.log-entry.level-up {
+  border-left-color: var(--color-primary);
+  font-weight: bold;
+}
+
+/* 4. アチーブメントポップアップ (画面上部からスライドイン) */
+.achievement-popup {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background: rgba(11, 15, 25, 0.9);
+  border: 2px solid var(--color-accent);
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  width: 90%;
+  max-width: 400px;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.achievement-popup.hidden {
+  top: -100px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.popup-icon {
+  font-size: 28px;
+  animation: rotate-gold 3s infinite linear;
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.popup-title {
+  font-family: var(--font-game);
+  font-size: 11px;
+  color: var(--color-accent);
+}
+
+.popup-desc {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* 5. モーダルダイアログ */
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 8, 15, 0.6);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.modal.hidden {
+  display: none !important;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 500px;
+  max-height: 80%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: scale-up 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.modal-header h2 {
+  font-family: var(--font-fancy);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-bright);
+}
+
+.modal-header h2 i {
+  color: var(--color-accent);
+  margin-right: 8px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: var(--text-bright);
+}
+
+.modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* タブ設定 */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 10px;
+}
+
+.tab-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  color: var(--text-bright);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.tab-btn.active {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.3);
+  color: var(--color-secondary);
+}
+
+.tab-content.hidden {
+  display: none !important;
+}
+
+/* 実績リスト */
+.achievements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.achievement-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.3s;
+}
+
+.achievement-card.unlocked {
+  background: rgba(16, 185, 129, 0.04);
+  border-color: rgba(16, 185, 129, 0.15);
+}
+
+.ach-icon {
+  font-size: 22px;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+}
+
+.achievement-card.unlocked .ach-icon {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--color-accent);
+}
+
+.ach-info {
+  flex: 1;
+}
+
+.ach-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: var(--text-muted);
+}
+
+.achievement-card.unlocked .ach-name {
+  color: var(--text-bright);
+}
+
+.ach-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.ach-badge {
+  font-family: var(--font-game);
+  font-size: 8px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+}
+
+.achievement-card.unlocked .ach-badge {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--color-primary);
+}
+
+/* スポットリスト */
+.locations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.location-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.loc-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.loc-name {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.loc-time {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.btn-loc-delete {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.btn-loc-delete:hover {
+  color: var(--color-danger);
+}
+
+.empty-msg {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  padding: 40px 0;
+}
+
+/* 設定セクション */
+.settings-section {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.settings-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.settings-section h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--color-secondary);
+}
+
+.settings-section p.desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.setting-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.setting-row label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.setting-row input[type="range"] {
+  width: 100%;
+  accent-color: var(--color-secondary);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  height: 6px;
+  outline: none;
+}
+
+.setting-row span {
+  font-size: 12px;
+  align-self: flex-end;
+  color: var(--text-bright);
+}
+
+.setting-row select {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-bright);
+  padding: 10px;
+  border-radius: 8px;
+  outline: none;
+  font-family: var(--font-main);
+  cursor: pointer;
+}
+
+.toggle-row {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* トグルスイッチ */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: .3s;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--text-bright);
+  transition: .3s;
+}
+
+input:checked + .slider {
+  background-color: var(--color-primary);
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+.slider.round {
+  border-radius: 24px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* ボタン・グループ */
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.action-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-bright);
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.action-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.action-btn.danger {
+  color: var(--color-danger);
+  border-color: rgba(239, 68, 68, 0.2);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.action-btn.danger:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: var(--color-danger);
+}
+
+/* スポット記録プロンプト */
+.prompt-modal {
+  max-width: 380px;
+  text-align: center;
+}
+
+.prompt-modal p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.prompt-modal input[type="text"] {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-bright);
+  padding: 12px;
+  border-radius: 8px;
+  outline: none;
+  font-family: var(--font-main);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.prompt-modal input[type="text"]:focus {
+  border-color: var(--color-accent);
+}
+
+.prompt-modal .btn-group {
+  flex-direction: row;
+  gap: 12px;
+}
+
+.prompt-modal .action-btn {
+  flex: 1;
+}
+
+.action-btn.confirm {
+  background: var(--color-accent);
+  color: #000;
+  border: none;
+  font-weight: 700;
+}
+
+.action-btn.confirm:hover {
+  background: #fbbf24;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+}
+
+.action-btn.cancel {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   アニメーション定義
+   -------------------------------------------------------------------------- */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scale-up {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes rotate-gold {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(-10deg); }
+  75% { transform: rotate(5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ユーティリティ */
+.hidden {
+  display: none !important;
+}
+
+/* Leaflet用カスタム調整（フォグCanvasを透過・重ねるための調整） */
+.leaflet-container {
+  background: var(--bg-dark) !important;
+}
+
+.leaflet-control-container {
+  /* Leafletデフォルトのズームコントロールの位置を下に下げる */
+  margin-top: 160px !important;
+}
+
+/* スマホ向けのLeafletコントロール非表示、または位置調整 */
+@media (max-width: 768px) {
+  .leaflet-top.leaflet-left {
+    top: 160px;
+  }
+}
+
+/* ==========================================================================
+   プレイヤーマーカー・宝箱ピンのスタイル
+   ========================================================================== */
+
+/* プレイヤーのカスタムマーカー（脈動する光のサークル） */
+.player-pulse-marker {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.pulse-dot {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-secondary);
+  border: 2px solid var(--text-bright);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--color-secondary);
+  z-index: 2;
+}
+
+.pulse-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--color-secondary);
+  border-radius: 50%;
+  animation: pulse-marker 1.5s infinite ease-out;
+  opacity: 0;
+  z-index: 1;
+}
+
+@keyframes pulse-marker {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* 宝箱マーカー（チェストピン） */
+.chest-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chest-pin {
+  width: 30px;
+  height: 30px;
+  border-radius: 50% 50% 50% 0;
+  background: var(--color-accent);
+  border: 2px solid var(--text-bright);
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  animation: float 2s infinite ease-in-out;
+}
+
+.chest-pin i {
+  transform: rotate(45deg);
+  font-size: 14px;
+  color: #000;
+}
+
+@keyframes float {
+  0%, 100% { transform: rotate(-45deg) translateY(0); }
+  50% { transform: rotate(-45deg) translateY(-5px); }
+}
+
+.spot-popup {
+  color: #000;
+}
+
+.spot-popup h4 {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.spot-popup p {
+  font-size: 11px;
+  color: #666;
+}
