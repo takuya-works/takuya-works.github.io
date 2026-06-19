@@ -17,14 +17,19 @@ let isTracking = true; // GPSトラッキング有効フラグ
 let isAutoCentering = true; // カメラ自動追従フラグ
 let currentLatLng = { lat: 35.6895, lng: 139.6917 }; // デフォルト：東京（皇居付近）
 let spotMarkers = []; // 地図上のスポットマーカー
+let landmarks = []; // 周辺のランドマークリスト [{id, name, lat, lng, type}]
+let landmarkMarkers = []; // 地図上のランドマークマーカー
+let lastFetchLatLng = null; // 最後にデータを取得した座標
 
 // 地図タイルのURLテンプレート
 const MAP_TILES = {
-  osm: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+  osm: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  satellite: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
 };
 
 const MAP_ATTRIBUTION = {
-  osm: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  osm: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  satellite: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 };
 
 let activeTileLayer = null;
@@ -57,6 +62,7 @@ const btnCloseSpot = document.getElementById('btn-close-spot');
 // 設定項目
 const rangeFogRadius = document.getElementById('range-fog-radius');
 const valFogRadius = document.getElementById('val-fog-radius');
+const checkSatelliteMode = document.getElementById('check-satellite-mode');
 const checkSimActive = document.getElementById('check-sim-active');
 const selectSimSpeed = document.getElementById('select-sim-speed');
 
@@ -134,6 +140,9 @@ function initMap() {
   // 初期描画
   drawFog();
 
+  // 初期のランドマークデータを取得
+  fetchNearbyLandmarks(currentLatLng.lat, currentLatLng.lng);
+
   // GPSトラッキングの開始
   if (isTracking) {
     startGPSTracking();
@@ -148,17 +157,19 @@ function resizeCanvas() {
 }
 
 // 地図スタイルの更新
-function updateMapStyle() {
+function updateMapStyle(styleName) {
   if (activeTileLayer) {
     map.removeLayer(activeTileLayer);
   }
   
-  activeTileLayer = L.tileLayer(MAP_TILES.osm, {
+  const style = MAP_TILES[styleName] ? styleName : 'osm';
+  
+  activeTileLayer = L.tileLayer(MAP_TILES[style], {
     maxZoom: 19,
-    attribution: MAP_ATTRIBUTION.osm
+    attribution: MAP_ATTRIBUTION[style]
   }).addTo(map);
 
-  state.mapStyle = 'osm';
+  state.mapStyle = style;
   state.save();
 }
 
@@ -227,6 +238,47 @@ function drawFog() {
 
   // 描画モードを通常に戻す
   ctx.globalCompositeOperation = 'source-over';
+
+  // 3. 霧の中にある未訪問ランドマークをCanvasの上に直接「？」マークで描画する
+  // (LeafletのピンはCanvasの下に隠れてしまうため)
+  landmarks.forEach(lm => {
+    const isVisited = state.visitedLandmarks.some(vl => vl.id === lm.id);
+    const isCleared = isLatLngCleared(lm);
+    
+    if (!isVisited && !isCleared) {
+      const p = map.latLngToContainerPoint(lm);
+      
+      // 画面外のピンは描画をスキップ
+      if (p.x < -20 || p.x > canvas.width + 20 || p.y < -20 || p.y > canvas.height + 20) {
+        return;
+      }
+
+      // ピンの足（逆三角形）
+      ctx.fillStyle = 'rgba(51, 65, 85, 0.95)';
+      ctx.beginPath();
+      ctx.moveTo(p.x - 7, p.y - 6);
+      ctx.lineTo(p.x, p.y);
+      ctx.lineTo(p.x + 7, p.y - 6);
+      ctx.closePath();
+      ctx.fill();
+
+      // ピンの頭（丸）
+      ctx.fillStyle = 'rgba(51, 65, 85, 0.95)';
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y - 12, 11, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.stroke();
+
+      // 内側のテキスト（？）
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = 'bold 12px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('?', p.x, p.y - 11);
+    }
+  });
 
   // 探索率の計算
   calculateExploration(ctx);
@@ -307,6 +359,10 @@ function handlePositionUpdate(lat, lng) {
   if (isAutoCentering && map) {
     map.setView([lat, lng]);
   }
+
+  // 周辺のランドマークをフェッチ＆再描画
+  fetchNearbyLandmarks(lat, lng);
+  renderLandmarkMarkers();
 
   if (added) {
     drawFog();
@@ -431,6 +487,215 @@ function renderSpotMarkers() {
       
     spotMarkers.push(marker);
   });
+}
+
+/* ==========================================================================
+   ランドマークシステム (Overpass API連携 ＆ チェックイン)
+   ========================================================================== */
+
+// 周辺のランドマークをOverpass APIから取得
+async function fetchNearbyLandmarks(lat, lng) {
+  // 前回フェッチした場所から500m以内の移動なら再取得しない
+  if (lastFetchLatLng) {
+    const dist = state.calculateDistance(lastFetchLatLng.lat, lastFetchLatLng.lng, lat, lng);
+    if (dist < 0.5) { // 500m未満の移動ならAPI負荷軽減のためスキップ
+      return;
+    }
+  }
+
+  addGameLog('周囲のランドマーク情報を探しています...', 'system');
+
+  // Overpass APIのクエリ（半径1km以内の駅、観光地、歴史的建造物、公園）
+  // nwr (node, way, relation) をすべて含め、out centerで中心座標を取得する
+  const query = `
+    [out:json][timeout:15];
+    (
+      nwr["tourism"](around:1000, ${lat}, ${lng});
+      nwr["historic"](around:1000, ${lat}, ${lng});
+      nwr["railway"="station"](around:1000, ${lat}, ${lng});
+      nwr["leisure"="park"](around:1000, ${lat}, ${lng});
+    );
+    out center;
+  `;
+  const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    
+    if (data && data.elements) {
+      // 取得成功時のみ、フェッチ地点を記録する（エラー時や空の時のスキップ防止）
+      lastFetchLatLng = { lat, lng };
+
+      // 必要なプロパティにマッピングし、重複（または名前がないスポット）を除外
+      const newLandmarks = data.elements
+        .filter(el => el.tags && el.tags.name)
+        .map(el => {
+          let type = 'landmark';
+          if (el.tags.railway === 'station') type = 'station';
+          else if (el.tags.leisure === 'park') type = 'park';
+          else if (el.tags.historic) type = 'historic';
+          
+          // out center を使うと、wayやrelationの場合は el.center.lat, el.center.lon に座標が入る
+          const itemLat = el.lat || (el.center && el.center.lat);
+          const itemLng = el.lon || (el.center && el.center.lon);
+
+          return {
+            id: el.id,
+            name: el.tags.name,
+            lat: itemLat,
+            lng: itemLng,
+            type: type
+          };
+        })
+        .filter(lm => lm.lat !== undefined && lm.lng !== undefined);
+
+      // 既存のリストとマージ（ID重複、および100m以内の同名重複を排除）
+      newLandmarks.forEach(nl => {
+        // 同一IDの排除
+        if (landmarks.some(ol => ol.id === nl.id)) {
+          return;
+        }
+
+        // 同名かつ100m(0.1km)以内の接近重複の排除
+        const isDuplicateNameAndClose = landmarks.some(ol => 
+          ol.name === nl.name && 
+          state.calculateDistance(ol.lat, ol.lng, nl.lat, nl.lng) <= 0.1
+        );
+
+        if (!isDuplicateNameAndClose) {
+          landmarks.push(nl);
+        }
+      });
+
+      addGameLog(`周囲に ${newLandmarks.length} 箇所のランドマークを感知しました！`, 'system');
+      renderLandmarkMarkers();
+    } else {
+      addGameLog('この周辺には目立ったランドマークが見つかりませんでした。', 'system');
+    }
+  } catch (err) {
+    console.error('Overpass API error:', err);
+    addGameLog('ランドマーク情報の取得に失敗しました。', 'system');
+  }
+}
+
+// ランドマークピンの地図描画
+function renderLandmarkMarkers() {
+  if (!map) return;
+
+  // 古いマーカーを削除
+  landmarkMarkers.forEach(m => map.removeLayer(m));
+  landmarkMarkers = [];
+
+  landmarks.forEach(lm => {
+    const isVisited = state.visitedLandmarks.some(vl => vl.id === lm.id);
+    const isCleared = isLatLngCleared(lm); // 霧が晴れているか
+
+    // 未訪問かつ霧の中のランドマークは、Leaflet上には描画しない（Canvas上に直接「？」を描画するため）
+    if (!isVisited && !isCleared) {
+      return;
+    }
+    
+    // 現在地からの距離
+    const distMeters = state.calculateDistance(currentLatLng.lat, currentLatLng.lng, lm.lat, lm.lng) * 1000;
+    const isNearby = distMeters <= 50; // 50メートル以内ならチェックイン可能
+
+    let pinClass = 'unexplored';
+    let iconName = 'fa-question';
+    let title = '未知のランドマーク';
+    let desc = '近づいて霧を晴らすと詳細が判明します。';
+
+    if (isVisited) {
+      pinClass = 'visited';
+      iconName = 'fa-crown';
+      title = lm.name;
+      desc = `<span class="text-emerald-400"><i class="fa-solid fa-circle-check"></i> 訪問済み</span>`;
+    } else if (isCleared) {
+      if (isNearby) {
+        pinClass = 'nearby';
+        iconName = 'fa-exclamation';
+        title = lm.name;
+        desc = `接近中！チェックイン可能です。<br><button class="btn-checkin" data-id="${lm.id}" data-name="${lm.name}"><i class="fa-solid fa-trophy"></i> チェックイン！</button>`;
+      } else {
+        pinClass = 'explored';
+        iconName = 'fa-exclamation';
+        title = lm.name;
+        desc = `発見！あと <b>${Math.round(distMeters - 50)}m</b> 近づくとチェックインできます。`;
+      }
+    }
+
+    // ランドマークの種類に応じたアイコンインナー（訪問済み以外）
+    if (!isVisited && isCleared) {
+      if (lm.type === 'station') iconName = 'fa-train';
+      else if (lm.type === 'park') iconName = 'fa-tree';
+      else if (lm.type === 'historic') iconName = 'fa-monument';
+      else iconName = 'fa-landmark';
+    }
+
+    const landmarkIcon = L.divIcon({
+      className: 'landmark-marker',
+      html: `<div class="landmark-pin ${pinClass}"><i class="fa-solid ${iconName}"></i></div>`,
+      iconSize: [32, 32],
+      iconAnchor: [16, 32]
+    });
+
+    const marker = L.marker([lm.lat, lm.lng], { icon: landmarkIcon }).addTo(map);
+
+    // ポップアップの設定
+    marker.bindPopup(`
+      <div class="spot-popup">
+        <h4>${title}</h4>
+        <p>${desc}</p>
+      </div>
+    `);
+
+    // ポップアップが開いたときにチェックインボタンがあればイベントをバインド
+    marker.on('popupopen', () => {
+      const btn = document.querySelector(`.btn-checkin[data-id="${lm.id}"]`);
+      if (btn) {
+        btn.addEventListener('click', () => {
+          const success = state.checkInLandmark(lm.id, lm.name);
+          if (success) {
+            playCheckinSound();
+            marker.closePopup();
+            renderLandmarkMarkers(); // マーカーの再描画
+            updateUI();
+          }
+        });
+      }
+    });
+
+    landmarkMarkers.push(marker);
+  });
+}
+
+// チェックイン時のファンファーレ効果音 (Web Audio API)
+function playCheckinSound() {
+  try {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const playNote = (freq, duration, startTime, type = 'sine') => {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = type;
+      osc.frequency.setValueAtTime(freq, startTime);
+      gain.gain.setValueAtTime(0.12, startTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(startTime);
+      osc.stop(startTime + duration);
+    };
+    const now = audioCtx.currentTime;
+    
+    // きらびやかなアルペジオ音
+    playNote(523.25, 0.1, now, 'triangle'); // C5
+    playNote(659.25, 0.1, now + 0.08, 'triangle'); // E5
+    playNote(783.99, 0.1, now + 0.16, 'triangle'); // G5
+    playNote(1046.50, 0.1, now + 0.24, 'triangle'); // C6
+    playNote(1318.51, 0.35, now + 0.32, 'sine'); // E6 (輝かしい高音)
+  } catch (e) {
+    console.warn(e);
+  }
 }
 
 /* ==========================================================================
@@ -599,9 +864,12 @@ function setupUIEvents() {
     state.save();
     drawFog();
   });
-
-
-
+  // 設定値変更イベント: 衛星写真トグル
+  checkSatelliteMode.addEventListener('change', (e) => {
+    const isSatellite = e.target.checked;
+    updateMapStyle(isSatellite ? 'satellite' : 'osm');
+    drawFog();
+  });
   // シミュレータ有効化スイッチ
   checkSimActive.addEventListener('change', (e) => {
     const active = e.target.checked;
@@ -773,6 +1041,50 @@ function renderJournal() {
       });
     });
   }
+
+  // 3. ランドマーク一覧
+  const lmList = document.getElementById('landmarks-list');
+  lmList.innerHTML = '';
+
+  if (landmarks.length === 0) {
+    lmList.innerHTML = `<p class="empty-msg">周囲にランドマークが見つかりません。移動して探索範囲を広げてください。</p>`;
+  } else {
+    // 訪問済みを優先してソート
+    const sortedLandmarks = [...landmarks].sort((a, b) => {
+      const aVisited = state.visitedLandmarks.some(v => v.id === a.id);
+      const bVisited = state.visitedLandmarks.some(v => v.id === b.id);
+      return bVisited - aVisited;
+    });
+
+    sortedLandmarks.forEach(lm => {
+      const visitedInfo = state.visitedLandmarks.find(v => v.id === lm.id);
+      const isCleared = isLatLngCleared(lm);
+      const card = document.createElement('div');
+      card.className = `landmark-card ${visitedInfo ? 'visited' : ''}`;
+      
+      let nameText = '未知のランドマーク';
+      let statusText = '未発見 (霧の中)';
+      let timeText = '';
+
+      if (visitedInfo) {
+        nameText = lm.name;
+        statusText = '訪問済み';
+        timeText = visitedInfo.time;
+      } else if (isCleared) {
+        nameText = lm.name;
+        statusText = '未踏 (発見済)';
+      }
+
+      card.innerHTML = `
+        <div class="lm-details">
+          <div class="lm-name">${nameText}</div>
+          <div class="lm-time">${timeText}</div>
+        </div>
+        <div class="lm-status">${statusText}</div>
+      `;
+      lmList.appendChild(card);
+    });
+  }
 }
 
 // コールバックとステートの接続
@@ -813,6 +1125,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // 初期設定値をUIに反映
   rangeFogRadius.value = state.fogRadius;
   valFogRadius.innerText = `${state.fogRadius}m`;
+  checkSatelliteMode.checked = (state.mapStyle === 'satellite');
 
   updateUI();
 });

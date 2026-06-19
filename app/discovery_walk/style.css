@@ -962,3 +962,151 @@ input:checked + .slider:before {
   font-size: 11px;
   color: #666;
 }
+
+/* ==========================================================================
+   ランドマークピン & リストのスタイル
+   ========================================================================== */
+
+.landmark-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.landmark-pin {
+  width: 32px;
+  height: 32px;
+  border-radius: 50% 50% 50% 0;
+  border: 2px solid var(--text-bright);
+  transform: rotate(-45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+}
+
+.landmark-pin i {
+  transform: rotate(45deg);
+  font-size: 13px;
+}
+
+/* 未探索：グレーで中身が「？」 */
+.landmark-pin.unexplored {
+  background: #4b5563; /* ダークグレー */
+  border-color: #9ca3af;
+  color: #d1d5db;
+}
+
+/* 探索済（未訪問）：ブルーで中身が「！」 */
+.landmark-pin.explored {
+  background: var(--color-secondary);
+  color: var(--text-bright);
+  animation: float 2.5s infinite ease-in-out;
+}
+
+/* 接近中：ゴールドで脈動 */
+.landmark-pin.nearby {
+  background: var(--color-accent);
+  color: #000;
+  border-color: var(--text-bright);
+  animation: float 1.8s infinite ease-in-out, landmark-pulse 1.2s infinite ease-in-out;
+  box-shadow: 0 0 15px var(--color-accent);
+}
+
+@keyframes landmark-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(245, 158, 11, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}
+
+/* 訪問済：エメラルドグリーンで王冠 */
+.landmark-pin.visited {
+  background: var(--color-primary);
+  color: var(--text-bright);
+  border-color: var(--text-bright);
+  animation: float 3s infinite ease-in-out;
+}
+
+/* ポップアップ内チェックインボタン */
+.btn-checkin {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  background: linear-gradient(135deg, var(--color-accent), #fcd34d);
+  color: #000;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  transition: all 0.2s;
+}
+
+.btn-checkin:hover {
+  background: linear-gradient(135deg, #fbbf24, #fef08a);
+  box-shadow: 0 4px 8px rgba(245, 158, 11, 0.4);
+}
+
+.btn-checkin i {
+  margin-right: 4px;
+}
+
+/* 日誌用ランドマークリスト */
+.landmarks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.landmark-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.landmark-card.visited {
+  background: rgba(16, 185, 129, 0.04);
+  border-color: rgba(16, 185, 129, 0.15);
+}
+
+.lm-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lm-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.landmark-card.visited .lm-name {
+  color: var(--text-bright);
+}
+
+.lm-time {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.lm-status {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+}
+
+.landmark-card.visited .lm-status {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--color-primary);
+}

@@ -43,6 +43,18 @@ export const ACHIEVEMENTS = {
     desc: '初めてのスポットを冒険日誌に記録した。',
     icon: 'fa-gem'
   },
+  landmark_hunter: {
+    id: 'landmark_hunter',
+    name: '歴史の探索者',
+    desc: '初めてランドマークにチェックインした。',
+    icon: 'fa-archway'
+  },
+  landmark_master: {
+    id: 'landmark_master',
+    name: '古の踏破者',
+    desc: '累計で 5箇所のランドマークにチェックインした。',
+    icon: 'fa-monument'
+  },
   level_5: {
     id: 'level_5',
     name: '一流の冒険家',
@@ -58,6 +70,7 @@ export class GameState {
     this.totalDistance = 0; // 単位: km
     this.history = []; // [{lat, lng}, ...]
     this.spots = []; // [{name, lat, lng, time}, ...]
+    this.visitedLandmarks = []; // [{id, name, time}, ...]
     this.unlockedAchievements = []; // ['first_step', ...]
     this.fogRadius = 30; // 霧を晴らす半径 (メートル)
     this.mapStyle = 'dark'; // 'dark' | 'light' | 'osm'
@@ -80,6 +93,7 @@ export class GameState {
         this.totalDistance = parsed.totalDistance || 0;
         this.history = parsed.history || [];
         this.spots = parsed.spots || [];
+        this.visitedLandmarks = parsed.visitedLandmarks || [];
         this.unlockedAchievements = parsed.unlockedAchievements || [];
         this.fogRadius = parsed.fogRadius || 30;
         this.mapStyle = parsed.mapStyle || 'dark';
@@ -98,6 +112,7 @@ export class GameState {
         totalDistance: this.totalDistance,
         history: this.history,
         spots: this.spots,
+        visitedLandmarks: this.visitedLandmarks,
         unlockedAchievements: this.unlockedAchievements,
         fogRadius: this.fogRadius,
         mapStyle: this.mapStyle
@@ -115,6 +130,7 @@ export class GameState {
     this.totalDistance = 0;
     this.history = [];
     this.spots = [];
+    this.visitedLandmarks = [];
     this.unlockedAchievements = [];
     this.save();
     if (this.onLog) this.onLog('すべての冒険データが初期化されました。', 'system');
@@ -216,6 +232,23 @@ export class GameState {
     return false;
   }
 
+  // ランドマークへのチェックイン
+  checkInLandmark(id, name) {
+    if (this.visitedLandmarks.some(l => l.id === id)) {
+      return false;
+    }
+
+    const time = new Date().toLocaleString('ja-JP', { hour12: false });
+    this.visitedLandmarks.push({ id, name, time });
+    this.triggerLog(`ランドマーク「${name}」にチェックインしました！`, 'system');
+    
+    // チェックインボーナスXP
+    this.addXP(200);
+    this.checkAchievements();
+    this.save();
+    return true;
+  }
+
   // 実績の条件チェック
   checkAchievements() {
     const listToUnlock = [];
@@ -253,7 +286,17 @@ export class GameState {
       listToUnlock.push('spot_finder');
     }
     
-    // 7. 一流の冒険家 (Level 5)
+    // 7. 歴史の探索者
+    if (this.visitedLandmarks.length > 0 && !this.unlockedAchievements.includes('landmark_hunter')) {
+      listToUnlock.push('landmark_hunter');
+    }
+
+    // 8. 古の踏破者
+    if (this.visitedLandmarks.length >= 5 && !this.unlockedAchievements.includes('landmark_master')) {
+      listToUnlock.push('landmark_master');
+    }
+
+    // 9. 一流の冒険家 (Level 5)
     if (this.level >= 5 && !this.unlockedAchievements.includes('level_5')) {
       listToUnlock.push('level_5');
     }

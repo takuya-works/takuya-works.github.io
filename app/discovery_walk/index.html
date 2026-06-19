@@ -106,10 +106,16 @@
         <div class="modal-body">
           <div class="tabs">
             <button class="tab-btn active" data-tab="tab-achievements">獲得実績</button>
+            <button class="tab-btn" data-tab="tab-landmarks">ランドマーク</button>
             <button class="tab-btn" data-tab="tab-locations">発見したスポット</button>
           </div>
           <div class="tab-content" id="tab-achievements">
             <div class="achievements-list" id="achievements-list">
+              <!-- 動的生成 -->
+            </div>
+          </div>
+          <div class="tab-content hidden" id="tab-landmarks">
+            <div class="landmarks-list" id="landmarks-list">
               <!-- 動的生成 -->
             </div>
           </div>
@@ -136,8 +142,13 @@
               <label for="range-fog-radius">霧を晴らす半径 (メートル)</label>
               <input type="range" id="range-fog-radius" min="10" max="100" value="30">
               <span id="val-fog-radius">30m</span>
+            <div class="setting-row toggle-row">
+              <span class="toggle-label">衛星写真モード (航空写真)</span>
+              <label class="switch">
+                <input type="checkbox" id="check-satellite-mode">
+                <span class="slider round"></span>
+              </label>
             </div>
-
           </div>
           
           <div class="settings-section">
